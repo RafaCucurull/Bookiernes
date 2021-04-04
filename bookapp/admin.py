@@ -7,14 +7,6 @@ class LlibreAdmin(admin.ModelAdmin):
     pass
 
 
-class EscriptorAdmin(admin.ModelAdmin):
-    pass
-
-
-class EditorAdmin(admin.ModelAdmin):
-    pass
-
-
 class TematicaAdmin(admin.ModelAdmin):
     pass
 
