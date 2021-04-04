@@ -1,0 +1,39 @@
+header {
+    background-image: url("../home/HOME_background.jpeg");
+    background-position: 50% 60%;
+}
+
+h1 {
+    font-size: 50px;
+    color: white;
+}
+
+.edition_world {
+    font-size: 70px;
+    color: black;
+}
+
+.business {
+    font-size: 70px;
+    color: white;
+    font-weight: bold;
+}
+
+h5 {
+    text-align: justify;
+}
+
+p {
+    font-size: 18px;
+    text-align: justify;
+    color: darkgrey;
+}
+
+li {
+    text-align: justify;
+}
+
+.btn-primary {
+    background-color: darkorange;
+    border-color: white;
+}
