@@ -3,6 +3,12 @@ header {
     background-position: 50% 60%;
 }
 
+.my_header {
+    text-align: center;
+    vertical-align: center;
+    padding: 220px 16px;
+}
+
 h1 {
     font-size: 50px;
     color: white;
@@ -29,6 +35,13 @@ p {
     color: darkgrey;
 }
 
+.entorn-treball-text {
+    color: black;
+    text-align: center;
+    display: inline;
+    vertical-align: middle;
+}
+
 li {
     text-align: justify;
 }
@@ -36,4 +49,12 @@ li {
 .btn-primary {
     background-color: darkorange;
     border-color: white;
+}
+
+div.entorn-treball {
+    padding: 16px 16px;
+    width: 1100px;
+    margin: auto;
+    border-radius: 25px;
+    border: 2px solid orange;
 }
