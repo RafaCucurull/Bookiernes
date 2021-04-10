@@ -25,6 +25,29 @@ h1 {
     font-weight: bold;
 }
 
+.features {
+    font-size: 25px;
+}
+
+.cataleg-img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+
+.book-img {
+    width: 250px;
+    height: 350px;
+}
+
+.entorn-treball-img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+
 h5 {
     text-align: justify;
 }
