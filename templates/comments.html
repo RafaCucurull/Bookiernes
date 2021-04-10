@@ -1,0 +1,87 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 450px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .button1 {
+            margin-left: 1200px;
+            margin-top: 50px;
+            color: white;
+            border: transparent;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 20px;
+            background-color: #f44336;
+            padding: 14px 20px;
+        }
+
+        .comment {
+            word-wrap: break-word;
+            margin-top: 20px;
+            margin-left: 40px;
+            display: inline-block;
+            width: 300px;
+            height: 200px;
+            border-width: 0.5px;
+            border-style: solid;
+            border-color: darkgrey;
+        }
+
+        .text {
+            position: absolute;
+        }
+
+        #title {
+            margin-left: 500px;
+        }
+
+        #subtitle1 {
+            margin-left: 320px;
+        }
+
+        #subtitle2 {
+            margin-left: 300px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="row">
+
+</div>
+<div class="row">
+    <h1 id="title">Comentaris i modificacions</h1>
+    <p id="subtitle1">Aquests són els comentaris i modificacions que li proposa el seu editor/a. Si les comparteix, pot
+        rectificar el seu</p>
+    <p id="subtitle2">manuscrit i tornar a enviar el document des de l'Àrea d'edició. Un cop les hagi atès, les pot
+        seleccionar per a enllestir-les</p>
+</div>
+<div class="row">
+    <div class="comment">
+        <p class="text">Comentari 1</p>
+    </div>
+    <div class="comment"><p class="text">Comentari 2</p></div>
+    <div class="comment"><p class="text">Comentari 3</p></div>
+    <div class="comment"><p class="text">Comentari 4</p></div>
+</div>
+<div class="row">
+    <div class="comment"><p class="text">Comentari 5</p></div>
+    <div class="comment"><p class="text">Comentari 6</p></div>
+    <div class="comment"><p class="text">Comentari 7</p></div>
+    <div class="comment"><p class="text">Comentari 8</p></div>
+</div>
+<div class="row">
+    <button class="button1">Tornar al llibre</button>
+</div>
+</body>
