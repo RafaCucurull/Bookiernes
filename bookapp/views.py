@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
 
 
+def homePage(request):
+    return render(request, "home.html")
+
+
 def afegirLlibre(request):
     if request.method == 'POST':
         form = AfegirLlibreForm(request.POST)
