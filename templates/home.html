@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 
     <body>
     <!-- Header -->
@@ -27,15 +27,13 @@
                     El nostre catàleg t'espera. Devora'l!</h3>
                 <p>La lectura és un món fantàstic, a través del qual pots gaudir d'un gran ventall d'emocions,
                     i des d'aquí, procurarem que vostè passi una estona meravellosa i disfruti el màxim possible.</p>
-                <button type="button" class="btn btn-primary" style="font-size: 25px"><b>CATÀLEG</b>
-                    <img class="w3-center" src="../static/home/cataleg-icon.png"
-                         style="width: 60px;height: 60px;margin-bottom: -10px;margin-top: -10px">
+                <button type="button" class="btn btn-primary features"><b>CATÀLEG</b>
+                    <img class="w3-center cataleg-img" src="../static/home/cataleg-icon.png">
                 </button>
             </div>
 
             <div class="w3-third w3-center">
-                <img class="w3-padding-64" src="../static/home/simple_book.png"
-                     style="width: 250px;height: 350px;">
+                <img class="w3-padding-64 book-img" src="../static/home/simple_book.png">
             </div>
         </div>
     </div>
@@ -51,9 +49,8 @@
                     <p class="entorn-treball-text">Benvinguts a l'espai on la vostra obra s'enlaira!</p>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-primary" style="font-size: 25px"><b>Entorn de Treball</b>
-                        <img class="w3-center" src="../static/home/entorn-treball-icon.png"
-                             style="width: 40px;height: 40px;margin-bottom: -10px;margin-top: -10px">
+                    <button type="button" class="btn btn-primary features"><b>Entorn de Treball</b>
+                        <img class="w3-center entorn-treball-img" src="../static/home/entorn-treball-icon.png">
                     </button>
                 </div>
             </div>
