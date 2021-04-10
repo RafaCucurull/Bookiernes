@@ -6,3 +6,6 @@ def homepage(request):
 
 def areaedicio(request):
     return render(request, 'area_edicio.html')
+
+def escriptorieditor(request):
+    return render(request, 'escriptori_editor.html')
