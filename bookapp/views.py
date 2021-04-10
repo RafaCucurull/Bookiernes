@@ -12,4 +12,4 @@ def afegirLlibre(request):
             return redirect('afegirllibre')
     else:
         form = AfegirLlibreForm()
-    return render(request, "comments.html", {'form': form})
+    return render(request, "area_edicio.html", {'form': form})

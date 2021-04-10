@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 450px;
+}
+
+.formulari {
+    text-align: center;
+    float: left;
+    width: 75%;
+    padding: 10px;
+    height: 450px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.border {
+    border-radius: 10px;
+}
+
+.foot {
+    text-align: center;
+    margin: auto;
+    width: 85%;
+    padding: 10px;
+    position: absolute;
+    bottom: 40px;
+    left: 90px;
+}
+
+.button1 {
+    color: white;
+    border: transparent;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: #f44336;
+    padding: 14px 20px;
+}
+
+.text {
+    position: absolute;
+    bottom: 300px;
+    left: 90px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid grey;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.logo {
+    display: inline;
+    width: 200px;
+    height: 80px;
+}
+
+.body-color {
+    background-color:gainsboro;
+}
