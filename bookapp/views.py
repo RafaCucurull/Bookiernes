@@ -4,19 +4,38 @@ from bookapp.models import Llibre
 from users.models import CustomUser
 
 
+class Counter:
+    counter = 0
+
+    def increment(self):
+        self.counter += 1
+        return ''
+
+    def mes3(self):
+        if self.counter > 3:
+            self.counter == 0
+            return True
+
+
 def homePage(request):
     return render(request, "home.html")
 
 
 def Escriptori(request):
     usuari = CustomUser.objects.get(email=request.user)
+    llibres = Llibre.objects.filter(editor=usuari)
+    comptador = Counter()
+    llibreshtml = {
+        "object_list": llibres,
+        "counter": comptador
+    }
     if not usuari.is_Treballador:
         return render(request, "home.html")
     else:
         if usuari.is_Escriptor:
-            return render(request, "escriptori_escriptor.html")
+            return render(request, "escriptori_escriptor.html", llibreshtml)
         if usuari.is_Editor:
-            return render(request, "escriptori_editor.html")
+            return render(request, "escriptori_editor.html", llibreshtml)
 
 
 def afegirLlibre(request):
@@ -34,12 +53,3 @@ def afegirLlibre(request):
 
 def areaedicio(request):
     return render(request, 'area_edicio.html')
-
-
-def infollibre(request):
-    usuari = CustomUser.objects.get(email=request.user)
-    llibres = Llibre.objects.filter(editor=usuari)
-    llibreshtml = {
-        "object_list": llibres
-    }
-    return render(request, 'escriptori_editor.html', llibreshtml)

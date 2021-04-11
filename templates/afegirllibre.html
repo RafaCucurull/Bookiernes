@@ -51,10 +51,13 @@
                             {{ form.sinopsis }}
                         </div>
                     </div>
-                    <button id="returnBut" class="button1">Tornar al llibre</button>
+
                 </div>
             </div>
         </form>
+        <a href={% url 'escriptori' %}>
+            <button id="returnBut" class="button1">Tornar a l'escriptori</button>
+        </a>
     </div>
     </body>
 {% endblock %}
