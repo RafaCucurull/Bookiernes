@@ -31,3 +31,10 @@ class Consulta(models.Model):
     usuari = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     assumpte = models.CharField(max_length=100)
     cos = models.TextField()
+
+
+class Comentari(models.Model):
+    usuari = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    titol = models.CharField(max_length=100)
+    descripcio = models.TextField()
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
