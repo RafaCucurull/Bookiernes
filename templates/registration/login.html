@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    {% include 'user_header.html' %}
+    {% include 'header_login.html' %}
 <!-- templates/registration/login.html -->
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,12 +23,11 @@
         <div class="formulari border white-bg">
             <h3>Inicieu sessió</h3>
             <form method="post">
-<<<<<<< HEAD
                 {% csrf_token %}
                 <input style="width: 400px; height: 30px" type="input" class="form-control" name="username"
-=======
+
                 <input type="input" class="form-control form-fields" name="username"
->>>>>>> css-stylesheet
+
                        id="inputEmail" placeholder="Email"
                        required>
                 <br>

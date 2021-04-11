@@ -1,0 +1,40 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg py-4 navbar-light" style="background-color: white">
+    <!-- Just an image -->
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'headers/Bookiernes_logo.jpeg' %}" width="200" height="90" alt="Logo Bookiernes">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="font-size: 20px; margin-left: 5px" href="#"
+                   id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Idioma
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" style="font-size: 15px" href="#">
+                        <img src="{% static 'areaedicio/catalonia-icon-flag.png' %}" width="20" height="20"
+                             alt="Català">
+                        Català</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" style="font-size: 15px" href="#">
+                        <img src="{% static '/areaedicio/spain-flag-round-icon.png' %}" width="20" height="20"
+                             alt="Español">
+                        Español</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" style="font-size: 15px" href="#">
+                        <img src="{% static '/areaedicio/united-kingdom-flag-round-icon.png' %}" width="20" height="20"
+                             alt="English">
+                        English</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
