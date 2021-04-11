@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/areaescriptor.css' %}">
+
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Àrea d'edició: <b>{{ llibre.nom }}</b>
+        </h1>
+        <p class="p_header w3-center">Escriptor, aquí apareix la darrera versió de la vostra obra i podeu accedir a les observacions
+            que us ha fet el vostre editor i que encara teniu pendents de resoldre. Des d'aquí també podeu enviar una nova
+            versió modificada a l'editor. Quan ho feu, també se us actualitzarà en aquest espai</p>
+    </header>
+    <!-- First Grid -->
+
+    <!-- PDF -->
+    <div class="w3-twothird ">
+            <iframe src="http://www.africau.edu/images/default/sample.pdf"
+                    width="70%"
+                    height="60%">
+            </iframe>
+    </div>
+
+    <!-- BOTONS -->
+
+     <div class="w3-row-padding w3-padding-24">
+         <div class="w3-quarter w3-container w3-margin- w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-primary message">
+                            <h3 class="h3-message"><b>Veure comentaris</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/comment.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+         <div class="w3-quarter w3-container w3-margin- w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-primary message">
+                            <h3 class="h3-message"><b>Enviar nova versió</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/files.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+         <div class="w3-quarter w3-container w3-margin- w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-primary message">
+                            <h3 class="h3-message"><b>Missatge nou</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/message.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+         <div class="w3-quarter w3-container w3-margin- w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-secundary message">
+                            <h3 class="h3-message-orange"><b>Tornar endarrere</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+  </div>
+
+    </div>
+    </body>
+    </html>
+{% endblock %}

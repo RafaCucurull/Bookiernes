@@ -53,3 +53,12 @@ def afegirLlibre(request):
 
 def areaedicio(request):
     return render(request, 'area_edicio.html')
+
+def areaescriptor(request):
+    return render(request, 'area_escriptor.html')
+
+def escriptoriescriptor(request):
+    return render(request, 'escriptori_escriptor.html')
+
+def enviarnovaversio(request):
+    return render(request, 'enviar_nova_versio.html')

@@ -7,4 +7,7 @@ urlpatterns = [
     path('escriptori', views.Escriptori, name="escriptori"),
     path('afegirllibre', views.afegirLlibre, name="afegirllibre"),
     path('area_edicio', views.areaedicio, name='areaedicio'),
+    path('area_escriptor', views.areaescriptor, name='areaescriptor'),
+    path('escriptori_escriptor', views.escriptoriescriptor, name='escriptoriescriptor'),
+    path('enviarnovaversio', views.enviarnovaversio, name='enviarnovaversio')
 ]
