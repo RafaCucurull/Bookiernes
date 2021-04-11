@@ -14,9 +14,9 @@ def Escriptori(request):
         return render(request, "home.html")
     else:
         if usuari.is_Escriptor:
-            return render(request, "home.html")
+            return render(request, "escriptori_escriptor.html")
         if usuari.is_Editor:
-            return render(request, "home.html")
+            return render(request, "escriptori_editor.html")
 
 
 def afegirLlibre(request):
@@ -29,7 +29,7 @@ def afegirLlibre(request):
             return redirect('afegirllibre')
     else:
         form = AfegirLlibreForm()
-    return render(request, "comments.html", {'form': form})
+    return render(request, "afegirllibre.html", {'form': form})
 
 def areaedicio(request):
     return render(request, 'area_edicio.html')
