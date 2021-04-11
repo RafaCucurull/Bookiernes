@@ -3,6 +3,8 @@ from django.forms import ModelForm, Textarea, CheckboxSelectMultiple
 from bookapp.models import Llibre
 
 
+
+
 class AfegirLlibreForm(ModelForm):
 
     class Meta:
