@@ -1,0 +1,52 @@
+.my_header {
+    padding: 10px 16px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    text-align: justify;
+}
+
+.p_header {
+    color: darkgrey;
+    font-size: 20px;
+    width: 1000px;
+    margin: auto;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 450px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.button1 {
+    position: relative;
+    right: -1350px;
+    color: white;
+    border: transparent;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: darkorange;
+    padding: 14px 20px;
+}
+
+.comment {
+    word-wrap: break-word;
+    margin: 20px 20px 20px 20px;
+    display: inline-block;
+    height: 200px;
+    border-width: 0.5px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darkorange;
+}

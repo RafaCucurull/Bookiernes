@@ -1,7 +1,8 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg py-4 navbar-light" style="background-color: white">
     <!-- Just an image -->
-    <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="../static/headers/Bookiernes_logo.jpeg" width="200" height="90" alt="Logo Bookiernes">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'headers/Bookiernes_logo.jpeg' %}" width="200" height="90" alt="Logo Bookiernes">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +20,17 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" style="font-size: 15px" href="#">
-                        <img src="../static/areaedicio/catalonia-icon-flag.png" width="20" height="20" alt="Català">
+                        <img src="{% static 'areaedicio/catalonia-icon-flag.png' %}" width="20" height="20"
+                             alt="Català">
                         Català</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" style="font-size: 15px" href="#">
-                        <img src="../static/areaedicio/spain-flag-round-icon.png" width="20" height="20" alt="Español">
+                        <img src="{% static '/areaedicio/spain-flag-round-icon.png' %}" width="20" height="20"
+                             alt="Español">
                         Español</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" style="font-size: 15px" href="#">
-                        <img src="../static/areaedicio/united-kingdom-flag-round-icon.png" width="20" height="20"
+                        <img src="{% static '/areaedicio/united-kingdom-flag-round-icon.png' %}" width="20" height="20"
                              alt="English">
                         English</a>
                 </div>
@@ -43,20 +46,23 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" style="font-size: 15px" href="#">
-                        <img src="../static/headers/perfil_icon.png" width="20" height="20" alt="Perfil">
+                        <img src="{% static '/headers/perfil_icon.png' %}" width="20" height="20" alt="Perfil">
                         Perfil</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" style="font-size: 15px" href="#">
-                        <img src="../static/headers/logout_icon.png" width="20" height="20" alt="Tancar Sessió">
+                        <img src="{% static '/headers/logout_icon.png' %}" width="20" height="20" alt="Tancar Sessió">
                         Tancar sessió</a>
                 </div>
             </li>
             <li class="nav-item">
-                <img src="../static/headers/notificacions-icon.png" style="width: 30px;height: 30px;margin-right: 20px" alt="Notificacions">
+                <img src="{% static '/headers/notificacions-icon.png' %}"
+                     style="width: 30px;height: 30px;margin-right: 20px;margin-bottom:-25px"
+                     alt="Notificacions">
 
             </li>
             <li class="nav-item">
-                <img src="../static/headers/icon-message.png" style="width: 50px;height: 50px;margin-right: 180px" alt="Missatges">
+                <img src="{% static '/headers/icon-message.png' %}" style="width: 50px;height: 50px;margin-right: 180px"
+                     alt="Missatges">
             </li>
         </ul>
     </div>
