@@ -9,3 +9,6 @@ def areaedicio(request):
 
 def escriptorieditor(request):
     return render(request, 'escriptori_editor.html')
+
+def escriptoriescriptor(request):
+    return render(request, 'escriptori_escriptor.html')
