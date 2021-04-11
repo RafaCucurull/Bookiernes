@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
+from bookapp.models import Llibre
 from users.models import CustomUser
 
 
@@ -29,3 +30,14 @@ def afegirLlibre(request):
     else:
         form = AfegirLlibreForm()
     return render(request, "comments.html", {'form': form})
+
+def areaedicio(request):
+    return render(request, 'area_edicio.html')
+
+def infollibre(request):
+    usuari=CustomUser.objects.get(email=request.user)
+    llibres=Llibre.objects.filter(editor=usuari)
+    llibreshtml={
+        "object_list": llibres
+    }
+    return render(request, 'escriptori_editor.html', llibreshtml)
