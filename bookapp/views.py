@@ -9,7 +9,7 @@ def homePage(request):
 
 
 def Escriptori(request):
-    usuari=CustomUser.objects.get(email=request.user)
+    usuari = CustomUser.objects.get(email=request.user)
     if not usuari.is_Treballador:
         return render(request, "home.html")
     else:
@@ -31,13 +31,15 @@ def afegirLlibre(request):
         form = AfegirLlibreForm()
     return render(request, "afegirllibre.html", {'form': form})
 
+
 def areaedicio(request):
     return render(request, 'area_edicio.html')
 
+
 def infollibre(request):
-    usuari=CustomUser.objects.get(email=request.user)
-    llibres=Llibre.objects.filter(editor=usuari)
-    llibreshtml={
+    usuari = CustomUser.objects.get(email=request.user)
+    llibres = Llibre.objects.filter(editor=usuari)
+    llibreshtml = {
         "object_list": llibres
     }
     return render(request, 'escriptori_editor.html', llibreshtml)

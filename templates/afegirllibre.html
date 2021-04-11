@@ -1,217 +1,60 @@
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Times New Roman";
-        }
-
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 450px;
-        }
-
-        .columnTop {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 80px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .button1 {
-            color: white;
-            border: transparent;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 20px;
-            background-color: #f44336;
-            padding: 14px 20px;
-        }
-
-        .logo {
-            display: inline;
-            width: 200px;
-            height: 80px;
-        }
-
-        .notification {
-            margin-left: 40px;
-            display: inline-block;
-            background-color: grey;
-            color: white;
-            text-decoration: none;
-            padding: 5px 16px;
-            position: relative;
-            display: inline-block;
-            border-radius: 2px;
-        }
-
-        .notification:hover {
-            background: red;
-        }
-
-        .notification .badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            padding: 5px 10px;
-            border-radius: 50%;
-            background: red;
-            color: white;
-        }
-
-        .custom-input-file {
-            border-style: dotted;
-            border-color: black;
-            cursor: pointer;
-            font-size: 18px;
-            margin-left: 140px;
-            margin-top: 30px !important;
-            height: 200px;
-            overflow: hidden;
-            padding: 10px;
-            position: relative;
-            width: 400px;
-        }
-
-        input[type='file'] {
-            color: rgba(0, 0, 0, 0);
-            margin-left: 140px;
-            margin-top: 20px;
-        }
-
-        .numstyle {
-            display: inline;
-            color: #f44336;
-            font-size: 20px;
-        }
-
-        #num1 {
-            margin-left: 100px;
-        }
-
-        .title {
-            display: inline;
-            margin-left: 30px;
-        }
-
-        #subtitle1 {
-            margin-left: 140px;
-        }
-
-        #subtitle2 {
-            margin-left: 225px;
-        }
-
-        #subtitle22 {
-            margin-left: 70px;
-        }
-
-        #downblock {
-            margin-top: 40px;
-            margin-left: 210px;
-        }
-
-        #downblock2 {
-            margin-top: 20px;
-        }
-
-        #downtext1 {
-            margin-left: 170px;
-        }
-
-        #downtext2 {
-            margin-left: 300px;
-        }
-
-        #image {
-            margin-left: 140px;
-            height: 100px;
-            width: 100px;
-        }
-
-        .headerText {
-            margin-left: 70px;
-        }
-
-        #returnBut {
-            margin-top: 20px;
-            margin-left: 300px;
-        }
-        #form{
-            margin-top: 40px;
-        }
-    </style>
-</head>
-<body>
-<div class="row">
-    <div class="columnTop">
-        {% load static %}
-        <img style="display: inline-block" src="{% static 'Bookiernes_logo.png' %}" class="logo" alt="logo">
-    </div>
-    <div class="columnTop">
-        <div style="margin-left: 175px">
-            <h4 style="display: inline-block">Hola Carles!</h4>
-            <a href="#" class="notification">
-                <span>Notificacions</span>
-                <span class="badge">3</span>
-            </a>
-        </div>
-    </div>
-</div>
-<form method="post">
-    <div style="margin-top: 50px" class="row">
-        <div class="column">
-            <div class="headerText">
-                <h1 id="num1" class="numstyle">1</h1>
-                <h1 class="title">Afegiu un nou llibre</h1>
-                <p id="subtitle1">Adjunteu els vostres manuscrits en el format</p>
-                <p id="subtitle2">habitual (PDF)</p>
-            </div>
-            <div class="custom-input-file col-md-6 col-sm-6 col-xs-6">
-                {% load static %}
-                <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo">
-                <small style="margin-left: -145px">Arrossega aquí els teus fitxers</small>
-                <input type="file" class="form-control" name="pdf"
-                       placeholder="pdf"
-                       required class="input-file">
-            </div>
-            <br>
-            <div id="downblock">
-                <h1 id="num3" class="numstyle">3</h1>
-                <button style="display:inline" class="button1" type="submit">Presentar el document</button>
-                <br>
-            </div>
-            <div id="downblock2">
-                <small id="downtext1">En enviar el document, accepteu els termes i condicions de</small>
-                <br>
-                <small id="downtext2">l'editorial</small>
-            </div>
-        </div>
-        <div class="column">
-            <div style="margin-left: 50px">
-                <h1 class="numstyle">2</h1>
-                <h1 class="title">Ompliu el formulari</h1>
-                <p id="subtitle22">Us volem conèixer una mica millor</p>
-                <div id="form">
-                    <p>Proposta de títol</p>
-                    {{ form.nom_llibre }}
-                    <p>Temàtica</p>
-                    {{ form.tematiques }}
-                    <p>Breu resum de la vostra obra (500 paraules)</p>
-                    {{ form.sinopsis }}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/afegir_llibre.css' %}">
+    </head>
+    <body>
+    <div class="w3-container w3-center">
+        <form method="post">
+            <div class="row">
+                <div class="column" style="margin-left: 50px">
+                    <div>
+                        <h1 id="num1" class="numstyle"><b>1.</b></h1>
+                        <h1 class="title"><b>Afegiu un nou llibre</b></h1>
+                        <p id="subtitle1">Adjunteu els vostres manuscrits en el format<br>
+                            habitual (PDF)</p>
+                    </div>
+                    <div class="custom-input-file">
+                        <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                        <small>Arrossega aquí els teus fitxers</small>
+                        <input type="file" class="form-control" name="pdf"
+                               placeholder="pdf"
+                               required class="input-file">
+                    </div>
+                    <br>
+                    <div id="downblock">
+                        <h1 id="num3" class="numstyle"><b>3.</b></h1>
+                        <button class="button1 submit-button" type="submit">Presentar el document</button>
+                        <br>
+                    </div>
+                    <div id="downblock2">
+                        <small id="downtext1">En enviar el document, accepteu els termes i condicions de<br>
+                            l'editorial
+                        </small>
+                    </div>
+                </div>
+                <div class="column" style="margin-left: -100px">
+                    <div>
+                        <h1 class="numstyle"><b>2.</b></h1>
+                        <h1 class="title"><b>Ompliu el formulari</b></h1>
+                        <p id="subtitle1">Us volem conèixer una mica millor</p>
+                        <div id="form">
+                            <p>Proposta de títol</p>
+                            {{ form.nom_llibre }}
+                            <p>Temàtica</p>
+                            {{ form.tematiques }}
+                            <p>Breu resum de la vostra obra (500 paraules)</p>
+                            {{ form.sinopsis }}
+                        </div>
+                    </div>
+                    <button id="returnBut" class="button1">Tornar al llibre</button>
                 </div>
             </div>
-            <button id="returnBut" class="button1">Tornar al llibre</button>
-        </div>
+        </form>
     </div>
-</form>
-</body>
+    </body>
+{% endblock %}
