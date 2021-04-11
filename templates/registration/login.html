@@ -105,6 +105,7 @@
         <div class="formulari border" style="background-color:white;">
             <h3 style="text-align: center">Inicieu sessió</h3>
             <form method="post">
+                {% csrf_token %}
                 <input style="width: 400px; height: 30px" type="input" class="form-control" name="username"
                        id="inputEmail" placeholder="Email"
                        required>
