@@ -63,5 +63,8 @@ def escriptoriescriptor(request):
 def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
 
+def commentseditor(request):
+    return render(request, 'comments_editor.html')
+
 def canviardocument(request):
     return render(request, 'canviar_document.html')
