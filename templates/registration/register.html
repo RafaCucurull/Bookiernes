@@ -1,22 +1,56 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-  </form>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    </head>
+    <body class="body-color">
+    <div class="container">
+        <div class="formulari border white-bg">
+            <h3><b>Registreu-vos</b></h3>
+            <form method="post">
+                <label for="username">Email</label>
+                <input type="text" id="username" name="username"><br>
+                {% csrf_token %}
+                <small style="color: grey">{{ form.email.help_text }}</small><br><br>
+
+                <label for="is_Editor">Editor/a</label>
+                <input type="checkbox" id="is_Editor" name="is_Editor"><br>
+                <label for="is_Escriptor">Escriptor/a</label>
+                <input type="checkbox" id="is_Escriptor" name="is_Escriptor"><br>
+                <label for="is_Maquetacio">Maquetador/a i/o dissenyador/a</label>
+                <input type="checkbox" id="is_Maquetacio" name="is_Maquetacio"><br>
+                <label for="is_IT">Membre del departament d'IT</label>
+                <input type="checkbox" id="is_IT" name="is_IT"><br><br>
+
+                <label for="password">Contrasenya</label>
+                <input type="text" id="password" name="password"><br>
+                {% for constraint in form.password1.help_text %}
+                    <ul>
+                        <li>
+                            <small style="color: grey">{{ constraint }}</small>
+                        </li>
+                    </ul>
+                {% endfor %}
+                <br>
+                <label for="confirm_password">Confirmar contrasenya</label>
+                <input type="text" id="confirm_password" name="confirm_password"><br>
+                <small style="color: grey">{{ form.password2.help_text }}</small><br><br>
+
+                <button class="button1" type="submit">Registrar-se</button>
+            </form>
+        </div>
+    </div>
+    <div class="foot border white-bg">
+        <h3 class="h3-inline"><b>Si teniu algun dubte, contacteu a través del formulari i us guiarem</b>
+            <button class="button1 button-margin h3-inline">Formulari contacte</button>
+        </h3>
+    </div>
+    </body>
 {% endblock %}
+
    

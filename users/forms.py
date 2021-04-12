@@ -5,25 +5,20 @@ from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
+    email = forms.CharField(help_text="Introdueix un format correcte de correu electrònic (p.ex. example@gmail.com)")
+    password1 = forms.CharField(
+        help_text=["La teva contrassenya no pot ser similar a l'altra informació personal teva.",
+                   "La teva contrassenya ha de tenir almenys 8 caràcters.",
+                   "La teva contrassenya no pot ser una comunment usada.",
+                   "La teva contrassenya no pot ser completament numèrica."])
+    password2 = forms.CharField(help_text="Introdueix la mateixa contrassenya que anteriorment, per verificació.")
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('email',)
+        fields = ('email', 'is_Editor', 'is_Escriptor', 'is_Maquetacio', 'is_IT')
 
 
 class CustomUserChangeForm(UserChangeForm):
-
     class Meta:
         model = CustomUser
         fields = ('email',)
-
-class SignUpForm(UserCreationForm):
-
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    is_Escriptor = forms.BooleanField()
-    is_Editor = forms.BooleanField()
-    is_Maquetacio = forms.BooleanField()
-    is_IT = forms.BooleanField()
-    class Meta:
-        model = CustomUser
-        fields = ('email', 'is_Escriptor','is_Editor', 'is_Maquetacio', 'is_IT')
