@@ -42,3 +42,4 @@ class Comentari(models.Model):
     titol = models.CharField(max_length=100)
     descripcio = models.TextField()
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
+
