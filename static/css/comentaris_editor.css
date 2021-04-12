@@ -4,8 +4,7 @@
 }
 
 .icons {
-    width: 60px;
-    height: 60px;
+    width: 10%;
     margin-top: -10px;
     margin-bottom: -10px;
 }
@@ -43,12 +42,13 @@ p {
 .btn-primary {
     background-color: darkorange;
     border-color: white;
-    size: 10px;
 }
+
 
 .message {
     border-radius: 20px;
-    width: 400px;
+    width: 80%;
+    margin-bottom: 2%;
 }
 
 .canviar_document {
@@ -81,7 +81,7 @@ div.row.bottom_feature {
 
 div.row.message_feature {
     text-align: center;
-    padding-top: 75px;
+    margin-top: 10%;
 }
 
 div.row.document_feature {
@@ -89,11 +89,16 @@ div.row.document_feature {
     padding-top: 20px;
 }
 
-div.row {
-    display: block;
-}
 
 div.col-md-auto {
     display: inline-block;
 }
 
+.area-input {
+    width: 100%;
+}
+
+.box {
+    margin: auto;
+    width: 25%;
+}

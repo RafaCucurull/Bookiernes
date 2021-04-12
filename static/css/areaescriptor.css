@@ -4,7 +4,6 @@
 
 .icons {
     width: 10%;
-    height: 10%;
     margin-top: -10px;
     margin-bottom: -10px;
 }
@@ -47,7 +46,6 @@ p {
 
 .message {
     border-radius: 20px;
-    width: 400px;
 }
 
 .canviar_document {

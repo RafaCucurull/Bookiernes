@@ -4,7 +4,6 @@
 
 .icons {
     width: 10%;
-    height: 10%;
     margin-top: -10px;
     margin-bottom: -10px;
 }
@@ -49,7 +48,7 @@ p {
 
 .message {
     border-radius: 20px;
-    width: 400px;
+    width: 80%;
 }
 
 .canviar_document {
@@ -186,7 +185,7 @@ iframe{
 }
 
 input[type='file'] {
-    color: rgba(0, 0, 0, 0);
+    color: rgba(1, 1, 1, 1);
     margin-top: 20px;
     border-color: white;
 }
