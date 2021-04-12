@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Llibre(models.Model):
@@ -12,6 +13,9 @@ class Llibre(models.Model):
 
     def __str__(self):
         return self.nom_llibre
+
+    def get_absolute_url(self):
+        return reverse("areaedicio", args=[str(self.pk)])
 
 
 class Tematica(models.Model):

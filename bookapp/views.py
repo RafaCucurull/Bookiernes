@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
+
 from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre
 from users.models import CustomUser
@@ -51,5 +53,9 @@ def afegirLlibre(request):
     return render(request, "afegirllibre.html", {'form': form})
 
 
-def areaedicio(request):
-    return render(request, 'area_edicio.html')
+def areaedicio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context={
+        "llibrehtml": llibre
+    }
+    return render(request, 'area_edicio.html', context)
