@@ -62,3 +62,6 @@ def escriptoriescriptor(request):
 
 def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
+
+def canviardocument(request):
+    return render(request, 'canviar_document.html')
