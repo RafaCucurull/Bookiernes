@@ -116,7 +116,8 @@ input[type='file'] {
 }
 
 #returnBut {
-    margin-top: 40px;
+    margin-top: 60px;
+    margin-left: 1385px;
 }
 
 #form {

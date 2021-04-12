@@ -103,6 +103,7 @@ def comments(request):
     return render(request, "comments.html")
 
 def notificacions(request):
+    comptador = Counter()
     notificacions = Notificacio.objects.filter(usuari=request.user)
     print (notificacions)
     context = {
