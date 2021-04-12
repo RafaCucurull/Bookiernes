@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
 from bookapp.forms import AfegirLlibreForm
-from bookapp.models import Llibre
+from bookapp.models import Llibre, TematiquesLlibre
 from users.models import CustomUser
 
 
@@ -24,11 +24,19 @@ def homePage(request):
 
 def Escriptori(request):
     usuari = CustomUser.objects.get(email=request.user)
-    llibres = Llibre.objects.filter(editor=usuari)
+    if usuari.is_Editor:
+        llibres = Llibre.objects.filter(editor=usuari)
+    if usuari.is_Escriptor:
+        llibres = Llibre.objects.filter(escriptor=usuari)
+    tematiques=list()
+    for llibre in llibres:
+        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
+    mylist = zip(llibres, tematiques)
     comptador = Counter()
     llibreshtml = {
         "object_list": llibres,
-        "counter": comptador
+        "counter": comptador,
+        "mylist": mylist
     }
     if not usuari.is_Treballador:
         return render(request, "home.html")
@@ -55,7 +63,7 @@ def afegirLlibre(request):
 def areaedicio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     return render(request, 'area_edicio.html', context)
 
@@ -63,7 +71,7 @@ def areaedicio(request, pk):
 def areaescriptor(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     return render(request, 'area_escriptor.html', context)
 

@@ -11,6 +11,6 @@ urlpatterns = [
     path('area_escriptor/<int:pk>', views.areaescriptor, name='areaescriptor'),
     path('enviarnovaversio', views.enviarnovaversio, name='enviarnovaversio'),
     path('canviardocument', views.canviardocument, name='canviardocument'),
-    path('commentseditor', views.commentseditor, name='commentseditor'),
-    path('comments', views.comments, name='comments')
+    path("area_edicio/<int:pk>/commentseditor", views.commentseditor, name='commentsedicio'),
+    path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
 ]

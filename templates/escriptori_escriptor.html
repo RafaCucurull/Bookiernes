@@ -40,9 +40,12 @@
                                  class="w3-hover-opacity"> <br/> <br/>
                             <p><h4>{{ object.nom_llibre }}</h4></p>
                             <p>{{ object.sinopsis }}</p><br/>
-                            <p>{{ object.tematiques }}</p>
-                            <p>Col·lecció: Clàssica</p>
-                            <p>Nombre de pàgines: 224</p><br/>
+                            <p style="display:inline">Temàtiques: </p>
+                            {% for t in tematiques %}
+                                <p style="display:inline">{{ t }},</p>
+                            {% endfor %}
+                            <p>Col·lecció: {{ object.coleccio}}</p>
+                            <p>Nombre de pàgines: {{ object.num_pagines}}</p><br/>
                         </div>
                     </a>
                 </div>
@@ -55,9 +58,12 @@
                              class="w3-hover-opacity"> <br/> <br/>
                         <p><h4>{{ object.nom_llibre }}</h4></p>
                         <p>{{ object.sinopsis }}</p><br/>
-                        <p>{{ object.tematiques }}</p>
-                        <p>Col·lecció: Clàssica</p>
-                        <p>Nombre de pàgines: 224</p><br/>
+                        <p style="display:inline">Temàtiques: </p>
+                        {% for t in tematiques %}
+                            <p style="display:inline">{{ t }},</p>
+                        {% endfor %}
+                        <p>Col·lecció: {{ object.coleccio}}</p>
+                        <p>Nombre de pàgines: {{ object.num_pagines}}</p><br/>
                     </div>
                 </a>
             </div>

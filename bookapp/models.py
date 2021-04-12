@@ -10,6 +10,8 @@ class Llibre(models.Model):
     sinopsis = models.TextField(max_length=300)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField(upload_to='pdf')
+    coleccio = models.CharField(max_length=100, blank=True)
+    num_pagines = models.IntegerField()
 
     def __str__(self):
         return self.nom_llibre
@@ -29,6 +31,9 @@ class Tematica(models.Model):
 class TematiquesLlibre(models.Model):
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
     tematica = models.ForeignKey('Tematica', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.tematica.nom_tematica
 
 
 class Consulta(models.Model):
