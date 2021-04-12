@@ -1,38 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
     {% include 'user_header.html' %}
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris.css' %}">
-    </head>
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris.css' %}">
+
     <body>
     <!-- Header -->
     <header class="my_header">
+
         <h1 class="w3-margin">
-            <b>Comentaris i modificacions</b>
+            Comentaris i modificacions
         </h1>
-        <p class="p_header">Aquests són els comentaris i modificacions que li proposa el seu editor/a. Si les
-            comparteix, pot rectificar el seumanuscrit i tornar a enviar el document des de l'Àrea d'edició.
-            Un cop les hagi atès, les pot seleccionar per a enllestir-les.</p>
+
+        <p class="p_header"> Aquests són els comentaris i les modificacions que li proposa el seu editor/a.
+            Si les comparteix, pot rectificar el seu manuscrit i tornar a enviar el document des de l'Àrea d'edició.
+            <br/> <br/> <br/> <br/>
+        </p>
+
     </header>
-    <div class="container">
-        <div class="row">
-            <div class="col comment"><p>Comentari 1</p></div>
-            <div class="col comment"><p>Comentari 2</p></div>
-            <div class="col comment"><p>Comentari 3</p></div>
+
+      <div class="w3-row-padding">
+    {% for object in object_list %}
+        {{ counter.increment }}
+        {% if counter.mes3 %}
+            <div class="w3-row-padding">
+                <div class="w3-third w3-container w3-margin-bottom">
+                    <a href="{% url 'areaedicio' %}">
+                        <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
+                            <br/>
+                            <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                                 class="w3-hover-opacity"> <br/> <br/>
+                            <p><h4>{{ object.nom_llibre }}</h4></p>
+                            <p>Un noi decideix fer-se escriptor quan descobreix que les seves invencions li regalen una
+                                estona
+                                més d’atenció de la nena rica que li té el cor robat. Un arquitecte fuig de
+                                Constantinoble
+                                amb els
+                                plànols d’una biblioteca inexpugnable. Un estrany cavaller tempta Cervantes perquè
+                                escrigui
+                                un llibre
+                                com no ha existit mai. I Gaudí, navegant cap a una misteriosa cita a Nova York, es
+                                complau
+                                amb la llum i el vapor,
+                                la matèria de la qual haurien d’estar fetes les ciutats.</p><br/><br/>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="w3-third w3-container w3-margin-bottom">
+                <a href="{% url 'areaedicio' %}">
+                    <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white"><br/>
+                        <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                             class="w3-hover-opacity"> <br/> <br/>
+                        <p><h4>{{ object.nom_llibre }}</h4></p>
+                        <p>Un noi decideix fer-se escriptor quan descobreix que les seves invencions li regalen una
+                            estona
+                            més d’atenció de la nena rica que li té el cor robat. Un arquitecte fuig de Constantinoble
+                            amb els
+                            plànols d’una biblioteca inexpugnable. Un estrany cavaller tempta Cervantes perquè escrigui
+                            un llibre
+                            com no ha existit mai. I Gaudí, navegant cap a una misteriosa cita a Nova York, es complau
+                            amb la llum i el vapor,
+                            la matèria de la qual haurien d’estar fetes les ciutats.</p><br/><br/>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+      <!-- BOTÓ -->
+         <div class="w3-container w3-margin w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="right col-md-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-secundary message">
+                            <h3 class="h3-message-orange"><b>Tornar al llibre</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col comment"><p>Comentari 4</p></div>
-            <div class="col comment"><p>Comentari 5</p></div>
-            <div class="col comment"><p>Comentari 6</p></div>
-        </div>
+
+  </div>
+      </div>
     </div>
-    <div class="row">
-        <a href="#">
-            <button class="button1">Tornar al llibre</button>
-        </a>
     </div>
-    </body>
 {% endblock %}

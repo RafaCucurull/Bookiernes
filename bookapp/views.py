@@ -55,7 +55,31 @@ def afegirLlibre(request):
 
 def areaedicio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    context={
+    context = {
         "llibrehtml": llibre
     }
     return render(request, 'area_edicio.html', context)
+
+
+def areaescriptor(request):
+    return render(request, 'area_escriptor.html')
+
+
+def escriptoriescriptor(request):
+    return render(request, 'escriptori_escriptor.html')
+
+
+def enviarnovaversio(request):
+    return render(request, 'enviar_nova_versio.html')
+
+
+def commentseditor(request):
+    return render(request, 'comments_editor.html')
+
+
+def canviardocument(request):
+    return render(request, 'canviar_document.html')
+
+
+def comments(request):
+    return render(request, 'comments.html')
