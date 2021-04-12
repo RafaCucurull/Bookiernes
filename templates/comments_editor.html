@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris_editor.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris.css' %}">
 
     <body>
     <!-- Header -->
@@ -87,21 +87,38 @@
 
                    <div class="w3-row-padding w3-padding-64 w3-container">
 
-        <div class="row message_feature">
-                <div class="col-md-auto">
+                        <div class="row message_feature">
+                            <div class="col-md-auto">
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary message">
+                                        <h3 class="h3-message"><b>Afegiu una nova obra</b>
+                                            <img class="w3-center icons" src="../static/escriptori/plusicon.png">
+                                        </h3>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          <!-- BOTÓ -->
+         <div class="w3-container w3-margin w3-padding">
+            <div class="w3-container w3-white">
+                <div class="row message_feature">
+                <div class="right col-md-auto">
                     <a href="#">
-                        <button type="button" class="btn btn-primary message">
-                            <h3 class="h3-message"><b>Afegiu una nova obra</b>
-                                <img class="w3-center icons" src="../static/escriptori/plusicon.png">
+                        <button type="button" class="btn btn-secundary message">
+                            <h3 class="h3-message-orange"><b>Tornar al llibre</b>
+                                <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
                             </h3>
                         </button>
                     </a>
                 </div>
+            </div>
+            </div>
         </div>
-    </div>
-               </div>
 
-      </div>
+    </div>
     </div>
     </div>
 {% endblock %}
