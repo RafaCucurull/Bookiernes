@@ -8,9 +8,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/afegir_llibre.css' %}">
     </head>
     <body>
-    <div class="w3-container w3-center">
-        <form method="post">
-            {% csrf_token %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="w3-container w3-center">
             <div class="row">
                 <div class="column" style="margin-left: 50px">
                     <div>
@@ -55,10 +55,10 @@
 
                 </div>
             </div>
-        </form>
-        <a href={% url 'escriptori' %}>
-            <button id="returnBut" class="button1">Tornar a l'escriptori</button>
-        </a>
-    </div>
+            <a href={% url 'escriptori' %}>
+                <button id="returnBut" class="button1">Tornar a l'escriptori</button>
+            </a>
+        </div>
+    </form>
     </body>
 {% endblock %}

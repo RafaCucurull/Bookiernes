@@ -13,11 +13,10 @@
         <div class="formulari border white-bg">
             <h3><b>Registreu-vos</b></h3>
             <form method="post">
-                <label for="username">Email</label>
-                <input type="text" id="username" name="username"><br>
                 {% csrf_token %}
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email"><br>
                 <small style="color: grey">{{ form.email.help_text }}</small><br><br>
-
                 <label for="is_Editor">Editor/a</label>
                 <input type="checkbox" id="is_Editor" name="is_Editor"><br>
                 <label for="is_Escriptor">Escriptor/a</label>

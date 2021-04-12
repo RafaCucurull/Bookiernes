@@ -41,10 +41,10 @@ def Escriptori(request):
 
 def afegirLlibre(request):
     if request.method == 'POST':
-        form = AfegirLlibreForm(request.POST)
+        form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
-            print("hola")
             obj = form.save()
+            obj.editor = request.user
             obj.escriptor = request.user
             obj.save()
             return redirect('afegirllibre')
