@@ -79,8 +79,28 @@ def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
 
 
-def commentseditor(request):
-    return render(request, 'comments_editor.html')
+def commentseditor(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    usuari = CustomUser.objects.filter(email=request.user)
+    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "usuari": usuari,
+        "comentaris": comentaris
+    }
+    if request.method == "POST":
+        titol=request.POST.get('titol')
+        
+        descripcio=request.POST.get('descripcio')
+        
+        nou_comentari=Comentari()
+        nou_comentari.usuari=request.user
+        nou_comentari.titol=titol
+        nou_comentari.descripcio=descripcio
+        nou_comentari.llibre=Llibre.objects.get(pk=pk)
+        nou_comentari.save()
+    return render(request, 'comments_editor.html', context)
+
 
 
 def canviardocument(request):
