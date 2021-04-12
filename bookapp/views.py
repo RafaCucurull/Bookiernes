@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
 from bookapp.forms import AfegirLlibreForm
-from bookapp.models import Llibre, TematiquesLlibre
+from bookapp.models import Llibre, TematiquesLlibre, Comentari
 from users.models import CustomUser
 
 
@@ -87,5 +87,14 @@ def canviardocument(request):
     return render(request, 'canviar_document.html')
 
 
-def comments(request):
-    return render(request, "comments.html")
+def comments(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    usuari = CustomUser.objects.get(email=request.user)
+    comentaris = Comentari.objects.filter(usuari=usuari)
+    context = {
+        "llibre": llibre,
+        "usuari": usuari,
+        "comentaris": comentaris
+    }
+    return render(request, 'comments.html', context)
+
