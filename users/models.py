@@ -18,6 +18,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_Editor = models.BooleanField(default=False)
     is_Maquetacio = models.BooleanField(default=False)
     is_IT = models.BooleanField(default=False)
+    lliure = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

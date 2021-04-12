@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
 
 from bookapp.forms import AfegirLlibreForm
-from bookapp.models import Llibre
+from bookapp.models import Llibre, Notificacio
 from users.models import CustomUser
 
 
@@ -18,24 +17,30 @@ class Counter:
             self.counter == 0
             return True
 
+
 def homePage(request):
     return render(request, "home.html")
 
 
 def Escriptori(request):
     usuari = CustomUser.objects.get(email=request.user)
-    llibres = Llibre.objects.filter(editor=usuari)
     comptador = Counter()
-    llibreshtml = {
-        "object_list": llibres,
-        "counter": comptador
-    }
     if not usuari.is_Treballador:
         return render(request, "home.html")
     else:
         if usuari.is_Escriptor:
+            llibres_escriptor = Llibre.objects.filter(escriptor=usuari)
+            llibreshtml = {
+                "object_list": llibres_escriptor,
+                "counter": comptador
+            }
             return render(request, "escriptori_escriptor.html", llibreshtml)
         if usuari.is_Editor:
+            llibres_editor = Llibre.objects.filter(editor=usuari)
+            llibreshtml = {
+                "object_list": llibres_editor,
+                "counter": comptador
+            }
             return render(request, "escriptori_editor.html", llibreshtml)
 
 
@@ -44,13 +49,25 @@ def afegirLlibre(request):
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save()
-            obj.editor = request.user
+            seleccionar_editor(obj)
             obj.escriptor = request.user
             obj.save()
             return redirect('afegirllibre')
     else:
         form = AfegirLlibreForm()
     return render(request, "afegirllibre.html", {'form': form})
+
+def seleccionar_editor(llibre):
+    editors_lliures=CustomUser.objects.filter(is_Editor=True, lliure=True)
+    editoraux = editors_lliures[0]
+    llibre.editor = editoraux
+    editor = CustomUser.objects.get(email=editoraux)
+    editor.lliure = False
+    editor.save()
+    print(editor.lliure)
+    notificacio = Notificacio()
+    notificacio.text = "Tens un nou llibre assignat"
+    notificacio.usuari = editoraux
 
 
 def areaedicio(request, pk):
@@ -67,6 +84,7 @@ def areaescriptor(request, pk):
         "llibrehtml": llibre
     }
     return render(request, 'area_escriptor.html', context)
+
 
 def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
