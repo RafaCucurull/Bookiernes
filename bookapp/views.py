@@ -61,13 +61,12 @@ def areaedicio(request, pk):
     return render(request, 'area_edicio.html', context)
 
 
-def areaescriptor(request):
-    return render(request, 'area_escriptor.html')
-
-
-def escriptoriescriptor(request):
-    return render(request, 'escriptori_escriptor.html')
-
+def areaescriptor(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibrehtml": llibre
+    }
+    return render(request, 'area_escriptor.html', context)
 
 def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
