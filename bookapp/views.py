@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
 from bookapp.forms import AfegirLlibreForm
+<<<<<<< HEAD
 from bookapp.models import Llibre
 from users.models import CustomUser
 
@@ -19,6 +20,8 @@ class Counter:
             return True
 
 
+=======
+>>>>>>> vistes
 def homePage(request):
     return render(request, "home.html")
 
@@ -50,6 +53,7 @@ def afegirLlibre(request):
             return redirect('afegirllibre')
     else:
         form = AfegirLlibreForm()
+<<<<<<< HEAD
     return render(request, "afegirllibre.html", {'form': form})
 
 
@@ -82,3 +86,7 @@ def canviardocument(request):
 
 def comments(request):
     return render(request, 'comments.html')
+=======
+    return render(request, "comments.html", {'form': form})
+
+>>>>>>> vistes
