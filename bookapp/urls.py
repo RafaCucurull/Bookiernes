@@ -12,5 +12,6 @@ urlpatterns = [
     path('enviarnovaversio', views.enviarnovaversio, name='enviarnovaversio'),
     path('canviardocument', views.canviardocument, name='canviardocument'),
     path('commentseditor', views.commentseditor, name='commentseditor'),
-    path('comments', views.comments, name='comments')
+    path('comments', views.comments, name='comments'),
+    path('notificacions', views.notificacions, name='notificacions')
 ]

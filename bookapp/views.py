@@ -66,8 +66,9 @@ def seleccionar_editor(llibre):
     editor.save()
     print(editor.lliure)
     notificacio = Notificacio()
-    notificacio.text = "Tens un nou llibre assignat"
+    notificacio.missatge = "Tens un nou llibre assignat"
     notificacio.usuari = editoraux
+    notificacio.save()
 
 
 def areaedicio(request, pk):
@@ -100,3 +101,11 @@ def canviardocument(request):
 
 def comments(request):
     return render(request, "comments.html")
+
+def notificacions(request):
+    notificacions = Notificacio.objects.filter(usuari=request.user)
+    print (notificacions)
+    context = {
+        "object_list": notificacions
+    }
+    return render(request, "notificacions.html", context)
