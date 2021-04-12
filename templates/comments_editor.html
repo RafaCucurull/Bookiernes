@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comentaris_editor.css' %}">
 
     <body>
     <!-- Header -->
@@ -19,19 +19,45 @@
         </h1>
 
         <p class="p_header"> Els comentaris o modificacions que proposeu en aquest espai les podrà veure l'escriptor/a
-            de l'obra. Cada cop que en publiqui un de nou li arribarà una notificació a ell/a per tal que valori si decideix
+            de l'obra. Cada cop que en publiqui un de nou li arribarà una notificació a ell/a per tal que valori si
+            decideix
             incloure'l o no en el seu llibre.
             <br/> <br/> <br/> <br/>
         </p>
 
     </header>
 
-      <div class="w3-row-padding">
-    {% for object in object_list %}
-        {{ counter.increment }}
-        {% if counter.mes3 %}
-            <div class="w3-row-padding">
-                <div class="w3-third w3-container w3-margin-bottom">
+    <div class="w3-row-padding">
+        {% for object in object_list %}
+            {{ counter.increment }}
+            {% if counter.mes3 %}
+                <div class="w3-row-padding">
+                    <div class="w3-third w3-container w3-margin-bottom box">
+                        <a href="{% url 'areaedicio' %}">
+                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
+                                <br/>
+                                <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                                     class="w3-hover-opacity"> <br/> <br/>
+                                <p><h4>{{ object.nom_llibre }}</h4></p>
+                                <p>Un noi decideix fer-se escriptor quan descobreix que les seves invencions li regalen
+                                    una
+                                    estona
+                                    més d’atenció de la nena rica que li té el cor robat. Un arquitecte fuig de
+                                    Constantinoble
+                                    amb els
+                                    plànols d’una biblioteca inexpugnable. Un estrany cavaller tempta Cervantes perquè
+                                    escrigui
+                                    un llibre
+                                    com no ha existit mai. I Gaudí, navegant cap a una misteriosa cita a Nova York, es
+                                    complau
+                                    amb la llum i el vapor,
+                                    la matèria de la qual haurien d’estar fetes les ciutats.</p><br/><br/>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="w3-third w3-container w3-margin-bottom box">
                     <a href="{% url 'areaedicio' %}">
                         <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
                             <br/>
@@ -53,72 +79,54 @@
                         </div>
                     </a>
                 </div>
-            </div>
-        {% else %}
-            <div class="w3-third w3-container w3-margin-bottom">
-                <a href="{% url 'areaedicio' %}">
-                    <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white"><br/>
-                        <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
-                             class="w3-hover-opacity"> <br/> <br/>
-                        <p><h4>{{ object.nom_llibre }}</h4></p>
-                        <p>Un noi decideix fer-se escriptor quan descobreix que les seves invencions li regalen una
-                            estona
-                            més d’atenció de la nena rica que li té el cor robat. Un arquitecte fuig de Constantinoble
-                            amb els
-                            plànols d’una biblioteca inexpugnable. Un estrany cavaller tempta Cervantes perquè escrigui
-                            un llibre
-                            com no ha existit mai. I Gaudí, navegant cap a una misteriosa cita a Nova York, es complau
-                            amb la llum i el vapor,
-                            la matèria de la qual haurien d’estar fetes les ciutats.</p><br/><br/>
+            {% endif %}
+        {% endfor %}
+
+        <div class="w3-third w3-container w3-margin-bottom box">
+            <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-left w3-white"><br/>
+                <div id="form">
+                    <label for="com_title"><b>Títol del comentari:</b></label><br>
+                    <input class="inputarea w3-margin-bottom area-input" type="text" id="com_title" name="com_title"
+                           size="50">
+                </div>
+
+                <label for="com_descr"><b>Descripció del comentari:</b></label><br>
+                <textarea class="area-input" id="com_descr" name="com_descr" rows="4" cols="50"></textarea>
+
+                <div class="w3-row-padding w3-padding-64 w3-container">
+
+                    <div class="row message_feature">
+
+                        <a href="#">
+                            <button type="button" class="btn btn-primary message">
+                                <h3 class="h3-message"><b>Afegiu una nova obra</b>
+                                    <img class="w3-center icons" src="../static/escriptori/plusicon.png">
+                                </h3>
+                            </button>
+                        </a>
+
                     </div>
-                </a>
+                </div>
             </div>
-        {% endif %}
-    {% endfor %}
 
-      <div class="w3-third w3-container w3-margin-bottom">
-               <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-left w3-white"><br/>
-                        <div id="form">
-                            <input class="inputarea w3-margin-bottom" type="text" id="fname" name="fname" size="50">
-                        </div>
-
-                       <textarea id="w3review" name="w3review" rows="4" cols="50">
-                       </textarea>
-
-                   <div class="w3-row-padding w3-padding-64 w3-container">
-
-                        <div class="row message_feature">
-
-                                <a href="#">
-                                    <button type="button" class="btn btn-primary message">
-                                        <h3 class="h3-message"><b>Afegiu una nova obra</b>
-                                            <img class="w3-center icons" src="../static/escriptori/plusicon.png">
-                                        </h3>
-                                    </button>
-                                </a>
-
+            <!-- BOTÓ -->
+            <div class="w3-container w3-margin w3-padding">
+                <div class="w3-container w3-white">
+                    <div class="row message_feature">
+                        <div class="right col-md-auto">
+                            <a href="#">
+                                <button type="button" class="btn btn-secundary message">
+                                    <h3 class="h3-message-orange"><b>Tornar al llibre</b>
+                                        <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
+                                    </h3>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-          <!-- BOTÓ -->
-         <div class="w3-container w3-margin w3-padding">
-            <div class="w3-container w3-white">
-                <div class="row message_feature">
-                <div class="right col-md-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-secundary message">
-                            <h3 class="h3-message-orange"><b>Tornar al llibre</b>
-                                <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
-                            </h3>
-                        </button>
-                    </a>
-                </div>
-            </div>
-            </div>
         </div>
-
-    </div>
     </div>
     </body>
 {% endblock %}
