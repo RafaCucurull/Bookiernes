@@ -15,7 +15,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('email', 'is_Editor', 'is_Escriptor', 'is_Maquetacio', 'is_IT')
+        fields = ('email', 'is_Editor', 'is_Escriptor', 'is_Maquetacio', 'is_IT', 'password1', 'password2')
 
 
 class CustomUserChangeForm(UserChangeForm):
