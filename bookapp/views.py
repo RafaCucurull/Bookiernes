@@ -68,3 +68,6 @@ def commentseditor(request):
 
 def canviardocument(request):
     return render(request, 'canviar_document.html')
+
+def comments(request):
+    return render(request, 'comments.html')

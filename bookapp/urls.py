@@ -11,5 +11,6 @@ urlpatterns = [
     path('escriptori_escriptor', views.escriptoriescriptor, name='escriptoriescriptor'),
     path('enviarnovaversio', views.enviarnovaversio, name='enviarnovaversio'),
     path('canviardocument', views.canviardocument, name='canviardocument'),
-    path('commentseditor', views.commentseditor, name='commentseditor')
+    path('commentseditor', views.commentseditor, name='commentseditor'),
+    path('comments', views.comments, name='comments')
 ]
