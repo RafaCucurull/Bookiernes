@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/novaversio.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin"> Envieu una nova versió </h1>
+        <p class="p_header w3-center">A través d'aquest espai podeu enviar les noves versions de la vostra obra,
+        un cop hi hagueu incorporat les modificacions que cregueu convenients</p> </br></br>
+    </header>
+
+    <div class="w3-container w3-center">
+        <form method="post">
+            <div class="row">
+                <div class="column" style="margin-left: 50px">
+                    <div>
+                        <h1 class="title"><b>Afegiu el llibre modificat</b></h1>
+                        <p id="subtitle1">Adjunteu el llibre modificat en format PDF </p>
+                    </div>
+                    <div class="custom-input-file">
+                        <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                        <small>Arrossega aquí els teus fitxers</small>
+                        <input type="file" class="form-control" name="pdf"
+                               placeholder="pdf"
+                               required class="input-file">
+                    </div>
+                </div>
+                <div class="column" style="margin-left: -100px">
+                    <div>
+                        <h1 class="title"><b>Anotacions</b></h1>
+                        <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per a l'editor/a</p>
+                        <div id="form">
+                            <input class="inputarea" type="text" id="fname" name="fname">
+                        </div>
+                    </div>
+                    <!-- Afegir nou llibre -->
+
+                    <div class="w3-row-padding w3-container">
+                        <div class="row message_feature">
+                                <div class="col-md-auto">
+                                    <a href="#">
+                                        <button type="button" class="btn btn-primary message">
+                                            <h3 class="h3-message"><b>Enviar nova versió</b>
+                                                <img class="w3-center icons" src="../static/modificacions/send.png">
+                                            </h3>
+                                        </button>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div id="downblock2">
+                        <medium id="downtext1">En enviar el document, accepteu els termes i condicions de<br>
+                            l'editorial
+                        </medium>
+                    </div>
+                <div class="w3-container w3-margin">
+                    <div class="w3-container w3-white">
+                        <div class="row message_feature">
+                        <div class="col-md-auto">
+                            <a href="#">
+                                <button type="button" class="btn btn-secundary message">
+                                    <h3 class="h3-message-orange"><b>Tornar endarrere</b>
+                                        <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
+                                    </h3>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            </div>
+        </form>
+    </div>
+    </body>
+{% endblock %}
