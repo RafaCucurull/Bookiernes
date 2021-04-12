@@ -89,8 +89,8 @@ def canviardocument(request):
 
 def comments(request, pk):
     llibre = Llibre.objects.filter(pk=pk)
-    usuari = CustomUser.objects.get(email=request.user)
-    comentaris = Comentari.objects.filter(usuari=usuari)
+    usuari = CustomUser.objects.filter(email=request.user)
+    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
     context = {
         "llibre": llibre,
         "usuari": usuari,
