@@ -43,3 +43,6 @@ class Comentari(models.Model):
     descripcio = models.TextField()
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
 
+class Notificacio(models.Model):
+    usuari = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    missatge = models.CharField(max_length=100)

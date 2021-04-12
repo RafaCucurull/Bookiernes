@@ -43,6 +43,7 @@ def afegirLlibre(request):
     if request.method == 'POST':
         form = AfegirLlibreForm(request.POST)
         if form.is_valid():
+            print("hola")
             obj = form.save()
             obj.escriptor = request.user
             obj.save()
