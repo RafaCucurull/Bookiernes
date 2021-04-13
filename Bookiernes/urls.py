@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('secret/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('bookapp.urls')),
     path('accounts/register/', views.register, name="register"),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
