@@ -28,10 +28,24 @@
     <div class="w3-row-padding">
         {% if comentaris %}
             {% for comentari in comentaris %}
+                {{ counter.increment }}
+                {% if counter.mes3 %}
+                    <div class="w3-row-padding">
+                        <div class="w3-third w3-container w3-margin-bottom">
 
-                <div class="w3-row-padding">
+                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
+                                <br/>
+                                <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                                     class="w3-hover-opacity"> <br/> <br/>
+                                <p><h4>{{ comentari.llibre.nom_llibre }}</h4></p>
+                                <p><h5>{{ comentari.titol }}</h5></p>
+                                <p>{{ comentari.descripcio }}</p><br/><br/>
+                            </div>
+
+                        </div>
+                    </div>
+                {% else %}
                     <div class="w3-third w3-container w3-margin-bottom">
-
                         <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
                             <br/>
                             <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
@@ -42,10 +56,8 @@
                         </div>
 
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
-
-
         {% endif %}
 
         <!-- BOTÓ -->
@@ -55,7 +67,7 @@
                     <div class="right col-md-auto">
                         <a href="javascript:history.back()">
                             <button type="button" class="btn btn-secundary message">
-                                <h3 class="h3-message-orange"><b>Tornar al llibre</b>
+                                <h3 class="h3-message-orange"><b>Tornar endarrere</b>
                                     <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
                                 </h3>
                             </button>
@@ -65,9 +77,6 @@
             </div>
         </div>
 
-    </div>
-    </div>
-    </div>
     </div>
     </body>
 {% endblock %}

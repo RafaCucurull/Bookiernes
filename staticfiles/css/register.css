@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+h3 {
+    text-align: center;
+}
+
+.h3-inline {
+    display: inline;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    margin: auto;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 450px;
+}
+
+.button-margin {
+    margin-left: 30px;
+}
+
+.formulari {
+    text-align: center;
+    width: 80%;
+    padding: 10px 20px;
+    height: 64%;
+    margin: 20px auto auto;
+}
+
+ul {
+    text-align: center;
+    list-style-position: inside;
+    margin: auto;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.border {
+    border-radius: 10px;
+}
+
+.foot {
+    text-align: center;
+    width: 85%;
+    padding: 10px;
+    margin: 3.5% auto auto;
+}
+
+.button1 {
+    color: white;
+    border: transparent;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: darkorange;
+    padding: 14px 20px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid grey;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.body-color {
+    background-color: gainsboro;
+}
