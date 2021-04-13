@@ -28,7 +28,7 @@
 
     <!-- First Grid -->
     <div class="w3-row-padding">
-        {% for object in object_list %}
+        {% for object, tematiques in mylist %}
             {{ counter.increment }}
             {% if counter.mes3 %}
                 <div class="w3-row-padding">
@@ -42,6 +42,7 @@
                                 <p>{{ object.sinopsis }}</p><br/>
                                 <p style="display: inline">Temàtiques:</p>
                                 {% for t in tematiques %}
+                                    {{ tematiques }}
                                     <p style="display: inline">{{ t }}, </p>
                                 {% endfor %}
                                 <p>Col·lecció: {{ object.coleccio }}</p>
