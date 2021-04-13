@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
-from django.http import HttpResponse
-from django.views.decorators.clickjacking import xframe_options_sameorigin
+
 
 
 class Counter:
@@ -83,7 +82,7 @@ def areaedicio(request, pk):
     return render(request, 'area_edicio.html', context)
 
 
-@xframe_options_sameorigin
+
 def areaescriptor(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
