@@ -4,7 +4,6 @@ from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 
 
-
 class Counter:
     counter = 0
 
@@ -82,7 +81,6 @@ def areaedicio(request, pk):
     return render(request, 'area_edicio.html', context)
 
 
-
 def areaescriptor(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
@@ -115,11 +113,20 @@ def commentseditor(request, pk):
         nou_comentari.descripcio = descripcio
         nou_comentari.llibre = Llibre.objects.get(pk=pk)
         nou_comentari.save()
+        notificarEscriptorComentari(Llibre.objects.get(pk=pk))
     return render(request, 'comments_editor.html', context)
+
+
+def notificarEscriptorComentari(llibre):
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un comentari pendent de revisar"
+    notificacio.usuari = llibre.escriptor
+    notificacio.save()
 
 
 def canviardocument(request):
     return render(request, 'canviar_document.html')
+
 
 def notificacions(request):
     notificacions = Notificacio.objects.filter(usuari=request.user)
@@ -127,6 +134,7 @@ def notificacions(request):
         "object_list": notificacions
     }
     return render(request, "notificacions.html", context)
+
 
 def comments(request, pk):
     llibre = Llibre.objects.filter(pk=pk)
@@ -138,4 +146,3 @@ def comments(request, pk):
         "comentaris": comentaris
     }
     return render(request, 'comments.html', context)
-
