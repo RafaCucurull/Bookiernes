@@ -105,13 +105,13 @@
         </div>
 
         <div class="w3-twothird">
-            <iframe src="{{ llibre.pdf.url }}"
+            <iframe src="{{ llibre.pdf }}"
                     width="100%"
                     height="800px">
             </iframe>
             <div class="row document_feature">
                 <div class="col-md-auto">
-                    <a class="btn" href="{%  url 'canviardocument' %}">
+                    <a class="btn" href="{%  url 'canviardocument' pk=llibre.pk %}">
                         <h3 class="h3-document"><b>Canviar document</b>
                             <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
                         </h3>

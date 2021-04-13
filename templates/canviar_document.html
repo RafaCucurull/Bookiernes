@@ -24,7 +24,7 @@
 
     <!-- Canviar document -->
     <div class="w3-container w3-center">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">
                     <div class="custom-input-file">
                         <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
@@ -37,9 +37,9 @@
                     <div class="w3-row-padding w3-container">
                         <div class="row message_feature">
                                 <div class="col-md-auto">
-                                    <a href="#">
-                                        <button type="button" class="btn btn-primary message">
-                                            <h3 class="h3-message"><b>Actualitzar document</b>
+                                    <a href="">
+                                        <button type="submit" class="btn btn-primary message">
+                                            <h3 class="h3-message"><b> Actualitzar document</b>
                                                 <img class="w3-center icons" src="../static/modificacions/updateicon.png">
                                             </h3>
                                         </button>
@@ -47,16 +47,16 @@
                                 </div>
                         </div>
                     </div>
-
                 <div class="w3-container w3-margin">
                     <div class="w3-container w3-white">
                         <div class="row message_feature">
                         <div class="col-md-auto">
-                            <a href="#">
-                                <button type="button" class="btn btn-secundary message">
-                                    <h3 class="h3-message-orange"><b>Tornar endarrere</b>
-                                        <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
-                                    </h3>
+                            <a href="#" onClick="history.go(-1)">
+                                <button type="button" class="btn btn-secundary message" >
+                                    
+                                        <h3 class="h3-message-orange"><b>Tornar endarrere</b>
+                                            <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
+                                        </h3>
                                 </button>
                             </a>
                         </div>
