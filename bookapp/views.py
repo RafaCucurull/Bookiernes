@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-
 from bookapp.forms import AfegirLlibreForm
-from bookapp.models import Llibre, Notificacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 
 
@@ -27,21 +26,23 @@ def Escriptori(request):
     comptador = Counter()
     if not usuari.is_Treballador:
         return render(request, "home.html")
-    else:
-        if usuari.is_Escriptor:
-            llibres_escriptor = Llibre.objects.filter(escriptor=usuari)
-            llibreshtml = {
-                "object_list": llibres_escriptor,
-                "counter": comptador
-            }
-            return render(request, "escriptori_escriptor.html", llibreshtml)
-        if usuari.is_Editor:
-            llibres_editor = Llibre.objects.filter(editor=usuari)
-            llibreshtml = {
-                "object_list": llibres_editor,
-                "counter": comptador
-            }
-            return render(request, "escriptori_editor.html", llibreshtml)
+    if usuari.is_Editor:
+        llibres = Llibre.objects.filter(editor=usuari)
+    if usuari.is_Escriptor:
+        llibres = Llibre.objects.filter(escriptor=usuari)
+    tematiques = list()
+    for llibre in llibres:
+        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
+    mylist = zip(llibres, tematiques)
+    llibreshtml = {
+        "object_list": llibres,
+        "counter": comptador,
+        "mylist": mylist
+    }
+    if usuari.is_Escriptor:
+        return render(request, "escriptori_escriptor.html", llibreshtml)
+    if usuari.is_Editor:
+        return render(request, "escriptori_editor.html", llibreshtml)
 
 
 def afegirLlibre(request):
@@ -57,8 +58,9 @@ def afegirLlibre(request):
         form = AfegirLlibreForm()
     return render(request, "afegirllibre.html", {'form': form})
 
+
 def seleccionar_editor(llibre):
-    editors_lliures=CustomUser.objects.filter(is_Editor=True, lliure=True)
+    editors_lliures = CustomUser.objects.filter(is_Editor=True, lliure=True)
     editoraux = editors_lliures[0]
     llibre.editor = editoraux
     editor = CustomUser.objects.get(email=editoraux)
@@ -74,7 +76,7 @@ def seleccionar_editor(llibre):
 def areaedicio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     return render(request, 'area_edicio.html', context)
 
@@ -82,7 +84,7 @@ def areaedicio(request, pk):
 def areaescriptor(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     return render(request, 'area_escriptor.html', context)
 
@@ -91,22 +93,47 @@ def enviarnovaversio(request):
     return render(request, 'enviar_nova_versio.html')
 
 
-def commentseditor(request):
-    return render(request, 'comments_editor.html')
+def commentseditor(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    usuari = CustomUser.objects.filter(email=request.user)
+    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "usuari": usuari,
+        "comentaris": comentaris
+    }
+    if request.method == "POST":
+        titol = request.POST.get('titol')
+
+        descripcio = request.POST.get('descripcio')
+
+        nou_comentari = Comentari()
+        nou_comentari.usuari = request.user
+        nou_comentari.titol = titol
+        nou_comentari.descripcio = descripcio
+        nou_comentari.llibre = Llibre.objects.get(pk=pk)
+        nou_comentari.save()
+    return render(request, 'comments_editor.html', context)
 
 
 def canviardocument(request):
     return render(request, 'canviar_document.html')
 
-
-def comments(request):
-    return render(request, "comments.html")
-
 def notificacions(request):
-    comptador = Counter()
     notificacions = Notificacio.objects.filter(usuari=request.user)
-    print (notificacions)
     context = {
         "object_list": notificacions
     }
     return render(request, "notificacions.html", context)
+
+def comments(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    usuari = CustomUser.objects.filter(email=request.user)
+    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "usuari": usuari,
+        "comentaris": comentaris
+    }
+    return render(request, 'comments.html', context)
+
