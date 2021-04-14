@@ -18,12 +18,11 @@
             Aquest és el vostre escriptori
         </h1>
 
-        <p class="p_header"> Aquí apareixen totes els llibres que estem o hem editat junts.
+        <p class="p_header w3-padding-24"> Aquí apareixen totes els llibres que estem o hem editat junts.
             Seleccioneu el que vulgueu per veure els comentaris del vostre editor i enviar noves versions.
             I si voleu presentar una obra nova, afegiu-la a la vostra col·lecció i un dels nostres editors
             se la llegirà i es posarà en contacte
-            <br/> <br/> <br/> <br/>
-        </p>
+        </p> </br>
     </header>
 
     <!-- First Grid -->
@@ -54,7 +53,7 @@
             {% else %}
                 <div class="w3-third w3-container w3-margin-bottom">
                     <a href="{% url 'areaescriptor' pk=object.pk %}">
-                        <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-white">
+                        <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white"><br/>
                             <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
                                  class="w3-hover-opacity"> <br/> <br/>
                             <p><h4>{{ object.nom_llibre }}</h4></p>
