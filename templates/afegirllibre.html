@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="column" style="margin-left: 50px">
                     <div>
-                        <h1 id="num1" class="numstyle"><b>1.</b></h1>
+                        <h1 id="num1" class="numstyle"><b><br>1.</b></h1>
                         <h1 class="title"><b>Afegiu un nou llibre</b></h1>
                         <p id="subtitle1">Adjunteu els vostres manuscrits en el format<br>
                             habitual (PDF)</p>
@@ -28,37 +28,74 @@
                     </div>
                     <br>
                     <div id="downblock">
-                        <h1 id="num3" class="numstyle"><b>3.</b></h1>
+                         <h1 class="numstyle"><b><br>2.</b></h1>
+                        <h1 class="title"><b>Escull el títol</b></h1>
+                        <div id="form" style="margin: 0 auto; width:300px; text-align: center; ">
+                            {{ form.nom_llibre }}
+                             <br>
+                             <br>
+                        </div>
+                    </div>
+                    <div id="downblock2">
+                            <h1 class="numstyle"><b><br>3.</b></h1>
+                        <h1 class="title"><b>Escull les temàtiques</b></h1>
+                            <p style="text-align: center;">
+                            {% for tematica in form.tematiques %}
+                                {{ tematica }}
+                            {% endfor %}
+                                </p>
+                             <br>
+                    </div>
+                    
+                </div>
+
+                <div class="column" style="margin-right: -100px">
+                    <div id="downblock2">
+                        <h1 class="numstyle"><b><br>4.</b></h1>
+                    <h1 class="title"><b>Col·lecció</b></h1>
+                        <p style="text-align: center;">
+                        {{ form.coleccio }}
+                            </p>
+                         <br>
+                    </div>
+                    <div id="downblock2">
+                        <h1 class="numstyle"><b><br>5.</b></h1>
+                    <h1 class="title"><b>Pàgines</b></h1>
+                        <p style="text-align: center;">
+                        {{ form.num_pagines }}
+                            </p>
+                         <br>
+                    </div>
+                    <div>
+                            <h1 id="num1" class="numstyle"><b><br>6.</b></h1>
+                            <h1 class="title"><b>Breu resum de la vostra obra<br>(500 paraules)<br></b></h1>
+                            {{ form.sinopsis }}
+                    </div>
+                    <div id="downblock">
+                        <h1 id="num3" class="numstyle"><b>7.</b></h1>
+                        <h1 class="title"><b>És hora de publicar-lo!<br><br></b></h1>
                         <button class="button1 submit-button" type="submit">Presentar el document</button>
                         <br>
                     </div>
                     <div id="downblock2">
-                        <small id="downtext1">En enviar el document, accepteu els termes i condicions de<br>
-                            l'editorial
+                        <small id="downtext1">En enviar el document, accepteu els termes i condicions de l'editorial<br><br>
                         </small>
                     </div>
-                </div>
-                <div class="column" style="margin-left: -100px">
-                    <div>
-                        <h1 class="numstyle"><b>2.</b></h1>
-                        <h1 class="title"><b>Ompliu el formulari</b></h1>
-                        <p id="subtitle1">Us volem conèixer una mica millor</p>
-                        <div id="form">
-                            <p>Proposta de títol</p>
-                            {{ form.nom_llibre }}
-                            <p>Temàtica</p>
-                            {{ form.tematiques }}
-                            <p>Breu resum de la vostra obra (500 paraules)</p>
-                            {{ form.sinopsis }}
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </form>
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>
     <a href={% url 'escriptori' %}>
-        <button id="returnBut" class="button1">Tornar a l'escriptori</button>
+        <button id="returnBut" class="button1" style="margin-top: 25%; margin-left:45%">Tornar a l'escriptori</button>
+        <br>
+        <br>
+        <br>
     </a>
     </body>
 {% endblock %}
+
