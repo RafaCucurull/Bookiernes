@@ -15,85 +15,87 @@
     <header class="my_header">
 
         <h1 class="w3-margin">
-            Comentaris i modificacions
+            Comentaris i propostes
         </h1>
 
-        <p class="p_header"> Els comentaris o modificacions que proposeu en aquest espai les podrà veure l'escriptor/a
+        <p class="p_header w3-padding-24"> Els comentaris o modificacions que proposeu en aquest espai les podrà veure l'escriptor/a
             de l'obra. Cada cop que en publiqui un de nou li arribarà una notificació a ell/a per tal que valori si
-            decideix
-            incloure'l o no en el seu llibre.
-            <br/> <br/> <br/> <br/>
+            decideix incloure'l o no en el seu llibre.
         </p>
 
     </header>
+
     <div class="w3-row-padding">
-        {% if comentaris %}
-            {% for comentari in comentaris %}
-
-                <div class="w3-row-padding">
-                    <div class="w3-third w3-container w3-margin-bottom">
-
-                        <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-left w3-white">
-                            <br/>
-                            <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
-                                 class="w3-hover-opacity"> <br/> <br/>
-                            <p><h4>{{ comentari.llibre.nom_llibre }}</h4></p>
-                            <p><h5>{{ comentari.titol }}</h5></p>
-                            <p>{{ comentari.descripcio }}</p><br/><br/>
-                        </div>
-
+     {% for lib in llibre %}
+        <form action="/area_edicio/{{ lib.id }}/commentseditor" method="post">{% csrf_token %}
+            <div class="w3-third w3-container w3-margin-bottom w3-center" style="margin-left:25%; width: 50%">
+                <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-white"><br/>
+                    <div id="form">
+                        <p class="titolformulari"> Títol del comentari</p>
+                        <input class="inputarea w3-margin-bottom" type="text" id="titol" name="titol" size="50"
+                               required>
                     </div>
-                </div>
-            {% endfor %}
-
-
-        {% endif %}
-        {% for lib in llibre %}
-            <form action="/area_edicio/{{ lib.id }}/commentseditor" method="post">{% csrf_token %}
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-left w3-white"><br/>
-                        <div id="form">
-                            <input class="inputarea w3-margin-bottom" type="text" id="titol" name="titol" size="50"
-                                   required>
-                        </div>
-
-                        <textarea id="w3review" name="descripcio" rows="4" cols="50" required>
+                    <p class="titolformulari"> Escriviu aquí el vostre comentari</p>
+                    <textarea id="w3review" name="descripcio" rows="4" cols="50" required>
                         </textarea>
 
-                        <div class="w3-row-padding w3-padding-64 w3-container">
+                    <div class="w3-justify w3-padding w3-container">
+                        <div class="row message_feature">
+                            <a href="#">
+                                <button type="submit" class="btn btn-primary message">
+                                    <h3 class="h3-message"><b>Publiqueu el comentari</b>
+                                        <img class="w3-center icons" src="{% static '/escriptori/plusicon.png' %}">
+                                    </h3>
+                                </button>
+                            </a>
 
-                            <div class="row message_feature">
-
-                                <a href="#">
-                                    <button type="submit" class="btn btn-primary message">
-                                        <h3 class="h3-message"><b>Afegiu una nova obra</b>
-                                            <img class="w3-center icons" src="../static/escriptori/plusicon.png">
-                                        </h3>
-                                    </button>
-                                </a>
-
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </form>
-        {% endfor %}
-        <!-- BOTÓ -->
-        <div class="w3-container w3-margin w3-padding">
-            <div class="w3-container w3-white">
-                <div class="row message_feature">
-                    <div class="right col-md-auto">
-                        <a href="javascript:history.back()">
-                            <button type="button" class="btn btn-secundary message">
-                                <h3 class="h3-message-orange"><b>Tornar al llibre</b>
-                                    <img class="w3-center icons" src="../static/areaescriptor/orangearrowback.png">
-                                </h3>
-                            </button>
-                        </a>
                     </div>
                 </div>
             </div>
+        </form>
+    {% endfor %}
+</div>
+    <div class="w3-row-padding">
+        {% if comentaris %}
+            {% for comentari in comentaris %}
+                {{ counter.increment }}
+
+                <div class="w3-third w3-container w3-margin-bottom">
+                    <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-white">
+                        <br/>
+                        <p><h5>{{ comentari.titol }}</h5></p>
+                        <p>{{ comentari.descripcio }}</p><br/><br/>
+                    </div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+    </div>
+
+
+    <!-- BOTÓ -->
+    <div class="w3-container w3-padding">
+        <div class="w3-container w3-white">
+            <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href="javascript:history.back()">
+                        <button type="button" class="btn btn-secundary message" >
+                            <h3 class="h3-message-orange"><b>Tornar endarrere</b>
+                                <img class="w3-center icons" src="{% static '/areaescriptor/orangearrowback.png' %}">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
+
+
+
+
     </div>
     </body>
 {% endblock %}

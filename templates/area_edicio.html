@@ -3,7 +3,7 @@
 
 {% block content %}
     {% include 'user_header.html' %}
-    <html>
+    <html xmlns="http://www.w3.org/1999/html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -17,16 +17,16 @@
     <header class="my_header">
 
         <h1 class="w3-margin">
-            Àrea d'edició: <b>{{ llibre.nom }}</b>
+            Àrea d'edició: <b>{{ llibre.nom_llibre }}</b>
         </h1>
-        <p class="w3-center p_header">Editor, des d'aquest espai podeu visualitzar el document i anotar les vostres observacions
+        <p class="w3-center p_header w3-padding-24">Editor, des d'aquest espai podeu visualitzar el document i anotar les vostres observacions
             per tal que les vegi l'escriptor. També podeu sol·licitar les bateries d'imatges i enviar el document per a ser maquetat
             i publicat, tot a través dels diferents formularis</p>
     </header>
     <!-- First Grid -->
-    <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-row-padding w3-padding-24 w3-container">
         <div class="w3-third">
-            <div class="row top_feature">
+            <div class="row top_feature"><br/><br/><br/>
                 <div class="col-md-auto">
                     <a href="{{llibre.id}}/commentseditor">
                         <button class="btn btn-primary btn-circle btn-xl">
