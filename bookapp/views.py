@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
-
+from django.core.files.storage import FileSystemStorage
 
 class Counter:
     counter = 0
@@ -11,6 +11,7 @@ class Counter:
         self.counter += 1
         return ''
 
+    
     def mes3(self):
         if self.counter > 3:
             self.counter == 0
@@ -124,7 +125,19 @@ def notificarEscriptorComentari(llibre):
     notificacio.save()
 
 
-def canviardocument(request):
+def canviardocument(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    usuari = CustomUser.objects.filter(email=request.user)
+    if request.method == "POST" and request.FILES['pdf']:
+        pdf =  request.FILES['pdf']
+        print(pdf)
+        fs = FileSystemStorage()
+        filename = fs.save(pdf.name, pdf)
+        
+        llibre.pdf=fs.url(filename)
+        print(llibre.pdf)
+        llibre.save()
+
     return render(request, 'canviar_document.html')
 
 

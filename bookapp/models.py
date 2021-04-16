@@ -9,7 +9,7 @@ class Llibre(models.Model):
     portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=300)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
-    pdf = models.FileField(upload_to='pdf')
+    pdf = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
 
