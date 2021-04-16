@@ -90,7 +90,7 @@ def areaescriptor(request, pk):
     return render(request, 'area_escriptor.html', context)
 
 
-def enviarnovaversio(request):
+def enviarnovaversio(request, pk):
     return render(request, 'enviar_nova_versio.html')
 
 
@@ -127,7 +127,10 @@ def notificarEscriptorComentari(llibre):
 
 def canviardocument(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    usuari = CustomUser.objects.filter(email=request.user)
+
+    context = {
+        "llibrehtml": llibre
+    }
     if request.method == "POST" and request.FILES['pdf']:
         pdf =  request.FILES['pdf']
         print(pdf)
@@ -138,7 +141,7 @@ def canviardocument(request, pk):
         print(llibre.pdf)
         llibre.save()
 
-    return render(request, 'canviar_document.html')
+    return render(request, 'canviar_document.html', context)
 
 
 def notificacions(request):
@@ -151,11 +154,9 @@ def notificacions(request):
 
 def comments(request, pk):
     llibre = Llibre.objects.filter(pk=pk)
-    usuari = CustomUser.objects.filter(email=request.user)
-    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+    comentaris = Comentari.objects.filter(llibre__in=llibre)
     context = {
         "llibre": llibre,
-        "usuari": usuari,
         "comentaris": comentaris
     }
     return render(request, 'comments.html', context)
