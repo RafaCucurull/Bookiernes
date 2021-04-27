@@ -14,7 +14,7 @@ class Counter:
 
     def mes3(self):
         if self.counter > 3:
-            self.counter == 0
+            self.counter = 0
             return True
 
 
