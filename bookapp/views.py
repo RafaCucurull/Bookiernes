@@ -5,19 +5,6 @@ from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 
 
-class Counter:
-    counter = 0
-
-    def increment(self):
-        self.counter += 1
-        return ''
-
-    def mes3(self):
-        if self.counter > 3:
-            self.counter == 0
-            return True
-
-
 def homePage(request):
     return render(request, "home.html")
 
