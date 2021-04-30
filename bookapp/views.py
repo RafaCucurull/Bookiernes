@@ -11,7 +11,6 @@ def homePage(request):
 
 def Escriptori(request):
     usuari = CustomUser.objects.get(email=request.user)
-    comptador = Counter()
     if not usuari.is_Treballador:
         return render(request, "home.html")
     if usuari.is_Editor:
@@ -24,7 +23,6 @@ def Escriptori(request):
     mylist = zip(llibres, tematiques)
     llibreshtml = {
         "object_list": llibres,
-        "counter": comptador,
         "mylist": mylist
     }
     if usuari.is_Escriptor:

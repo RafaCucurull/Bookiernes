@@ -7,7 +7,7 @@ class Llibre(models.Model):
     escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True, null=True)
     editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True, null=True)
     portada = models.CharField(max_length=100)
-    sinopsis = models.TextField(max_length=300)
+    sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
