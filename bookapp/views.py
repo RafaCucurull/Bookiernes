@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from bookapp.forms import AfegirLlibreForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -145,3 +145,31 @@ def comments(request, pk):
         "comentaris": comentaris
     }
     return render(request, 'comments.html', context)
+
+
+def solicitudImatges(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarImatgesForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            seleccionar_editor(obj)
+            obj.save()
+            return redirect('solicitudimatges')
+    else:
+        form = SolicitarImatgesForm()
+    return render(request, "solicitarimatges.html", {'form': form})
+
+def seleccionar_dissenyador(solicitud):
+    dissenyadors_lliures = CustomUser.objects.filter(is_Dissenyador=True, lliure=True)
+    dissenyadoraux = dissenyadors_lliures[0]
+    solicitud.dissenyador = dissenyadoraux
+    dissenyador = CustomUser.objects.get(email=dissenyadoraux)
+    dissenyador.lliure = False
+    dissenyador.save()
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
+    notificacio.usuari = dissenyadoraux
+    notificacio.save()

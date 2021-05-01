@@ -4,8 +4,10 @@ from django.urls import reverse
 
 class Llibre(models.Model):
     nom_llibre = models.CharField(max_length=70)
-    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True, null=True)
-    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True, null=True)
+    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True,
+                                  null=True)
+    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True,
+                               null=True)
     portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
@@ -48,6 +50,19 @@ class Comentari(models.Model):
     descripcio = models.TextField()
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
 
+
 class Notificacio(models.Model):
     usuari = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     missatge = models.CharField(max_length=100)
+
+
+class solicitudImatges(models.Model):
+    nom = models.CharField(max_length=70)
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorbateria')
+    dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyador')
+
+
+class images(models.Model):
+    nom = models.CharField(max_length=70)
+    image = models.ImageField()
