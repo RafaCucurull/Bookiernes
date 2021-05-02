@@ -14,6 +14,7 @@ class Llibre(models.Model):
     pdf = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
+    imatges = models.ManyToManyField('Imatge', related_name='imatgesassociades', blank=True)
 
     def __str__(self):
         return self.nom_llibre
@@ -63,6 +64,13 @@ class solicitudImatges(models.Model):
     dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyador')
 
 
-class images(models.Model):
+class Imatge(models.Model):
     nom = models.CharField(max_length=70)
     image = models.ImageField()
+
+
+class solicitudMaquetacio(models.Model):
+    anotacions = models.CharField(max_length=70)
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editormaquetacio')
+    maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetador')

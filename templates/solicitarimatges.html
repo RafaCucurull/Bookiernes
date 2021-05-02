@@ -6,4 +6,7 @@
         {{ form }}
         <input type="submit" value="Submit">
     </form>
+    {% for object in llistaimatges.all %}
+    <img  class="img-responsive watch-right" alt="not found" src="{{object.image.url}}">
+    {% endfor %}
 {% endblock %}

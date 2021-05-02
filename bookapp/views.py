@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -148,7 +148,7 @@ def comments(request, pk):
 
 
 def solicitudImatges(request, pk):
-    llibre = Llibre.objects.filter(pk=pk)
+    llibre = Llibre.objects.get(pk=pk)
     if request.method == 'POST':
         form = SolicitarImatgesForm(request.POST)
         if form.is_valid():
@@ -160,7 +160,13 @@ def solicitudImatges(request, pk):
             return redirect('solicitudimatges')
     else:
         form = SolicitarImatgesForm()
-    return render(request, "solicitarimatges.html", {'form': form})
+    imatges = llibre.imatges
+    context = {
+        'llistaimatges': imatges,
+        'form': form
+    }
+    return render(request, "solicitarimatges.html", context)
+
 
 def seleccionar_dissenyador(solicitud):
     dissenyadors_lliures = CustomUser.objects.filter(is_Dissenyador=True, lliure=True)
@@ -172,4 +178,36 @@ def seleccionar_dissenyador(solicitud):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
     notificacio.usuari = dissenyadoraux
+    notificacio.save()
+
+
+def maquetacio(request, pk):
+    return render(request, "maquetacio.html")
+
+
+def solicitudmaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarImatgesForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            assignarsolicitud(obj)
+            obj.save()
+            return redirect('solicitudimatges')
+    else:
+        form = SolicitarMaquetacioForm()
+    return render(request, "solictudmaquetacio.html" ,{ 'form': form})
+
+def assignarsolicitud(solicitud):
+    maquetador_lliures = CustomUser.objects.filter(is_Maquetacio=True, lliure=True)
+    maquetadoraux = maquetador_lliures[0]
+    solicitud.maquetador = maquetadoraux
+    maquetador = CustomUser.objects.get(email=maquetadoraux)
+    maquetador.lliure = False
+    maquetador.save()
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
+    notificacio.usuari = maquetadoraux
     notificacio.save()

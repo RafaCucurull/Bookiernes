@@ -14,4 +14,6 @@ urlpatterns = [
     path('area_edicio/<int:pk>/commentseditor', views.commentseditor, name='commentseditor'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
     path('area_edicio/<int:pk>/solicitudimatges', views.solicitudImatges, name='solicitudimatges'),
+    path('area_edicio/<int:pk>/maquetacio', views.maquetacio, name='maquetaciollibre'),
+    path('area_edicio/<int:pk>/maquetacio/solicitud', views.solicitudImatges, name='solicitudmaquetaciollibre'),
 ]

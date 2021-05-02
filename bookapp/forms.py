@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple
 
-from bookapp.models import Llibre, solicitudImatges
+from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio
 
 
 class AfegirLlibreForm(ModelForm):
@@ -19,3 +19,8 @@ class SolicitarImatgesForm(ModelForm):
     class Meta:
         model = solicitudImatges
         fields = ('nom',)
+
+class SolicitarMaquetacioForm(ModelForm):
+    class Meta:
+        model = solicitudMaquetacio
+        fields = ('anotacions',)
