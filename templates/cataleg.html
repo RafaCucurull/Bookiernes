@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'main_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+
+    <body>
+    <!-- Header -->
+    <div class="col-md-12 search" style="width:800px; margin:0 auto;">
+        <h2 class="widget-title" style="text-align:center;">Cercador</h2>
+        <form method="get" >
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <div class="input-group">
+                        <input class="form-control py-2 border-right-0 border" type="search" name="titol" placeholder="Títol ..." />
+                        <span class="input-group-append">
+                            <div class="input-group-text bg-transparent">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </span>
+                    </div>
+                </div>        
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <div class="input-group">
+                        <input class="form-control py-2 border-right-0 border" type="search" name="autor" placeholder="Autor ..." />
+                        <span class="input-group-append">
+                            <div class="input-group-text bg-transparent">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </span>
+                    </div>
+                </div>        
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <div class="input-group">
+                        <input class="form-control py-2 border-right-0 border" type="search" name="collecio" placeholder="Col·lecció ..." />
+                        <span class="input-group-append">
+                            <div class="input-group-text bg-transparent">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </span>
+                    </div>
+                </div>        
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2 col-lg-2">
+                  <label for="viewCountMin">Mínim pàgines</label>
+                  <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="pagines_min">
+                </div>
+                <div class="form-group col-md-2 col-lg-2">
+                  <label for="viewCountMax">Màxim pàgines</label>
+                  <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="pagines_max">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                <label for="category">Temàtica</label>
+                <select id="category" class="form-control" name="tematica">
+                  <option selected>Tria...</option>
+                  {% for tematica in tematiques %}
+                  <option value="{{ tematica }}">{{ tematica }}</option>
+                  {% endfor %}
+                </select>
+              
+                </div>
+            </div>
+            <br>
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <button type="submit" class="w3-button w3-orange">Buscar</button>
+                    
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <br><br>
+    <div class="w3-row-padding">
+        <ul>
+        {% for llibre in queryset %}
+        <div>
+            <div class="w3-third w3-container w3-margin-bottom">
+                <a href="/{{llibre.id}}/">
+                    <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
+                        <br/>
+                        <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                             class="w3-hover-opacity"> <br/> <br/>
+                        <p><h4>{{ llibre.nom_llibre }}</h4></p>
+                        <p style="display: inline">Temàtiques:</p>
+                        {% for t in tematiques %}
+                            <p style="display:inline">{{ t }},</p>
+                        {% endfor %}
+                        <p>Col·lecció: {{ llibre.coleccio }}</p>
+                        <p>Nombre de pàgines: {{ llibre.num_pagines }}</p><br/>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    </html>
+    {% endblock %}

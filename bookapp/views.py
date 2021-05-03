@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
-
-
+from django.db.models import Q
+from django.http import HttpResponse
+from django.conf import settings
+from django.template import loader
 def homePage(request):
     return render(request, "home.html")
 
@@ -145,3 +147,43 @@ def comments(request, pk):
         "comentaris": comentaris
     }
     return render(request, 'comments.html', context)
+
+def cataleg(request):
+    qs = filtrar(request)
+    print(qs)
+    for llibre in qs:
+        print(llibre.nom_llibre)
+    context = {
+        'queryset': qs,
+        'tematiques': Tematica.objects.all()
+    }
+    return render(request, "cataleg.html", context)
+
+def filtrar(request):
+    queryset=Llibre.objects.all()
+    tematiques=Tematica.objects.all()
+    escriptor=CustomUser.objects.filter(is_Escriptor=True)
+    titol = request.GET.get('titol')
+    autor = request.GET.get('autor')
+    colleccio = request.GET.get('collecio')
+    min_pagines = request.GET.get('pagines_min')
+    max_pagines = request.GET.get('pagines_max')
+    tematica = request.GET.get('tematica')
+
+
+    if is_valid(titol):
+        queryset=queryset.filter(nom_llibre__icontains=titol)
+    if is_valid(autor):
+        queryset=queryset.filter(escriptor__nom__icontains=autor)
+    if is_valid(colleccio):
+        queryset=queryset.filter(coleccio__icontains=colleccio)
+    if is_valid(min_pagines):
+        queryset=queryset.filter(num_pagines__gte=min_pagines)
+    if is_valid(max_pagines):
+        queryset=queryset.filter(num_pagines__lt=max_pagines)
+    if is_valid(tematica) and tematica != 'Tria...':
+        queryset=queryset.filter(tematiques__nom_tematica=tematica)
+
+    return queryset
+def is_valid(param):
+    return param != '' and param is not None

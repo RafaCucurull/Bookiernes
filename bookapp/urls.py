@@ -5,6 +5,7 @@ from bookapp import views
 urlpatterns = [
     path('', views.homePage, name="home"),
     path('escriptori', views.Escriptori, name="escriptori"),
+    path('cataleg', views.cataleg, name="cataleg"),
     path('afegirllibre', views.afegirLlibre, name="afegirllibre"),
     path('area_edicio/<int:pk>', views.areaedicio, name='areaedicio'),
     path('area_escriptor/<int:pk>', views.areaescriptor, name='areaescriptor'),
