@@ -16,4 +16,5 @@ urlpatterns = [
     path('area_edicio/<int:pk>/solicitudimatges', views.solicitudImatges, name='solicitudimatges'),
     path('area_edicio/<int:pk>/maquetacio', views.maquetacio, name='maquetaciollibre'),
     path('area_edicio/<int:pk>/maquetacio/solicitud', views.solicitudImatges, name='solicitudmaquetaciollibre'),
+    path('area_dismaq/<int:pk>', views.areaDisssenyiMaquetacio, name='areadismaq'),
 ]

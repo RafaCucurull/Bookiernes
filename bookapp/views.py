@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, solicitudMaquetacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 
@@ -17,6 +17,12 @@ def Escriptori(request):
         llibres = Llibre.objects.filter(editor=usuari)
     if usuari.is_Escriptor:
         llibres = Llibre.objects.filter(escriptor=usuari)
+    if usuari.is_Dissenyador:
+        llibres = Llibre.objects.filter(dissenyador=usuari)
+    if usuari.is_Maquetacio:
+        llibres = Llibre.objects.filter(maquetador=usuari)
+    if usuari.is_IT:
+        llibres = Llibre.objects.filter(IT=usuari)
     tematiques = list()
     for llibre in llibres:
         tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
@@ -28,6 +34,12 @@ def Escriptori(request):
     if usuari.is_Escriptor:
         return render(request, "escriptori_escriptor.html", llibreshtml)
     if usuari.is_Editor:
+        return render(request, "escriptori_editor.html", llibreshtml)
+    if usuari.is_Dissenyador:
+        return render(request, "escriptori_editor.html", llibreshtml)
+    if usuari.is_Maquetacio:
+        return render(request, "escriptori_editor.html", llibreshtml)
+    if usuari.is_IT:
         return render(request, "escriptori_editor.html", llibreshtml)
 
 
@@ -155,9 +167,9 @@ def solicitudImatges(request, pk):
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
-            seleccionar_editor(obj)
+            seleccionar_dissenyador(obj, llibre)
             obj.save()
-            return redirect('solicitudimatges')
+            return redirect(request.path_info)
     else:
         form = SolicitarImatgesForm()
     imatges = llibre.imatges
@@ -168,9 +180,10 @@ def solicitudImatges(request, pk):
     return render(request, "solicitarimatges.html", context)
 
 
-def seleccionar_dissenyador(solicitud):
+def seleccionar_dissenyador(solicitud, llibre):
     dissenyadors_lliures = CustomUser.objects.filter(is_Dissenyador=True, lliure=True)
     dissenyadoraux = dissenyadors_lliures[0]
+    llibre.dissenyador = dissenyadoraux
     solicitud.dissenyador = dissenyadoraux
     dissenyador = CustomUser.objects.get(email=dissenyadoraux)
     dissenyador.lliure = False
@@ -193,16 +206,18 @@ def solicitudmaquetacio(request, pk):
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
-            assignarsolicitud(obj)
+            seleccionar_maquetador(obj, llibre)
             obj.save()
             return redirect('solicitudimatges')
     else:
         form = SolicitarMaquetacioForm()
-    return render(request, "solictudmaquetacio.html" ,{ 'form': form})
+    return render(request, "solictudmaquetacio.html", {'form': form})
 
-def assignarsolicitud(solicitud):
+
+def seleccionar_maquetador(solicitud, llibre):
     maquetador_lliures = CustomUser.objects.filter(is_Maquetacio=True, lliure=True)
     maquetadoraux = maquetador_lliures[0]
+    llibre.maquetador = maquetadoraux
     solicitud.maquetador = maquetadoraux
     maquetador = CustomUser.objects.get(email=maquetadoraux)
     maquetador.lliure = False
@@ -211,3 +226,23 @@ def assignarsolicitud(solicitud):
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
     notificacio.usuari = maquetadoraux
     notificacio.save()
+
+
+def areaDisssenyiMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+
+
+def areaDisseny(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    solicituds_disseny = solicitudImatges.objects.filter(llibre=llibre)
+    solicituds = {
+        'llista_solicituds': solicituds_disseny
+    }
+
+
+def areaMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    solicituds_maquetacio = solicitudMaquetacio.objects.filter(llibre=llibre)
+    solicituds = {
+        'llista_solicituds': solicituds_maquetacio
+    }

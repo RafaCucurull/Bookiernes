@@ -8,6 +8,13 @@ class Llibre(models.Model):
                                   null=True)
     editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True,
                                null=True)
+    dissenyador = models.ForeignKey('users.CustomUser', related_name="dissenyador", on_delete=models.CASCADE,
+                                    blank=True,
+                                    null=True)
+    maquetador = models.ForeignKey('users.CustomUser', related_name="maquetador", on_delete=models.CASCADE, blank=True,
+                                   null=True)
+    IT = models.ForeignKey('users.CustomUser', related_name="IT", on_delete=models.CASCADE, blank=True,
+                           null=True)
     portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
@@ -59,9 +66,11 @@ class Notificacio(models.Model):
 
 class solicitudImatges(models.Model):
     nom = models.CharField(max_length=70)
-    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
-    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorbateria')
-    dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyador')
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorbateria', null=True,
+                               blank=True)
+    dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyadorimatge', null=True,
+                                    blank=True)
 
 
 class Imatge(models.Model):
@@ -71,6 +80,8 @@ class Imatge(models.Model):
 
 class solicitudMaquetacio(models.Model):
     anotacions = models.CharField(max_length=70)
-    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
-    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editormaquetacio')
-    maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetador')
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editormaquetacio', null=True,
+                               blank=True)
+    maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetadorsolicitud', null=True,
+                                   blank=True)
