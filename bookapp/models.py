@@ -85,3 +85,8 @@ class solicitudMaquetacio(models.Model):
                                blank=True)
     maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetadorsolicitud', null=True,
                                    blank=True)
+
+class Maquetacio(models.Model):
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    portada = models.ImageField()
+    contraportada = models.ImageField()

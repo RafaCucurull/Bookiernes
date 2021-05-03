@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, solicitudMaquetacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, solicitudMaquetacio, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 
@@ -238,6 +238,13 @@ def areaDisseny(request, pk):
     solicituds = {
         'llista_solicituds': solicituds_disseny
     }
+    return render()
+
+def afegirBateriaImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    imatge = Imatge.objects.get()
+    llibre.imatges.add(imatge)
+    return render()
 
 
 def areaMaquetacio(request, pk):
@@ -246,3 +253,4 @@ def areaMaquetacio(request, pk):
     solicituds = {
         'llista_solicituds': solicituds_maquetacio
     }
+    return render()
