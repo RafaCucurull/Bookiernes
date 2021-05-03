@@ -3,6 +3,8 @@ from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
+from datetime import datetime
+from django.utils import formats
 
 
 def homePage(request):
@@ -56,6 +58,9 @@ def seleccionar_editor(llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
     notificacio.usuari = editoraux
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
     notificacio.save()
 
 
@@ -107,6 +112,9 @@ def notificarEscriptorComentari(llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un comentari pendent de revisar"
     notificacio.usuari = llibre.escriptor
+    notificacio.llibre = llibre
+    data = datetime.now()
+    notificacio.data = data
     notificacio.save()
 
 
