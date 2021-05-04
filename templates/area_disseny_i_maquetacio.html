@@ -29,7 +29,7 @@
             <div class="col-md-auto">
                 <a href={% url 'afegirllibre' %}>
                     <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Enviar bateria d'imatges</b>
+                        <h3 class="h3-message"><b>Enviar bateria d'imatges<br><br></b>
                             <img class="w3-center icons" src="../static/escriptori/camera.png">
                         </h3>
                     </button>
@@ -38,7 +38,30 @@
             <div class="col-md-auto">
                 <a href={% url 'afegirllibre' %}>
                     <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Enviar maquetació</b>
+                        <h3 class="h3-message"><b>Enviar maquetació<br><br></b>
+                            <img class="w3-center icons" src="../static/escriptori/llibre_maquetat.png">
+                        </h3>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row message_feature">
+            <div class="col-md-auto">
+                <a href={% url 'afegirllibre' %}>
+                    <button type="button" class="btn btn-primary message">
+                        <h3 class="h3-message"><b>Veure sol·licituds d'imatges<br><br></b>
+                            <img class="w3-center icons" src="../static/escriptori/solicitud.png">
+                            <img class="w3-center icons" src="../static/escriptori/camera.png">
+                        </h3>
+                    </button>
+                </a>
+            </div>
+            <div class="col-md-auto">
+                <a href={% url 'afegirllibre' %}>
+                    <button type="button" class="btn btn-primary message">
+                        <h3 class="h3-message"><b>Veure sol·licituds de maquetació<br><br></b>
+                            <img class="w3-center icons" src="../static/escriptori/solicitud.png">
                             <img class="w3-center icons" src="../static/escriptori/llibre_maquetat.png">
                         </h3>
                     </button>
@@ -47,6 +70,19 @@
         </div>
 
 
+        <div class="row message_feature">
+            <div class="col-md-auto">
+                <a href={% url 'afegirllibre' %}>
+                    <button type="button" class="btn btn-primary message">
+                        <h3 class="h3-message"><b>Missatge nou<br><br></b>
+                            <img class="w3-center icons" src="../static/escriptori/message.png">
+                        </h3>
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
+    <br>
+    <br>
     </body>
 {% endblock %}
