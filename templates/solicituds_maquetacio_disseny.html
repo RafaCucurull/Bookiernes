@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/escriptori.css' %}">
+
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Sol·licituds de maquetació
+        </h1>
+
+        <p class="p_header w3-padding-24"> Aquí apareixen totes les sol·licituds de maquetació que tens pendent de gestionar
+        </p> </br>
+    </header>
+
+    <!-- First Grid -->
+    <div class="w3-row-padding">
+        {% for object in mylist %}
+                <div>
+                    <div class="w3-third w3-container w3-margin-bottom">
+                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
+                                <br/>
+                                <img class="w3-center icons" src="../static/escriptori/solicitudblack.png" style="margin-left: 35%">
+                                <img class="w3-center icons" src="../static/escriptori/llibreblack.png">
+                                <p><h4>NOM</h4></p>
+                                <p><b>Anotacions:</b> ANOTACIONS</p><br/>
+                                <p><b>Llibre:</b> LLIBRE</p>
+                                <p><b>Editor:</b> EDITOR</p>
+                            </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    </body>
+{% endblock %}
