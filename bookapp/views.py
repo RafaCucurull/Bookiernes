@@ -111,6 +111,13 @@ def dirbateriaimatges(request, pk):
     }
     return render(request, 'directori_imatges.html', context)
 
+def galeriaimatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre
+    }
+    return render(request, 'galeria_imatges.html', context)
+
 def dirmaquetacions(request, pk):
     llibre = Llibre.objects.filter(pk=pk)
     comentaris = Comentari.objects.filter(llibre__in=llibre)
