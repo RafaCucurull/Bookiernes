@@ -12,5 +12,6 @@ urlpatterns = [
     path('area_edicio/<int:pk>/canviardocument', views.canviardocument, name='canviardocument'),
     path('notificacions', views.notificacions, name='notificacions'),
     path('area_edicio/<int:pk>/commentseditor', views.commentseditor, name='commentseditor'),
+    path('area_edicio/<int:pk>/bateriaimatges', views.bateriaimatges, name='bateriaimatges'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
 ]

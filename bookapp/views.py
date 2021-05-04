@@ -102,6 +102,15 @@ def commentseditor(request, pk):
         notificarEscriptorComentari(Llibre.objects.get(pk=pk))
     return render(request, 'comments_editor.html', context)
 
+def bateriaimatges(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    comentaris = Comentari.objects.filter(llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "comentaris": comentaris
+    }
+    return render(request, 'directori_imatges.html', context)
+
 
 def notificarEscriptorComentari(llibre):
     notificacio = Notificacio()
