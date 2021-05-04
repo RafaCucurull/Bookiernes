@@ -34,13 +34,13 @@
                                 <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
                                      class="w3-hover-opacity"> <br/> <br/>
                                 <p><h4>{{ object.nom_llibre }}</h4></p>
-                                <p>{{ object.sinopsis }}</p><br/>
-                                <p style="display:inline">Temàtiques: </p>
-                                {% for t in tematiques %}
-                                    <p style="display:inline">{{ t }},</p>
-                                {% endfor %}
-                                <p>Col·lecció: {{ object.coleccio }}</p>
-                                <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
+                                <a href={% url 'afegirllibre' %}>
+                                    <button type="button" class="btn btn-primary message" style="width:50%; height:10%; margin-left: 25%" >
+                                    <h3 class="h3-message"><b>Publica'l</b>
+                                    <img class="w3-center icons" src="../static/escriptori/plusicon.png">
+                                    </h3>
+                                    </button>
+                                </a>
                             </div>
                     </div>
                 </div>
