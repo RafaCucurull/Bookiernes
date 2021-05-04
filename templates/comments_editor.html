@@ -30,7 +30,8 @@
         {% for lib in llibre %}
             <form action="/area_edicio/{{ lib.id }}/commentseditor" method="post">{% csrf_token %}
                 <div class="w3-center w3-margin-bottom w3-center" style="margin: auto; width: 40%">
-                    <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-white" style="box-shadow: 10px 10px 5px #aaaaaa"><br/>
+                    <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-white"
+                         style="box-shadow: 10px 10px 5px #aaaaaa"><br/>
                         <div id="form">
                             <p class="titolformulari"> Títol del comentari</p>
                             <input class="inputarea w3-margin-bottom" type="text" id="titol" name="titol" size="50"
@@ -60,7 +61,22 @@
         {% endfor %}
     </div>
 
-    <div class="w3-row-padding" style="margin-top: 3%">
+    <!-- BOTÓ TORNAR -->
+
+    <div class="w3-container" style="margin-top: 2%">
+        <div class="right col-md-auto">
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-primary message">
+                    <h3 class="h3-message"><b>Tornar endarrere</b>
+                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                    </h3>
+                </button>
+                <br/> <br/> <br/> <br/> <br/> <br/>
+            </a>
+        </div>
+    </div>
+
+    <div class="w3-row-padding" style="margin-top: 7%">
         {% if comentaris %}
             {% for comentari in comentaris %}
                 {{ counter.increment }}
@@ -77,23 +93,6 @@
         {% endif %}
 
     </div>
-    </div>
-
-
-    <!-- BOTÓ TORNAR -->
-
-    <div class="w3-container">
-
-        <div class="right col-md-auto">
-            <a href="javascript:history.back()">
-                <button type="button" class="btn btn-primary message">
-                    <h3 class="h3-message"><b>Tornar endarrere</b>
-                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
-                    </h3>
-                </button>
-                <br/> <br/> <br/>
-            </a>
-        </div>
     </div>
 
     </body>
