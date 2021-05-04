@@ -20,7 +20,7 @@ class AfegirLlibreForm(ModelForm):
 class SolicitarImatgesForm(ModelForm):
     class Meta:
         model = solicitudImatges
-        fields = ('nom',)
+        fields = ('nom', 'context')
 
 
 class cercaImatgeBDD(forms.Form):

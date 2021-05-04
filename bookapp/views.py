@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, solicitudMaquetacio, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -159,6 +159,15 @@ def comments(request, pk):
     return render(request, 'comments.html', context)
 
 
+def galeriaImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    imatges = llibre.imatges
+    context = {
+        'llistaimatges': imatges,
+    }
+    return render()
+
+
 def solicitudImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     if request.method == 'POST':
@@ -172,9 +181,7 @@ def solicitudImatges(request, pk):
             return redirect(request.path_info)
     else:
         form = SolicitarImatgesForm()
-    imatges = llibre.imatges
     context = {
-        'llistaimatges': imatges,
         'form': form
     }
     return render(request, "solicitarimatges.html", context)
@@ -194,7 +201,7 @@ def seleccionar_dissenyador(solicitud, llibre):
     notificacio.save()
 
 
-def maquetacio(request, pk):
+def galeriaMaquetacions(request, pk):
     return render(request, "maquetacio.html")
 
 
@@ -232,13 +239,14 @@ def areaDisssenyiMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
 
 
-def areaDisseny(request, pk):
+def solicitudsDisseny(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     solicituds_disseny = solicitudImatges.objects.filter(llibre=llibre)
     solicituds = {
         'llista_solicituds': solicituds_disseny
     }
     return render()
+
 
 def afegirBateriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -247,7 +255,7 @@ def afegirBateriaImatges(request, pk):
     return render()
 
 
-def areaMaquetacio(request, pk):
+def solicitudsMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     solicituds_maquetacio = solicitudMaquetacio.objects.filter(llibre=llibre)
     solicituds = {
@@ -255,8 +263,16 @@ def areaMaquetacio(request, pk):
     }
     return render()
 
+
 def afegirMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    imatge = Imatge.objects.get()
-    llibre.imatges.add(imatge)
+    if request.method == 'POST':
+        form = PujarMaquetacio(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.save()
+            llibre.maquetacio = obj
+            return redirect('')
+    else:
+        form = PujarMaquetacio()
     return render()

@@ -66,7 +66,8 @@ class Notificacio(models.Model):
 
 
 class solicitudImatges(models.Model):
-    nom = models.CharField(max_length=70)
+    nom = models.CharField(max_length=70, null=True, blank=True)
+    context = models.CharField(max_length=70, null=True, blank=True)
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
     editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorbateria', null=True,
                                blank=True)
