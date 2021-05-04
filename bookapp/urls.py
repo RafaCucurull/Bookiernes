@@ -15,5 +15,6 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirbateriaimatges', views.dirbateriaimatges, name='dirbateriaimatges'),
     path('area_edicio/<int:pk>/galeriaimatges', views.galeriaimatges, name='galeriaimatges'),
     path('area_edicio/<int:pk>/dirmaquetacions', views.dirmaquetacions, name='dirmaquetacions'),
+    path('area_edicio/<int:pk>/galeriamaquetacions', views.galeriamaquetacions, name='galeriamaquetacions'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
 ]

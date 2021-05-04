@@ -118,6 +118,13 @@ def galeriaimatges(request, pk):
     }
     return render(request, 'galeria_imatges.html', context)
 
+def galeriamaquetacions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre
+    }
+    return render(request, 'galeria_maquetacions.html', context)
+
 def dirmaquetacions(request, pk):
     llibre = Llibre.objects.filter(pk=pk)
     comentaris = Comentari.objects.filter(llibre__in=llibre)
