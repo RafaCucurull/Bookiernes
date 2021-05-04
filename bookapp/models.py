@@ -12,6 +12,7 @@ class Llibre(models.Model):
     pdf = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
+    comentari_it = models.TextField(max_length=3000, blank=True )
 
     def __str__(self):
         return self.nom_llibre
