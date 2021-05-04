@@ -22,6 +22,7 @@ class Llibre(models.Model):
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
     imatges = models.ManyToManyField('Imatge', related_name='imatgesassociades', blank=True)
+    maquetacio = models.ForeignKey('Maquetacio', related_name='maquetacio', null=True, blank = True,  on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nom_llibre
@@ -87,6 +88,7 @@ class solicitudMaquetacio(models.Model):
                                    blank=True)
 
 class Maquetacio(models.Model):
-    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    pdf_maquetat = models.FileField(null=True, blank=True)
+    anotacions = models.CharField(max_length=70, null=True, blank=True)
     portada = models.ImageField()
     contraportada = models.ImageField()

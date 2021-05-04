@@ -254,3 +254,9 @@ def areaMaquetacio(request, pk):
         'llista_solicituds': solicituds_maquetacio
     }
     return render()
+
+def afegirMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    imatge = Imatge.objects.get()
+    llibre.imatges.add(imatge)
+    return render()
