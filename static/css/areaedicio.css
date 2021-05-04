@@ -3,8 +3,8 @@
 }
 
 .icons {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-top: -10px;
     margin-bottom: -10px;
 }
@@ -31,6 +31,10 @@ p {
     margin: auto;
 }
 
+.boto{
+    box-shadow: 5px 5px #fe7e13 ;
+}
+
 .btn-primary {
     background-color: darkorange;
     border-color: white;
@@ -50,8 +54,8 @@ p {
 }
 
 .btn-circle.btn-xl {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     padding: 10px 10px;
     border-radius: 50px;
 }
