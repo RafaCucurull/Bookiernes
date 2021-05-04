@@ -28,7 +28,7 @@ def Escriptori(request):
         "mylist": mylist
     }
     if usuari.is_Escriptor:
-        return render(request, "escriptori_it.html", llibreshtml)
+        return render(request, "escriptori_escriptor.html", llibreshtml)
     if usuari.is_Editor:
         return render(request, "escriptori_editor.html", llibreshtml)
 
