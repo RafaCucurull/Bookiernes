@@ -1,0 +1,147 @@
+.my_header {
+    padding: 10px 16px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Times New Roman";
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 450px;
+}
+
+.columnTop {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 80px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.h1-header {
+    font-size: 50px;
+    text-align: center;
+    vertical-align: top;
+}
+
+p {
+    font-size: 18px;
+    text-align: justify;
+    color: darkgrey;
+}
+
+.p_header {
+    font-size: 20px;
+    width: 1000px;
+    margin: auto;
+}
+
+.icons {
+    width: 10%;
+}
+
+.btn-primary1 {
+    background-color: darkorange;
+    border-color: white;
+    width: 20%;
+}
+
+.btn-primary2 {
+    background-color: darkorange;
+    border-color: white;
+    width: 30%;
+}
+
+.h3-message {
+    color: white;
+}
+
+.custom-input-file {
+    border-style: dotted;
+    border-color: darkorange;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 30px !important;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+}
+
+input[type='file'] {
+    color: rgba(0, 0, 0, 0);
+    margin-top: 20px;
+    border-color: white;
+}
+
+.numstyle {
+    display: inline;
+    color: darkorange;
+    font-size: 35px;
+}
+
+.title {
+    display: inline;
+    text-align: center;
+    margin-left: 5px;
+}
+
+#subtitle1 {
+    width: 40%;
+    text-align: center;
+    margin-top: 10px;
+    margin: auto;
+}
+
+#image {
+    height: 100px;
+    width: 100px;
+}
+
+#form {
+    margin-top: 40px;
+}
+
+.submit-button {
+    display: inline;
+    margin-left: 5px;
+}
+
+.margin {
+    margin-top: 3%;
+}
+
+.back-button {
+    margin-bottom: 1%;
+}
+
+.border-color {
+    border-color: darkorange;
+}
+
+.left {
+    width: 50%;
+    float: left;
+}
+
+.right {
+    width: 50%;
+    float: right;
+}
+
+#textarea {
+    margin-top: 30px;
+    width: 50%;
+}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from bookapp.forms import AfegirLlibreForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage

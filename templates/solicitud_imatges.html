@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/enviar_maquetar.css' %}">
+    </head>
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="h1-header w3-margin">
+            Sol·liciteu una bateria d'imatges
+        </h1>
+
+        <p class="w3-center p_header w3-padding-24"> A través d'aquest formulari podeu sol·licitar les imatges que
+            necessiteu als membres del departament de disseny gràfic.
+        </p>
+    </header>
+    <div class="w3-container w3-center">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="w3-container w3-center">
+                <div class="row">
+                    <div class="col-4">
+                        {{ form.nom }}
+                    </div>
+                    <div class="col-8">
+                        {{ form.context }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+{% endblock %}
