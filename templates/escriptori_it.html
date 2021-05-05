@@ -27,6 +27,9 @@
 
     <div class="w3-row-padding">
         {% for object, tematiques in mylist %}
+        
+            {% if object.publicat %}
+            {% else %}
                 <div>
                     <div class="w3-third w3-container w3-margin-bottom">
                             <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white">
@@ -35,7 +38,7 @@
                                      class="w3-hover-opacity"> <br/> <br/>
                                 <p><h4>{{ object.nom_llibre }}</h4></p>
                                 <p><h5>{{ object.comentari_it }}</h5></p>
-                                <a href={% url 'afegirllibre' %}>
+                                <a href={% url 'publicarllibre' pk=object.pk %}>
                                     <button type="button" class="btn btn-primary message" style="width:50%; height:10%; margin-left: 25%" >
                                     <h3 class="h3-message"><b>Publica'l</b>
                                     <img class="w3-center icons" src="../static/escriptori/plusicon.png">
@@ -45,6 +48,7 @@
                             </div>
                     </div>
                 </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
