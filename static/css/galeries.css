@@ -119,6 +119,11 @@ p {
     border-color: white;
 }
 
+.btn-ghost {
+    background-color: transparent;
+    border-color: transparent;
+}
+
 .btn-secundary {
     background-color: white;
     border-color: darkorange;
