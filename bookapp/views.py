@@ -104,6 +104,38 @@ def commentseditor(request, pk):
         notificarEscriptorComentari(Llibre.objects.get(pk=pk))
     return render(request, 'comments_editor.html', context)
 
+def dirbateriaimatges(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    comentaris = Comentari.objects.filter(llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "comentaris": comentaris
+    }
+    return render(request, 'directori_imatges.html', context)
+
+def galeriaimatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre
+    }
+    return render(request, 'galeria_imatges.html', context)
+
+def galeriamaquetacions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre
+    }
+    return render(request, 'galeria_maquetacions.html', context)
+
+def dirmaquetacions(request, pk):
+    llibre = Llibre.objects.filter(pk=pk)
+    comentaris = Comentari.objects.filter(llibre__in=llibre)
+    context = {
+        "llibre": llibre,
+        "comentaris": comentaris
+    }
+    return render(request, 'directori_maquetacions.html', context)
+
 
 def notificarEscriptorComentari(llibre):
     notificacio = Notificacio()

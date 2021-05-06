@@ -25,6 +25,22 @@
         </p> </br>
     </header>
 
+    <!-- Afegir nou llibre -->
+
+        <div class="w3-row-padding w3-container">
+            <div class="row message_feature">
+                <div class="col-md-auto">
+                    <a href={% url 'afegirllibre' %}>
+                        <button type="button" class="btn btn-primary message">
+                            <h3 class="h3-message"><b>Afegiu una nova obra</b>
+                                <img class="w3-center icons" src="../static/escriptori/plusicon.png">
+                            </h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     <!-- First Grid -->
     <div class="w3-row-padding">
         {% for object, tematiques in mylist %}
@@ -48,21 +64,7 @@
                     </div>
                 </div>
         {% endfor %}
-        <!-- Afegir nou llibre -->
 
-        <div class="w3-row-padding w3-padding-64 w3-container">
-            <div class="row message_feature">
-                <div class="col-md-auto">
-                    <a href={% url 'afegirllibre' %}>
-                        <button type="button" class="btn btn-primary message">
-                            <h3 class="h3-message"><b>Afegiu una nova obra</b>
-                                <img class="w3-center icons" src="../static/escriptori/plusicon.png">
-                            </h3>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
     </div>
     </body>
 {% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bateriaimatges.css' %}">
+
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Bateria d'imatges
+        </h1>
+
+        <p class="p_header w3-padding-24"> A través d'aquesta secció podeu accedir a la galeria d'imatges d'aquesta obra,
+            on trobareu les imatges que vau demanar i que us han fet arribar els membres del departament de disseny. També
+            podeu tramitar noves sol·licituds per demanar-ne altres
+        </p>
+
+    </header>
+
+    <!-- GALERIA -->
+
+    <div class="w3-half w3-container">
+        <div class="w3-margin w3-right w3-card-4 w3-round-xlarge w3-light-grey w3-padding-8" style="width:50%">
+
+            <div class="w3-container w3-center w3-padding-64">
+                <h2>GALERIA</h2> </br></br>
+                <h3 class="w3-margin">Visualitzeu les imatges rebudes per aquesta obra</h3></br>
+
+                <div class="w3-section">
+                    <a href="{{llibre.id}}/#">
+                    <button class="w3-button w3-xlarge w3-orange w3-round-large ">
+                        <div style="color: white; font-weight: bold"> Accedir</div>
+                    </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- SOL·LICITUD -->
+
+    <div class="w3-half w3-container">
+        <div class="w3-margin w3-left w3-card-4 w3-round-xlarge w3-light-grey w3-padding-8" style="width:50%">
+
+            <div class="w3-container w3-center w3-padding-64">
+                <h2>SOL·LICITUD</h2> </br></br>
+                <h3 class="w3-margin">Sol·liciteu les noves imatges que necessiteu </h3></br>
+
+                <div class="w3-section">
+                    <a href="{{llibre.id}}/#">
+                    <button class="w3-button w3-xlarge w3-orange w3-round-large ">
+                        <div style="color: white; font-weight: bold"> Accedir</div>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTÓ TORNAR -->
+
+    <div class="w3-container">
+
+        <div class="right col-md-auto">
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-primary message">
+                    <h3 class="h3-message"><b>Tornar endarrere</b>
+                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                    </h3>
+                </button>
+                <br/> <br/> <br/>
+            </a>
+        </div>
+    </div>
+    </body>
+{% endblock %}

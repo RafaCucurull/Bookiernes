@@ -175,9 +175,8 @@ div.col-md-auto {
     display: inline-block;
 }
 
-.titolformulari {
-    font-size: 20px;
-    margin: auto;
-    padding-bottom: 2%;
-    text-align: center;
+iframe{
+    margin-top: 5%;
+    margin-left: 40%;
+    margin-right: 40%;
 }

@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/galeries.css' %}">
+
+    <body>
+
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Galeria d'imatges: <b>{{ llibre.nom_llibre }}</b>
+        </h1>
+
+        <br/>
+
+    </header>
+
+
+    <!-- Qui faci el backend tot això ho pot esborrar fins al (*) -->
+
+
+    <div class=" w3-center w3-third w3-container w3-margin-bottom">
+        <div class="w3-container">
+
+            <div class="w3-card-4" style="width:100%">
+                <div class=" w3-display-container">
+                    <a href="#">
+                        <img class=" w3-display-container w3-hover-opacity"
+                             src="https://www.w3schools.com/w3css/img_snowtops.jpg" alt="Alps"
+                             style="width:100%">
+                    </a>
+                    <div style="color: white; font-weight: bold; font-size: medium">
+
+                        <!-- Creu eliminar imatge -->
+                        <a href="#">
+                            <img id="creu"
+                                 class="w3-shadow w3-display-topright w3-margin w3-center btn-ghost w3-center icons"
+                                 title="Eliminar imatge"
+                                 style="width: 50px; height: auto"
+                                 src="{% static '/altres/creuvermella.png' %}">
+                        </a>
+
+                        <!-- Modal -->
+                        <div id="modal" class="modal">
+
+                            <!-- Contingut del Modal -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+
+                                <!-- Missatge avís -->
+                                <p style="color: red; text-align: center"> </br> ATENCIÓ! </br> </br> Esteu segurs que
+                                    voleu eliminar aquesta imatge de la vostra galeria?
+                                    </br> Aquesta acció és irreversible, per bé que sempre podreu tornar a demanar les
+                                    imatges al departament de disseny gràfic.</p>
+
+                                <!-- Botó eliminar imatge (span serveix per tancar) -->
+                                <span class="close">
+                                <button class="w3-button w3-hover-red w3-xlarge w3-red w3-round-large w3-margin"
+                                        style="width: 20%; align-self: center">
+                                    <div style="color: white; font-weight: bolder; font-size: large"> Eliminar
+                                        imatge
+                                        <img class="w3-center icons" style="margin: auto; width: 30px; height: auto"
+                                             src="{% static '/altres/paperera.png' %}">
+                                    </div>
+                                </button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Caixetí inferior info -->
+
+
+                <div class="w3-container w3-center w3-margin">
+                    <p style="text-align: center">Muntanyes del Canigó</p>
+                    <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
+                    <a href="LINK IMATGE">
+                        <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                            <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
+                                <img class="w3-center icons" style="width: 30px; height: auto"
+                                     src="{% static '/altres/baixada.png' %}">
+                            </div>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="imatge">
+        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+            <div class="w3-container">
+
+                <div class="w3-card-4" style="width:100%">
+                    <img class="w3-hover-opacity" src="https://www.w3schools.com/w3css/img_snowtops.jpg" alt="Alps"
+                         style="width:100%">
+                    <div class="w3-container w3-center w3-margin">
+                        <p style="text-align: center">Muntanyes del Canigó</p>
+                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
+                        <a href="LINK IMATGE">
+                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
+                                    <img class="w3-center icons" style="width: 30px; height: auto"
+                                         src="{% static '/altres/baixada.png' %}">
+                                </div>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <a href="imatge">
+        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+            <div class="w3-container">
+
+                <div class="w3-card-4" style="width:100%">
+                    <img class="w3-hover-opacity" src="https://www.w3schools.com/w3css/img_snowtops.jpg" alt="Alps"
+                         style="width:100%">
+                    <div class="w3-container w3-center w3-margin">
+                        <p style="text-align: center">Muntanyes del Canigó</p>
+                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
+                        <a href="LINK IMATGE">
+                            <button id="eliminar" class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
+                                    <img class="w3-center icons" style="width: 30px; height: auto"
+                                         src="{% static '/altres/baixada.png' %}">
+                                </div>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <a href="imatge">
+        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+            <div class="w3-container">
+
+                <div class="w3-card-4" style="width:100%">
+                    <img class="w3-hover-opacity" src="https://www.w3schools.com/w3css/img_snowtops.jpg" alt="Alps"
+                         style="width:100%">
+                    <div class="w3-container w3-center w3-margin">
+                        <p style="text-align: center">Muntanyes del Canigó</p>
+                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
+                        <a href="LINK IMATGE">
+                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
+                                    <img class="w3-center icons" style="width: 25px; height: auto"
+                                         src="{% static '/altres/baixada.png' %}">
+                                </div>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+
+    <!-- (*) Des de dalt fins aquí -->
+
+
+    <div>
+        {% for object, tematiques in mylist %}
+            <a href="imatge">
+                <div class=" w3-center w3-third w3-container w3-margin-bottom">
+                    <div class="w3-container">
+                        <div class="w3-card-4" style="width:100%">
+
+                            <!-- Imatge -->
+                            <div class=" w3-display-container">
+                                <a href="#">
+                                    <img class=" w3-display-container w3-hover-opacity"
+                                         src="https://www.w3schools.com/w3css/img_snowtops.jpg" alt="Alps"
+                                         style="width:100%">
+                                </a>
+                                <div style="color: white; font-weight: bold; font-size: medium">
+
+                                    <!-- Creu eliminar imatge -->
+                                    <a href="#">
+                                        <img id="creu"
+                                             class="w3-shadow w3-display-topright w3-margin w3-center btn-ghost w3-center icons"
+                                             title="Eliminar imatge"
+                                             style="width: 50px; height: auto"
+                                             src="{% static '/altres/creuvermella.png' %}">
+                                    </a>
+
+                                    <!-- Modal (el popup) -->
+                                    <div id="modal" class="modal">
+
+                                        <!-- Contingut del Modal -->
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+
+                                            <!-- Missatge avís -->
+                                            <p style="color: red; text-align: center"> </br> ATENCIÓ! </br> </br> Esteu
+                                                segurs que
+                                                voleu eliminar aquesta imatge de la vostra galeria?
+                                                </br> Aquesta acció és irreversible, per bé que sempre podreu tornar a
+                                                demanar les
+                                                imatges al departament de disseny gràfic.</p>
+
+                                            <!-- Botó eliminar imatge (span serveix per tancar) -->
+                                            <span class="close">
+                                            <button class="w3-button w3-hover-red w3-xlarge w3-red w3-round-large w3-margin"
+                                                    style="width: 20%; align-self: center">
+                                                <div style="color: white; font-weight: bolder; font-size: large"> Eliminar imatge
+                                                    <img class="w3-center icons"
+                                                         style="margin: auto; width: 30px; height: auto"
+                                                         src="{% static '/altres/paperera.png' %}">
+                                                </div>
+                                            </button>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caixetí inferior info -->
+
+                            <div class="w3-container w3-center w3-margin">
+                                <p style="text-align: center">Títol: {{ object.nom_imatge }}</p>
+                                <p style="text-align: center">Dissenyador: {{ object.autor }}.
+                                    Ref: {{ object.referència }}</p>
+                                <a href="LINK IMATGE">
+                                    <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                                        <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
+                                            <img class="w3-center icons" style="width: 25px; height: auto"
+                                                 src="{% static '/altres/baixada.png' %}">
+                                        </div>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- BOTÓ TORNAR -->
+
+    <div class="w3-container">
+
+        <div class="right col-md-auto">
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-primary message">
+                    <h3 class="h3-message"><b>Tornar endarrere</b>
+                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                    </h3>
+                </button>
+                <br/> <br/> <br/>
+            </a>
+        </div>
+    </div>
+
+    <!-- SCRIPT MODAL -->
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("creu");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[1];
+
+        // Get the <span> element that closes the modal
+        var span1 = document.getElementsByClassName("close")[0];
+
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span1.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    </body>
+{% endblock %}
+
