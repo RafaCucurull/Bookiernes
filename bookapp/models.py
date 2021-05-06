@@ -1,11 +1,14 @@
 from django.db import models
 from django.urls import reverse
+import datetime
 
 
 class Llibre(models.Model):
     nom_llibre = models.CharField(max_length=70)
-    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True, null=True)
-    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True, null=True)
+    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True,
+                                  null=True)
+    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True,
+                               null=True)
     portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
@@ -49,6 +52,9 @@ class Comentari(models.Model):
     descripcio = models.TextField()
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)
 
+
 class Notificacio(models.Model):
     usuari = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     missatge = models.CharField(max_length=100)
+    data = models.DateTimeField(auto_now=True, blank=True, null=True)
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE)

@@ -3,10 +3,8 @@ from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
-from django.db.models import Q
-from django.http import HttpResponse
-from django.conf import settings
-from django.template import loader
+from datetime import datetime
+
 def homePage(request):
     return render(request, "home.html")
 
@@ -58,6 +56,9 @@ def seleccionar_editor(llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
     notificacio.usuari = editoraux
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
     notificacio.save()
 
 
@@ -141,6 +142,9 @@ def notificarEscriptorComentari(llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un comentari pendent de revisar"
     notificacio.usuari = llibre.escriptor
+    notificacio.llibre = llibre
+    data = datetime.now()
+    notificacio.data = data
     notificacio.save()
 
 
@@ -217,5 +221,6 @@ def filtrar(request):
         queryset=queryset.filter(tematiques__nom_tematica=tematica)
 
     return queryset
+
 def is_valid(param):
     return param != '' and param is not None
