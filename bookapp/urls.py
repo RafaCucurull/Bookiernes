@@ -18,4 +18,7 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirmaquetacions', views.dirmaquetacions, name='dirmaquetacions'),
     path('area_edicio/<int:pk>/galeriamaquetacions', views.galeriamaquetacions, name='galeriamaquetacions'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
+    path('area_it/<int:pk>/publicarllibre', views.publicarllibre, name='publicarllibre'),
+    path('area_maquetacio/imatges', views.solicitudsimatges_maq, name='solicitudimatges'),
+    path('area_maquetacio/maquetacio', views.solicitudsmaquetacio_maq, name='solicitudmaquetacio'),
 ]

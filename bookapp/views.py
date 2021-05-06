@@ -19,6 +19,10 @@ def Escriptori(request):
         llibres = Llibre.objects.filter(editor=usuari)
     if usuari.is_Escriptor:
         llibres = Llibre.objects.filter(escriptor=usuari)
+    if usuari.is_IT:
+        llibres = Llibre.objects.filter(it=usuari)
+    if usuari.is_Maquetacio:
+        llibres = Llibre.objects.filter(maquetacio=usuari)
     tematiques = list()
     for llibre in llibres:
         tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
@@ -28,12 +32,16 @@ def Escriptori(request):
         "mylist": mylist
     }
     if usuari.is_Escriptor:
-        return render(request, "solicituds_maquetacio_disseny.html", llibreshtml)
+        return render(request, "escriptori_escriptor.html", llibreshtml)
     if usuari.is_Editor:
         return render(request, "escriptori_editor.html", llibreshtml)
-
+    if usuari.is_IT:
+       return render(request, "escriptori_it.html", llibreshtml)
+    if usuari.is_Maquetacio:
+       return render(request, "area_disseny_i_maquetacio.html", llibreshtml)
 
 def afegirLlibre(request):
+    
     if request.method == 'POST':
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
@@ -44,6 +52,7 @@ def afegirLlibre(request):
             return redirect('afegirllibre')
     else:
         form = AfegirLlibreForm()
+
     return render(request, "afegirllibre.html", {'form': form})
 
 
@@ -73,6 +82,13 @@ def areaedicio(request, pk):
 
 
 def areaescriptor(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre
+    }
+    return render(request, 'area_escriptor.html', context)
+
+def areait(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
         "llibre": llibre
@@ -228,3 +244,42 @@ def filtrar(request):
 def is_valid(param):
     return param != '' and param is not None
 
+def publicarllibre(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    llibreshtml = {
+        "llibre": llibre,
+    }
+    if request.method == "POST":
+        llibre.publicat = True
+        llibre.save()
+    
+    return render(request, "publicarllibre.html", llibreshtml)
+
+def solicitudsimatges_maq(request):
+    usuari = CustomUser.objects.get(email=request.user)
+    llibres = Llibre.objects.filter(maquetacio=usuari)
+    tematiques = list()
+    for llibre in llibres:
+        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
+    mylist = zip(llibres, tematiques)
+    llibreshtml = {
+        "object_list": llibres,
+        "mylist": mylist
+    }
+    
+
+    return render(request, "solicituds_imatges_disseny.html", llibreshtml)
+
+def solicitudsmaquetacio_maq(request):
+    usuari = CustomUser.objects.get(email=request.user)
+    llibres = Llibre.objects.filter(maquetacio=usuari)
+    tematiques = list()
+    for llibre in llibres:
+        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
+    mylist = zip(llibres, tematiques)
+    llibreshtml = {
+        "object_list": llibres,
+        "mylist": mylist
+    }
+    
+    return render(request, "solicituds_maquetacio_disseny.html", llibreshtml)

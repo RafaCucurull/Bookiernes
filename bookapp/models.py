@@ -5,10 +5,10 @@ import datetime
 
 class Llibre(models.Model):
     nom_llibre = models.CharField(max_length=70)
-    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True,
-                                  null=True)
-    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True,
-                               null=True)
+    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True, null=True)
+    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True, null=True)
+    it = models.ForeignKey('users.CustomUser', related_name="it", on_delete=models.CASCADE, blank=True, null=True)
+    maquetacio = models.ForeignKey('users.CustomUser', related_name="maquetacio", on_delete=models.CASCADE, blank=True, null=True)
     portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
@@ -16,7 +16,7 @@ class Llibre(models.Model):
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
     comentari_it = models.TextField(max_length=3000, blank=True )
-
+    publicat = models.BooleanField(default=False)
     def __str__(self):
         return self.nom_llibre
 
