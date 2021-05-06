@@ -13,8 +13,4 @@ urlpatterns = [
     path('notificacions', views.notificacions, name='notificacions'),
     path('area_edicio/<int:pk>/commentseditor', views.commentseditor, name='commentseditor'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
-    path('area_edicio/<int:pk>/enviarmaquetacio', views.enviarLlibreMaquetar, name='enviarmaquetacio'),
-    path('area_edicio/<int:pk>/enviarpublicar', views.enviarLlibrePublicar, name='enviarpublicar'),
-    path('area_edicio/<int:pk>/enviarimatges', views.enviarImatges, name='enviarimatges'),
-    path('area_edicio/<int:pk>/enviarmaquetat', views.enviarLlibreMaquetat, name='enviarmaquetat'),
 ]

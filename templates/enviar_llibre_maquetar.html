@@ -17,36 +17,13 @@
 
         <p class="w3-center p_header w3-padding-24"> A través d'aquest espai podeu enviar el text del vostre llibre i
             les imatges
-            per tal que el departament de maquetació faci el muntatge.
+            per tal que el departament de maquetació faci el muntatge. Tant el text com les imatges es troben ja
+            guardades, així que només cal afegir alguna anotació si ho desitgeu.
         </p>
     </header>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="w3-container w3-center">
-            <div class="left">
-                <h1 class="title"><b>Afegiu el text</b></h1>
-                <p id="subtitle1">Adjunteu l'arxiu amb el text</p>
-                <div class="custom-input-file">
-                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
-                    <small>Arrossega aquí els teus fitxers</small>
-                    <input type="file" class="form-control" name="pdf"
-                           placeholder="pdf"
-                           required class="input-file">
-                </div>
-            </div>
-            <div class="right">
-                <h1 class="title"><b>Afegiu les imatges</b></h1>
-                <p id="subtitle1">Adjunteu la bateria d'imatges</p>
-                <div class="custom-input-file">
-                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
-                    <small>Arrossega aquí els teus fitxers</small>
-                    <input type="file" class="form-control" name="img"
-                           placeholder="img"
-                           required class="input-file" multiple/>
-                </div>
-            </div>
-        </div>
-        <div class="w3-container w3-center margin">
             <h1 class="title"><b>Anotacions</b></h1>
             <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per als maquetadors</p>
             <div>

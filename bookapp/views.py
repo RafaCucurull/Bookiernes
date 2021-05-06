@@ -145,3 +145,20 @@ def comments(request, pk):
         "comentaris": comentaris
     }
     return render(request, 'comments.html', context)
+
+def solicitudImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarImatgesForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            obj.save()
+            return redirect('areaedicio')
+    else:
+        form = SolicitarImatgesForm()
+    context = {
+        'form': form
+    }
+    return render(request, "enviar_imatges.html", context)
