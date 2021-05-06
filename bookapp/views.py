@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -184,6 +186,7 @@ def comments(request, pk):
     }
     return render(request, 'comments.html', context)
 
+
 def cataleg(request):
     qs = filtrar(request)
     print(qs)
@@ -224,3 +227,4 @@ def filtrar(request):
 
 def is_valid(param):
     return param != '' and param is not None
+

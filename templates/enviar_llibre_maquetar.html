@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/enviar_maquetar.css' %}">
+    </head>
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="h1-header w3-margin">
+            Envieu el llibre a maquetar
+        </h1>
+
+        <p class="w3-center p_header w3-padding-24"> A través d'aquest espai podeu enviar el text del vostre llibre i
+            les imatges
+            per tal que el departament de maquetació faci el muntatge. Tant el text com les imatges es troben ja
+            guardades, així que només cal afegir alguna anotació si ho desitgeu.
+        </p>
+    </header>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="w3-container w3-center">
+            <h1 class="title"><b>Anotacions</b></h1>
+            <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per als maquetadors</p>
+            <div>
+                <textarea id="textarea" class="border-color" name="anotacions" rows="10" cols="60"
+                          placeholder="Escriviu els vostres comentaris..."></textarea>
+            </div>
+            <button class="btn btn-primary1 submit-button margin" type="submit">
+                <h3 class="h3-message"><b>Enviar a maquetar</b>
+                    <img class="w3-center icons" src={% static "maquetacio/send.png" %}>
+                </h3>
+            </button>
+        </div>
+    </form>
+    <div class="w3-container w3-center">
+        <div class="back-button right">
+            <a href={% url 'escriptori' %}>
+                <button class="btn btn-primary2">
+                    <h3 class="h3-message"><b>Tornar al llibre</b>
+                        <img class="w3-center icons" src={% static "maquetacio/backarrow.png" %}>
+                    </h3>
+                </button>
+            </a>
+        </div>
+    </div>
+    </body>
+{% endblock %}
+

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/enviar_maquetar.css' %}">
+    </head>
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="h1-header w3-margin">
+            Envieu la bateria d'imatges
+        </h1>
+
+        <p class="w3-center p_header w3-padding-24"> A través d'aquest espai podeu enviar la bateria d'imatges
+            que heu preparat per l'obra per tal que la validi el seu editor/a
+        </p>
+    </header>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="w3-container w3-center">
+            <div class="left">
+                <h1 class="title"><b>Afegiu les imatges</b></h1>
+                <p id="subtitle1">Adjunteu la bateria d'imatges en format PNG, JPG, JPEG, BMP, o similars</p>
+                <div class="custom-input-file">
+                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                    <small>Arrossega aquí els teus fitxers</small>
+                    <input type="file" class="form-control" name="img"
+                           placeholder="img"
+                           required class="input-file" multiple/>
+                </div>
+            </div>
+            <div class="right">
+                <h1 class="title"><b>Anotacions</b></h1>
+                <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per a l'editor/a</p>
+                <div>
+                    <textarea id="textarea" class="border-color" name="anotacions" rows="10" cols="60"
+                              placeholder="Escriviu els vostres comentaris..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container w3-center">
+            <button class="btn btn-primary1 submit-button margin" type="submit">
+                <h3 class="h3-message"><b>Presentar les imatges</b>
+                    <img class="w3-center icons" src={% static "maquetacio/send.png" %}>
+                </h3>
+            </button>
+        </div>
+    </form>
+    <div class="w3-container w3-center">
+        <div class="back-button right">
+            <a href={% url 'escriptori' %}>
+                <button class="btn btn-primary2">
+                    <h3 class="h3-message"><b>Tornar al llibre</b>
+                        <img class="w3-center icons" src={% static "maquetacio/backarrow.png" %}>
+                    </h3>
+                </button>
+            </a>
+        </div>
+    </div>
+    </body>
+{% endblock %}
