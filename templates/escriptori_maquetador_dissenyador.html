@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/escriptori.css' %}">
+
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Aquest és el vostre escriptori
+        </h1>
+
+        <p class="p_header w3-padding-24"> Aquí apareixen totes els llibres que estem dissenyant i/o maquetant junts.
+        </p> </br>
+    </header>
+
+    <!-- First Grid -->
+    <div class="w3-row-padding">
+        {% for object, tematiques in mylist %}
+                <div>
+                    <div class="w3-third w3-container w3-margin-bottom">
+                        <a href="{% url 'areadismaq' pk=object.pk %}">
+                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
+                                <br/>
+                                <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                                     class="w3-hover-opacity"> <br/> <br/>
+                                <p><h4>{{ object.nom_llibre }}</h4></p>
+                                <p style="display: inline">Temàtiques:</p>
+                                {% for t in tematiques %}
+                                    <p style="display:inline">{{ t }},</p>
+                                {% endfor %}
+                                <p>Col·lecció: {{ object.coleccio }}</p>
+                                <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        {% endfor %}
+
+    </div>
+    </body>
+{% endblock %}
