@@ -3,6 +3,8 @@ from bookapp.forms import AfegirLlibreForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, solicitudMaquetacio, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -19,10 +21,12 @@ def Escriptori(request):
         llibres = Llibre.objects.filter(editor=usuari)
     if usuari.is_Escriptor:
         llibres = Llibre.objects.filter(escriptor=usuari)
-    if usuari.is_IT:
-        llibres = Llibre.objects.filter(it=usuari)
+    if usuari.is_Dissenyador:
+        llibres = Llibre.objects.filter(dissenyador=usuari)
     if usuari.is_Maquetacio:
-        llibres = Llibre.objects.filter(maquetacio=usuari)
+        llibres = Llibre.objects.filter(maquetador=usuari)
+    if usuari.is_IT:
+        llibres = Llibre.objects.filter(IT=usuari)
     tematiques = list()
     for llibre in llibres:
         tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
@@ -35,10 +39,12 @@ def Escriptori(request):
         return render(request, "escriptori_escriptor.html", llibreshtml)
     if usuari.is_Editor:
         return render(request, "escriptori_editor.html", llibreshtml)
-    if usuari.is_IT:
-       return render(request, "escriptori_it.html", llibreshtml)
+    if usuari.is_Dissenyador:
+        return render(request, "area_disseny_i_maquetacio.html", llibreshtml)
     if usuari.is_Maquetacio:
-       return render(request, "area_disseny_i_maquetacio.html", llibreshtml)
+        return render(request, "area_disseny_i_maquetacio.html", llibreshtml)
+    if usuari.is_IT:
+        return render(request, "escriptori_it.html", llibreshtml)
 
 def afegirLlibre(request):
     
@@ -255,31 +261,120 @@ def publicarllibre(request, pk):
     
     return render(request, "publicarllibre.html", llibreshtml)
 
-def solicitudsimatges_maq(request):
-    usuari = CustomUser.objects.get(email=request.user)
-    llibres = Llibre.objects.filter(maquetacio=usuari)
-    tematiques = list()
-    for llibre in llibres:
-        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
-    mylist = zip(llibres, tematiques)
-    llibreshtml = {
-        "object_list": llibres,
-        "mylist": mylist
+def galeriaImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    imatges = llibre.imatges
+    context = {
+        'llistaimatges': imatges,
     }
-    
+    return render()
 
-    return render(request, "solicituds_imatges_disseny.html", llibreshtml)
 
-def solicitudsmaquetacio_maq(request):
-    usuari = CustomUser.objects.get(email=request.user)
-    llibres = Llibre.objects.filter(maquetacio=usuari)
-    tematiques = list()
-    for llibre in llibres:
-        tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
-    mylist = zip(llibres, tematiques)
-    llibreshtml = {
-        "object_list": llibres,
-        "mylist": mylist
+def solicitudImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarImatgesForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            seleccionar_dissenyador(obj, llibre)
+            obj.save()
+            return redirect(request.path_info)
+    else:
+        form = SolicitarImatgesForm()
+    context = {
+        'form': form
     }
-    
-    return render(request, "solicituds_maquetacio_disseny.html", llibreshtml)
+    return render(request, "solicitarimatges.html", context)
+
+
+def seleccionar_dissenyador(solicitud, llibre):
+    dissenyadors_lliures = CustomUser.objects.filter(is_Dissenyador=True, lliure=True)
+    dissenyadoraux = dissenyadors_lliures[0]
+    llibre.dissenyador = dissenyadoraux
+    solicitud.dissenyador = dissenyadoraux
+    dissenyador = CustomUser.objects.get(email=dissenyadoraux)
+    dissenyador.lliure = False
+    dissenyador.save()
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
+    notificacio.usuari = dissenyadoraux
+    notificacio.save()
+
+
+def galeriaMaquetacions(request, pk):
+    return render(request, "maquetacio.html")
+
+
+def solicitudmaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarImatgesForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            seleccionar_maquetador(obj, llibre)
+            obj.save()
+            return redirect('solicitudimatges')
+    else:
+        form = SolicitarMaquetacioForm()
+    return render(request, "solictudmaquetacio.html", {'form': form})
+
+
+def seleccionar_maquetador(solicitud, llibre):
+    maquetador_lliures = CustomUser.objects.filter(is_Maquetacio=True, lliure=True)
+    maquetadoraux = maquetador_lliures[0]
+    llibre.maquetador = maquetadoraux
+    solicitud.maquetador = maquetadoraux
+    maquetador = CustomUser.objects.get(email=maquetadoraux)
+    maquetador.lliure = False
+    maquetador.save()
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
+    notificacio.usuari = maquetadoraux
+    notificacio.save()
+
+
+def areaDisssenyiMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+
+
+def solicitudsDisseny(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    solicituds_disseny = solicitudImatges.objects.filter(llibre=llibre)
+    solicituds = {
+        'llista_solicituds': solicituds_disseny
+    }
+    return render()
+
+
+def afegirBateriaImatges(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    imatge = Imatge.objects.get()
+    llibre.imatges.add(imatge)
+    return render()
+
+
+def solicitudsMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    solicituds_maquetacio = solicitudMaquetacio.objects.filter(llibre=llibre)
+    solicituds = {
+        'llista_solicituds': solicituds_maquetacio
+    }
+    return render()
+
+
+def afegirMaquetacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = PujarMaquetacio(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.save()
+            llibre.maquetacio = obj
+            return redirect('')
+    else:
+        form = PujarMaquetacio()
+    return render()
