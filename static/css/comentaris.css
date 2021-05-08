@@ -82,10 +82,6 @@ h1 {
     color: white;
 }
 
-.h3-message-orange {
-    color: darkorange;
-}
-
 p {
     font-size: 18px;
     text-align: justify;
@@ -103,13 +99,7 @@ p {
     border-color: white;
 }
 
-.btn-secundary {
-    background-color: white;
-    border-color: darkorange;
-}
-
 .message {
-    border-radius: 20px;
     width: 400px;
 }
 
@@ -119,13 +109,6 @@ p {
 
 .h3-document {
     color: darkorange;
-}
-
-.btn-circle.btn-xl {
-    width: 100px;
-    height: 100px;
-    padding: 10px 10px;
-    border-radius: 50px;
 }
 
 div.row.middle_features {

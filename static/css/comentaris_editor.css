@@ -35,18 +35,6 @@ p {
     clear: both;
 }
 
-.button1 {
-    position: relative;
-    right: -1350px;
-    color: white;
-    border: transparent;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 20px;
-    background-color: darkorange;
-    padding: 14px 20px;
-}
-
 .btn-secundary {
     background-color: white;
     border-color: darkorange;
@@ -58,7 +46,6 @@ p {
     display: inline-block;
     height: 200px;
     border-width: 0.5px;
-    border-radius: 5px;
     border-style: solid;
     border-color: darkorange;
 }
@@ -125,7 +112,6 @@ p {
 }
 
 .message {
-    border-radius: 20px;
     width: 400px;
 }
 
@@ -135,13 +121,6 @@ p {
 
 .h3-document {
     color: darkorange;
-}
-
-.btn-circle.btn-xl {
-    width: 100px;
-    height: 100px;
-    padding: 10px 10px;
-    border-radius: 50px;
 }
 
 div.row.middle_features {

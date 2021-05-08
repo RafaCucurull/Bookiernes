@@ -3,12 +3,13 @@
 {% block content %}
     {% include 'user_header.html' %}
     <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/novaversio.css' %}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/novaversio.css' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -18,53 +19,45 @@
 
         <h1 class="w3-margin nom-seccio"> Canvieu el document principal </h1>
         <p class="p_header w3-center">Aquest serà el document que es veurà quan obriu l'espai de treball de cada llibre.
-        Us recomanem que hi tingueu sempre la darrera versió, ja sigui el manuscrit, el llibre modificat, la maquetació
-        o el llibre definitiu</p> </br></br>
+            Us recomanem que hi tingueu sempre la darrera versió, ja sigui el manuscrit, el llibre modificat, la
+            maquetació
+            o el llibre definitiu</p> </br></br>
     </header>
 
     <!-- Canviar document -->
     <div class="w3-container w3-center">
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">
-                    <div class="custom-input-file">
-                        <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
-                        <medium>Arrossega aquí els teus fitxers</medium>
-                        <input type="file" class="form-control" name="pdf"
-                               placeholder="pdf"
-                               required class="input-file">
-                    </div>
+                <div class="custom-input-file">
+                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                    <medium>Arrossega aquí els teus fitxers</medium>
+                    <input type="file" class="form-control" name="pdf"
+                           placeholder="pdf"
+                           required class="input-file">
+                </div>
 
-                    <div class="w3-row-padding w3-container">
-                        <div class="row message_feature">
-                                <div class="col-md-auto">
-                                    <a href="">
-                                        <button type="submit" class="btn btn-primary message">
-                                            <h3 class="h3-message"><b> Actualitzar document</b>
-                                                <img src="{% static '../static/modificacions/updateicon.png' %}" style="width: 30px;height: 30px;margin-right: 20px;margin-top: 10px" alt="..">
-                                            </h3>
-                                        </button>
-                                    </a>
-                                </div>
-                        </div>
-                    </div>
-                <div class="w3-container w3-margin">
-                    <div class="w3-container w3-white">
-                        <div class="row message_feature">
-                        <div class="col-md-auto">
-                            <a href="{% url 'areaedicio' pk=llibrehtml.pk %}">
-                                <button type="button" class="btn btn-secundary message" >
-                                    
-                                        <h3 class="h3-message-orange"><b>Tornar endarrere</b>
-                                            <img src="{% static '../static/areaescriptor/orangearrowback.png' %}" style="width: 30px;height: 30px;margin-right: 20px;margin-top: 10px" alt="..">
-                                        </h3>
-                                </button>
-                            </a>
-                        </div>
+                <div class="w3-row-padding w3-container">
+                    <div class="row message_feature">
+                        <a href="">
+                            <button type="submit" class="w3-round-xlarge btn btn-primary">
+                                <h3 class="h3-message"><b> Actualitzar document</b>
+                                    <img src="{% static '../static/modificacions/updateicon.png' %}"
+                                         style="width: 30px;height: 30px;margin-right: 20px;"
+                                         alt="Actualitzar document">
+                                </h3>
+                            </button>
+                        </a>
+                        <a href="{% url 'areaedicio' pk=llibrehtml.pk %}">
+                            <button type="button" class="w3-round-xlarge btn btn-primary">
+                                <h3 class="h3-message"><b>Tornar endarrere</b>
+                                    <img src="{% static '../static/areaescriptor/backarrow.png' %}"
+                                         style="width: 30px;height: 30px;margin-right: 20px;"
+                                         alt="Endarrere">
+                                </h3>
+                            </button>
+                        </a>
                     </div>
                 </div>
-            </div>
-
-            </div>
             </div>
         </form>
     </div>

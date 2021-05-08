@@ -17,9 +17,8 @@ p {
 }
 
 .right {
-  position: absolute;
-  right: 200px;
-  padding: 10px;
+    float: right;
+    padding: 10px;
 }
 
 .column {
@@ -62,6 +61,7 @@ p {
     border-style: solid;
     border-color: darkorange;
 }
+
 .my_header {
     padding: 10px 16px;
 }
@@ -117,6 +117,7 @@ p {
 .btn-primary {
     background-color: darkorange;
     border-color: white;
+    width: 50%;
 }
 
 .btn-secundary {
@@ -175,7 +176,7 @@ div.col-md-auto {
     display: inline-block;
 }
 
-iframe{
+iframe {
     margin-top: 5%;
     margin-left: 40%;
     margin-right: 40%;

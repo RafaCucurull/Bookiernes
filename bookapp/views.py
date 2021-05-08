@@ -286,7 +286,7 @@ def solicitudImatges(request, pk):
     context = {
         'form': form
     }
-    return render(request, "solicitarimatges.html", context)
+    return render(request, "publicarllibre.html", context)
 
 
 def seleccionar_dissenyador(solicitud, llibre):
