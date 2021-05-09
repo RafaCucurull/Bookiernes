@@ -28,6 +28,7 @@
 
     <!-- GALERIA -->
 
+
     <div class="w3-half w3-container">
         <div class="w3-margin w3-right w3-card-4 w3-round-xlarge w3-light-grey w3-padding-8" style="width:50%">
 
@@ -36,7 +37,7 @@
                 <h3 class="w3-margin">Visualitzeu les maquetacions rebudes per aquesta obra</h3></br>
 
                 <div class="w3-section">
-                    <a href="{{ llibre.id }}/#">
+                    <a href="{% url 'galeriamaquetacions' pk=llibre.id %}">
                         <button class="w3-button w3-xlarge w3-orange w3-round-large ">
                             <div style="color: white; font-weight: bold"> Accedir</div>
                         </button>
@@ -58,7 +59,7 @@
                 <h3 class="w3-margin">Sol·liciteu les noves maquetacions que necessiteu </h3></br>
 
                 <div class="w3-section">
-                    <a href="{{ llibre.id }}/#">
+                    <a href="{% url 'solicitudmaquetacio' pk=llibre.id %}">
                         <button class="w3-button w3-xlarge w3-orange w3-round-large ">
                             <div style="color: white; font-weight: bold"> Accedir</div>
                         </button>

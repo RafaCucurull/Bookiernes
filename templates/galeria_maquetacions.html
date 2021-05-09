@@ -23,128 +23,19 @@
 
     </header>
 
-    <!-- Qui faci el backend tot això ho pot esborrar (*) -->
-
-    <a href="imatge">
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="https://www.parlament.cat/document/cataleg/48089.pdf"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Muntanyes del Canigó</p>
-                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
-                        <a href="LINK IMATGE">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 30px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-
-    <a href="imatge">
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="https://www.parlament.cat/document/cataleg/48089.pdf"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Muntanyes del Canigó</p>
-                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
-                        <a href="LINK IMATGE">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 30px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-
-    <a href="imatge">
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="https://www.parlament.cat/document/cataleg/48089.pdf"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Muntanyes del Canigó</p>
-                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
-                        <a href="LINK IMATGE">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 30px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-
-    <a href="imatge">
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="https://www.parlament.cat/document/cataleg/48089.pdf"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Muntanyes del Canigó</p>
-                        <p style="text-align: center">Dissenyador: GARRIDO. Ref: 254ALMB</p>
-                        <a href="LINK IMATGE">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 30px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-
-    <!-- Des de dalt fins aquí (*) -->
-
-
     <div>
-        {% for object, tematiques in mylist %}
+        {% for object in maquetacions %}
             <a href="imatge">
                 <div class=" w3-center w3-third w3-container w3-margin-bottom">
                     <div class="w3-container">
                         <div class="w3-card-4" style="width:100%">
-                            <iframe src="{{ llibre.pdf.url }}"
+                            <iframe src="{{ object.pdf.url }}"
                                     width="100%"
                                     height="800px">
                             </iframe>
                             <div class="w3-container w3-center w3-margin">
-                                <p style="text-align: center">Títol: {{ object.nom_imatge }}</p>
-                                <p style="text-align: center">Maquetador: {{ object.autor }}.
+                                <p style="text-align: center">Títol: {{ llibre.nom_llibre }}</p>
+                                <p style="text-align: center">Maquetador: {{ llibre.maquetador }}.
                                     Ref: {{ object.referència }}</p>
                                 <a href="LINK IMATGE">
                                     <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
