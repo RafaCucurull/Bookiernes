@@ -18,26 +18,30 @@
             Sol·licituds de maquetació
         </h1>
 
-        <p class="p_header w3-padding-24"> Aquí apareixen totes les sol·licituds de maquetació que tens pendent de gestionar
+        <p class="p_header w3-padding-24"> Aquí apareixen totes les sol·licituds de maquetació que tens pendent de
+            gestionar
         </p> </br>
     </header>
 
     <!-- First Grid -->
     <div class="w3-row-padding">
         {% for object in llista_solicituds %}
-                <div>
+            <div>
+                <a href="{{ llibre.id }}/enviarmaq">
                     <div class="w3-third w3-container w3-margin-bottom">
-                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
-                                <br/>
-                                <img class="w3-center icons" src="../static/escriptori/solicitudblack.png" style="margin-left: 35%">
-                                <img class="w3-center icons" src="../static/escriptori/llibreblack.png">
-                                <p><h4>NOM</h4></p>
-                                <p><b>Anotacions:</b> {{ object.anotacions }}</p><br/>
-                                <p><b>Llibre:</b> {{ object.llibre }}</p>
-                                <p><b>Editor:</b> {{ object.editor.nom }}</p>
-                            </div>
+                        <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
+                            <br/>
+                            <img class="w3-center icons" src="../static/escriptori/solicitudblack.png"
+                                 style="margin-left: 35%">
+                            <img class="w3-center icons" src="../static/escriptori/llibreblack.png">
+                            <p><h4>NOM</h4></p>
+                            <p><b>Anotacions:</b> {{ object.anotacions }}</p><br/>
+                            <p><b>Llibre:</b> {{ object.llibre }}</p>
+                            <p><b>Editor:</b> {{ object.editor.nom }}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
+            </div>
         {% endfor %}
     </div>
     </body>
