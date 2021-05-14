@@ -114,6 +114,16 @@ input[type='file'] {
     margin-top: 40px;
 }
 
+.btn-primary {
+    background-color: darkorange;
+    border-color: white;
+    margin-top: 5%;
+}
+
+.message {
+    width: 400px;
+}
+
 .submit-button {
     display: inline;
     margin-left: 5px;
