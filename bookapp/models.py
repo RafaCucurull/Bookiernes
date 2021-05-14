@@ -78,7 +78,7 @@ class solicitudImatges(models.Model):
 
 
 class Imatge(models.Model):
-    nom = models.CharField(max_length=70)
+    nom = models.CharField(max_length=70, null=True, blank=True)
     image = models.ImageField()
 
 

@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, TextInput
 
-from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio
+from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio, Imatge
 
 from django import forms
 
@@ -34,10 +34,10 @@ class SolicitarImatgesForm(ModelForm):
             }),
         }
 
-class pujarImatge(forms.Form):
+class pujarImatge(ModelForm):
     class Meta:
         model = Imatge
-        fields = ('nom', 'image')
+        fields = ('image',)
 
 class SolicitarMaquetacioForm(ModelForm):
     class Meta:

@@ -139,12 +139,7 @@ def dirbateriaimatges(request, pk):
     return render(request, 'directori_imatges.html', context)
 
 
-def galeriaimatges(request, pk):
-    llibre = Llibre.objects.get(pk=pk)
-    context = {
-        "llibre": llibre
-    }
-    return render(request, 'galeria_imatges.html', context)
+
 
 
 def dirmaquetacions(request, pk):
@@ -259,9 +254,8 @@ def publicarllibre(request, pk):
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    imatges = llibre.imatges
     context = {
-        'llistaimatges': imatges,
+        'imatges': llibre.imatges.all(),
         'llibre': llibre,
     }
     return render(request, "galeria_imatges.html", context)
@@ -363,8 +357,9 @@ def veuresolicitudsImatge(request, pk):
 def enviarbat(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     if request.method == 'POST':
-        form = pujarImatge(request.POST)
+        form = pujarImatge(request.POST, request.FILES)
         if form.is_valid():
+            print("HOLA")
             obj = form.save()
             obj.save()
             llibre.imatges.add(obj)
@@ -392,6 +387,7 @@ def enviarMaquetacio(request, pk):
             obj = form.save()
             obj.save()
             llibre.maquetacio = obj
+            llibre.save()
             return redirect('')
     else:
         form = PujarMaquetacio()
