@@ -18,10 +18,9 @@
             Àrea de disseny i maquetació: <b>{{ llibre.nom_llibre }}</b>
         </h1>
 
-        <p class="p_header w3-padding" ; style="text-align: center"> Dissenyador, des d'aquest espai podreu trametre les
-            imatges que us demani
-            l'editor/a, així com enviar les maquetacions de les obres. Si feu ús dels formularis, l'editor/a rebrà
-            directament els vostres arxius.
+        <p class="p_header w3-padding" ; style="text-align: center"> {{ request.user.email }}, des d'aquest espai podeu veure les sol·licituds i trametre les
+            imatges i maquetacions que us demani l'editor/a per l'obra "<b>{{ llibre.nom_llibre }}</b>". Si feu ús dels formularis, l'editor/a rebrà
+            directament els vostres arxius. També podeu fer ús de l'eina de missatgeria.
         </p> </br>
     </header>
 
