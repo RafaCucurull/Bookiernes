@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -362,7 +362,17 @@ def veuresolicitudsImatge(request, pk):
 
 def enviarbat(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    return render(request, 'enviar_imatges.html')
+    if request.method == 'POST':
+        form = pujarImatge(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.save()
+            llibre.imatges.add(obj)
+            llibre.save()
+            return redirect(request.path_info)
+    else:
+        form = pujarImatge()
+    return render(request, 'enviar_imatges.html', {'form': form})
 
 
 def veuresolicitudsMaquetacio(request, pk):

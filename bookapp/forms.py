@@ -34,10 +34,10 @@ class SolicitarImatgesForm(ModelForm):
             }),
         }
 
-
-class cercaImatgeBDD(forms.Form):
-    nom_imatge = forms.TextInput()
-
+class pujarImatge(forms.Form):
+    class Meta:
+        model = Imatge
+        fields = ('nom', 'image')
 
 class SolicitarMaquetacioForm(ModelForm):
     class Meta:
