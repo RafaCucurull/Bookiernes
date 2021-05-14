@@ -8,79 +8,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/escriptori.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/areaedicio.css' %}">
 
     <body>
     <!-- Header -->
     <header class="my_header">
 
         <h1 class="w3-margin">
-            Àrea de disseny i maquetació: {{ llibre.nom_llibre }}
+            Àrea de disseny i maquetació: <b>{{ llibre.nom_llibre }}</b>
         </h1>
 
-        <p class="p_header w3-padding-24"> Dissenyador, des d'aquest espai podreu trametre les imatges que us demani
+        <p class="p_header w3-padding" ; style="text-align: center"> Dissenyador, des d'aquest espai podreu trametre les
+            imatges que us demani
             l'editor/a, així com enviar les maquetacions de les obres. Si feu ús dels formularis, l'editor/a rebrà
             directament els vostres arxius.
         </p> </br>
     </header>
 
 
-        <div class="row message_feature">
-            <div class="col-md-auto">
-                <a href="{{ llibre.id }}/enviarbat">
-                    <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Enviar bateria d'imatges<br><br></b>
-                            <img class="w3-center icons" src="../static/escriptori/camera.png">
-                        </h3>
-                    </button>
-                </a>
-            </div>
-            <div class="col-md-auto">
-                <a href="{{ llibre.id }}/enviarmaq">
-                    <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Enviar maquetació<br><br></b>
-                            <img class="w3-center icons" src="../static/escriptori/llibre_maquetat.png">
-                        </h3>
-                    </button>
-                </a>
-            </div>
-        </div>
+    <div class="row message_feature" ; style="margin-top: -5%; margin-bottom: -2%">
 
-        <div class="row message_feature">
-            <div class="col-md-auto">
-                <a href="{{ llibre.id }}/solicitudsimg">
-                    <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Veure sol·licituds d'imatges<br><br></b>
+
+        <div class="w3-margin col-md-auto">
+            <a href="{{ llibre.id }}/solicitudsimg">
+                <div class="boto w3-button w3-border w3-round-xlarge row middle_features">
+                    <div class="col-md-auto">
+                        <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/escriptori/solicitud.png">
-                            <img class="w3-center icons" src="../static/escriptori/camera.png">
-                        </h3>
-                    </button>
-                </a>
-            </div>
-            <div class="col-md-auto">
-                <a href="{{ llibre.id }}/solicitudsmaq">
-                    <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Veure sol·licituds de maquetació<br><br></b>
+                        </button>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn">
+                            <h3><b>SOL·LICITUDS </p> IMATGES</b></h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="w3-margin col-md-auto">
+            <a href="{{ llibre.id }}/solicitudsmaq">
+                <div class="boto w3-button w3-border w3-round-xlarge row middle_features">
+                    <div class="col-md-auto">
+                        <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/escriptori/solicitud.png">
-                            <img class="w3-center icons" src="../static/escriptori/llibre_maquetat.png">
-                        </h3>
-                    </button>
-                </a>
-            </div>
+                        </button>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn">
+                            <h3><b>SOL·LICITUDS </p> MAQUETACIONS </b></h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
+    </div>
+
+    <!-- MISSATGE NOU -->
+
+    <div class="w3-margin row message_feature w3-padding-16">
+        <div class="col-md-auto w3-padding-64" style="text-align: left">
+            <a href="#">
+                <button type="button" class="btn btn-primary message">
+                    <h3 class="h3-message"><b>Missatge nou</b>
+                        <img class="w3-center icons" src="../static/areaedicio/message-icon.png">
+                    </h3>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- BOTÓ TORNAR -->
+
+    <div class="w3-container w3-right" style="margin-right: 5%; margin-top: -2%">
+        <div class="right col-md-auto">
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-primary message">
+                    <h3 class="h3-message"><b>Tornar endarrere</b>
+                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                    </h3>
+                </button>
+                <br/> <br/> <br/> <br/> <br/> <br/>
+            </a>
+        </div>
+    </div>
 
 
-        <div class="row message_feature">
-            <div class="col-md-auto">
-                <a href="">
-                    <button type="button" class="btn btn-primary message">
-                        <h3 class="h3-message"><b>Missatge nou<br><br></b>
-                            <img class="w3-center icons" src="../static/escriptori/message.png">
-                        </h3>
-                    </button>
-                </a>
-            </div>
-        </div>
     </div>
     <br>
     <br>
