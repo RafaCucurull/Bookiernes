@@ -28,7 +28,7 @@
                 <div class="custom-input-file">
                     <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
                     <small>Arrossega aquí els teus fitxers</small>
-                    <input type="file" class="form-control" name="pdf"
+                    <input type="file" class="form-control" name="pdf_maquetat"
                            placeholder="pdf"
                            required class="input-file">
                 </div>
@@ -37,13 +37,12 @@
                 <h1 class="title"><b>Anotacions</b></h1>
                 <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per a l'editor/a</p>
                 <div>
-                    <textarea id="textarea" class="border-color" name="anotacions" rows="10" cols="60"
-                              placeholder="Escriviu els vostres comentaris..."></textarea>
+                    {{form.anotacions}}
                 </div>
             </div>
         </div>
         <div class="w3-container w3-center">
-            <button class="btn btn-primary1 submit-button margin" type="submit">
+            <button class="w3-round-xlarge btn btn-primary1 submit-button margin" type="submit">
                 <h3 class="h3-message"><b>Presentar maquetació</b>
                     <img class="w3-center icons" src={% static "maquetacio/send.png" %}>
                 </h3>
@@ -53,7 +52,7 @@
     <div class="w3-container w3-center">
         <div class="back-button right">
             <a href={% url 'escriptori' %}>
-                <button class="btn btn-primary2">
+                <button class="w3-round-xlarge btn btn-primary2">
                     <h3 class="h3-message"><b>Tornar al llibre</b>
                         <img class="w3-center icons" src={% static "maquetacio/backarrow.png" %}>
                     </h3>

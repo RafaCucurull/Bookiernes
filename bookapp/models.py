@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-import datetime
 
 
 class Llibre(models.Model):
@@ -93,5 +92,5 @@ class solicitudMaquetacio(models.Model):
 class Maquetacio(models.Model):
     pdf_maquetat = models.FileField(null=True, blank=True)
     anotacions = models.CharField(max_length=70, null=True, blank=True)
-    portada = models.ImageField()
-    contraportada = models.ImageField()
+    portada = models.ImageField(null=True, blank=True)
+    contraportada = models.ImageField(null=True, blank=True)

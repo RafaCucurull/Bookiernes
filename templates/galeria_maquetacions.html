@@ -29,7 +29,7 @@
                 <div class=" w3-center w3-third w3-container w3-margin-bottom">
                     <div class="w3-container">
                         <div class="w3-card-4" style="width:100%">
-                            <iframe src="{{ object.pdf.url }}"
+                            <iframe src="{{ object.pdf_maquetat.url }}"
                                     width="100%"
                                     height="800px">
                             </iframe>
@@ -38,7 +38,7 @@
                                 <p style="text-align: center">Maquetador: {{ llibre.maquetador }}.
                                     Ref: {{ object.referència }}</p>
                                 <a href="LINK IMATGE">
-                                    <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
+                                    <button class="w3-button w3-round-xlarge w3-orange w3-margin ">
                                         <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
                                             <img class="w3-center icons" style="width: 25px; height: auto"
                                                  src="{% static '/altres/baixada.png' %}">
@@ -59,7 +59,7 @@
 
         <div class="right col-md-auto">
             <a href="javascript:history.back()">
-                <button type="button" class="btn btn-primary message">
+                <button type="button" class="w3-round-xlarge btn btn-primary message">
                     <h3 class="h3-message"><b>Tornar endarrere</b>
                         <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
                     </h3>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from bookapp import models
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Maquetacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -291,6 +291,7 @@ def solicitudImatges(request, pk):
     return render(request, "solicitud_imatges.html", context)
 
 
+
 def seleccionar_dissenyador(solicitud, llibre):
     dissenyadors_lliures = CustomUser.objects.filter(is_Dissenyador=True, lliure=True)
     dissenyadoraux = dissenyadors_lliures[0]
@@ -311,7 +312,7 @@ def seleccionar_dissenyador(solicitud, llibre):
 
 def galeriaMaquetacions(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    maquetacions = llibre.maquetacio
+    maquetacions = llibre.maquetacio.maquetacio.all()
     context = {
         "llibre": llibre,
         "maquetacions": maquetacions
@@ -364,10 +365,11 @@ def areaDisssenyiMaquetacio(request, pk):
 def veuresolicitudsImatge(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     solicituds_disseny = models.solicitudImatges.objects.filter(llibre=llibre)
-    solicituds = {
-        'llista_solicituds': solicituds_disseny
+    context = {
+        'llista_solicituds': solicituds_disseny,
+        'llibre':llibre
     }
-    return render(request, 'solicituds_imatges_disseny.html', solicituds)
+    return render(request, 'solicituds_imatges_disseny.html', context)
 
 
 def enviarbat(request, pk):
@@ -375,7 +377,6 @@ def enviarbat(request, pk):
     if request.method == 'POST':
         form = pujarImatge(request.POST, request.FILES)
         if form.is_valid():
-            print("HOLA")
             obj = form.save()
             obj.save()
             llibre.imatges.add(obj)
@@ -396,25 +397,38 @@ def notificarEditorImatges(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+def notificarEditorMaquetacio(llibre):
+    editor = llibre.editor
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens disponible el llibre maquetat que vas sol·licitar"
+    notificacio.usuari = editor
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
+    notificacio.save()
+
 def veuresolicitudsMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     solicituds_maquetacio = models.solicitudMaquetacio.objects.filter(llibre=llibre)
-    solicituds = {
-        'llista_solicituds': solicituds_maquetacio
+    context = {
+        'llista_solicituds': solicituds_maquetacio,
+        'llibre': llibre
     }
-    return render(request, 'solicituds_maquetacio_disseny.html', solicituds)
+    return render(request, 'solicituds_maquetacio_disseny.html', context)
 
 
 def enviarMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     if request.method == 'POST':
-        form = PujarMaquetacio(request.POST)
+        form = PujarMaquetacio(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save()
             obj.save()
+            print(obj.pdf_maquetat)
             llibre.maquetacio = obj
             llibre.save()
-            return redirect('')
+            notificarEditorMaquetacio(llibre)
+            return redirect(request.path_info)
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form})
