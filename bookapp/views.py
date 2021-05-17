@@ -313,6 +313,7 @@ def seleccionar_dissenyador(solicitud, llibre):
 def galeriaMaquetacions(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     maquetacions = llibre.maquetacio.maquetacio.all()
+    print(maquetacions)
     context = {
         "llibre": llibre,
         "maquetacions": maquetacions
