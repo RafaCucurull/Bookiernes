@@ -18,31 +18,35 @@
             Aquest és el vostre escriptori
         </h1>
 
-        <p class="p_header w3-padding-24"> Aquí apareixen totes els llibres que estem dissenyant i/o maquetant junts.
+        <p class="p_header w3-padding-24"> Benvingut/da de nou <b>{{ request.user.email }}</b>. Aquí apareixen totes les
+            obres en què esteu treballant. Dins de cada llibre disposeu d'un espai on rebreu les sol·licituds d'imatges
+            i/o maquetacions que se us assignin. Des d'allí podreu enviar el material que se us demana. A més, hi teniu
+            disponible
+            l'eina de missatgeria, per comunicar-vos amb qualsevol dels altres implicats.
         </p> </br>
     </header>
 
     <!-- First Grid -->
     <div class="w3-row-padding">
         {% for object, tematiques in mylist %}
-                <div>
-                    <div class="w3-third w3-container w3-margin-bottom">
-                        <a href="{% url 'areadismaq' pk=object.pk %}">
-                            <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
-                                <br/>
-                                <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
-                                     class="w3-hover-opacity"> <br/> <br/>
-                                <p><h4>{{ object.nom_llibre }}</h4></p>
-                                <p style="display: inline">Temàtiques:</p>
-                                {% for t in tematiques %}
-                                    <p style="display:inline">{{ t }},</p>
-                                {% endfor %}
-                                <p>Col·lecció: {{ object.coleccio }}</p>
-                                <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
-                            </div>
-                        </a>
-                    </div>
+            <div>
+                <div class="w3-third w3-container w3-margin-bottom">
+                    <a href="{% url 'areadismaq' pk=object.pk %}">
+                        <div class="w3-container w3-border w3-round-xlarge w3-rightbar w3-bottombar w3-white box">
+                            <br/>
+                            <img src="/static/escriptori/bookescriptori3.png" alt="Book icon" style="width:10%"
+                                 class="w3-hover-opacity"> <br/> <br/>
+                            <p><h4>{{ object.nom_llibre }}</h4></p>
+                            <p style="display: inline">Temàtiques:</p>
+                            {% for t in tematiques %}
+                                <p style="display:inline">{{ t }},</p>
+                            {% endfor %}
+                            <p>Col·lecció: {{ object.coleccio }}</p>
+                            <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
+                        </div>
+                    </a>
                 </div>
+            </div>
         {% endfor %}
 
     </div>

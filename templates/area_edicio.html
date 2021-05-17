@@ -15,69 +15,89 @@
     <body>
     <!-- Header -->
     <header class="my_header">
-
         <h1 class="w3-margin">
             Àrea d'edició: <b>{{ llibre.nom_llibre }}</b>
         </h1>
-        <p class="w3-center p_header w3-padding-24">Editor, des d'aquest espai podeu visualitzar el document i anotar les vostres observacions
-            per tal que les vegi l'escriptor. També podeu sol·licitar les bateries d'imatges i enviar el document per a ser maquetat
+        <p class="w3-center p_header w3-padding-24">Editor, des d'aquest espai podeu visualitzar el document i anotar
+            les vostres observacions
+            per tal que les vegi l'escriptor. També podeu sol·licitar les bateries d'imatges i enviar el document per a
+            ser maquetat
             i publicat, tot a través dels diferents formularis</p>
     </header>
+
     <!-- First Grid -->
+
     <div class="w3-row-padding w3-padding-24 w3-container">
+
         <div class="w3-third">
-            <div class="row top_feature"><br/><br/><br/>
+
+            </br> </br> </br>
+
+            <!-- COMENTARIS -->
+
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
                 <div class="col-md-auto">
-                    <a href="{{llibre.id}}/commentseditor">
+                    <a href="{{ llibre.id }}/commentseditor">
                         <button class="btn btn-primary btn-circle btn-xl">
                             <img class="icons" src="../static/areaedicio/pencil-icon.png">
                         </button>
                     </a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="{{llibre.id}}/commentseditor">
-                        <button class="boto w3-button w3-border w3-round-xlarge">
-                            <h3><b>COMENTARIS I MODIFICACIONS</b></h3>
+                    <a href="{{ llibre.id }}/commentseditor">
+                        <button class="btn">
+                            <h3><b>COMENTARIS</b></h3>
                         </button>
                     </a>
                 </div>
             </div>
-            <div class="row middle_features">
+
+            <!-- IMATGES -->
+
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
                 <div class="col-md-auto">
-                    <a href="{{llibre.id}}/dirbateriaimatges">
+                    <a href="{{ llibre.id }}/dirbateriaimatges">
                         <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/areaedicio/bateriaimatges.png">
                         </button>
                     </a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="{{llibre.id}}/dirbateriaimatges">
+                    <a href="{{ llibre.id }}/dirbateriaimatges">
                         <button class="btn">
                             <h3><b>BATERIA D'IMATGES</b></h3>
                         </button>
                     </a>
                 </div>
             </div>
-            <div class="row middle_features">
+
+            <!-- MAQUETACIÓ -->
+
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
                 <div class="col-md-auto">
-                    <a href="{{llibre.id}}/dirmaquetacions">
+                    <a href="{{ llibre.id }}/dirmaquetacions">
                         <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/areaedicio/book-icon.png">
                         </button>
                     </a>
                 </div>
                 <div class="col-md-auto">
-
-                    <a href="{{llibre.id}}/dirmaquetacions">
+                    <a href="{{ llibre.id }}/dirmaquetacions">
                         <button class="btn">
                             <h3><b>MAQUETACIÓ</b></h3>
                         </button>
                     </a>
                 </div>
             </div>
-            <div class="row bottom_feature">
+
+            <!-- PUBLICACIÓ -->
+
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
                 <div class="col-md-auto">
-                    
                     <a href="#">
                         <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/areaedicio/earth-icon.png">
@@ -86,14 +106,17 @@
                 </div>
                 <div class="col-md-auto">
                     <a href="#">
-                        <button class="boto w3-button w3-border w3-round-xlarge">
+                        <button class="btn">
                             <h3><b>PUBLICACIÓ</b></h3>
                         </button>
                     </a>
                 </div>
             </div>
-            <div class="row message_feature">
-                <div class="col-md-auto">
+
+            <!-- MISSATGE NOU -->
+
+            <div class="w3-margin w3-threequarter row message_feature w3-padding-16">
+                <div class="col-md-auto w3-padding-64" style="text-align: left">
                     <a href="#">
                         <button type="button" class="btn btn-primary message">
                             <h3 class="h3-message"><b>Missatge nou</b>
@@ -106,21 +129,44 @@
 
         </div>
 
+
+        <!-- PDF -->
+
         <div class="w3-twothird">
             <iframe src="{{ llibre.pdf.url }}"
                     width="100%"
                     height="800px">
             </iframe>
+
+            <!-- COMENTARIS -->
+
             <div class="row document_feature">
                 <div class="col-md-auto">
-                    <a class="btn" href="{%  url 'canviardocument' pk=llibre.pk %}">
+                    <a class="btn" href="{% url 'canviardocument' pk=llibre.pk %}">
                         <h3 class="h3-document"><b>Canviar document</b>
                             <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
                         </h3>
                     </a>
                 </div>
+
+
+                <!-- BOTÓ TORNAR -->
+
+                <div class="w3-container" style="margin-top: 2%">
+                    <div class="right col-md-auto">
+                        <a href="javascript:history.back()">
+                            <button type="button" class="btn btn-primary message">
+                                <h3 class="h3-message"><b>Tornar endarrere</b>
+                                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                                </h3>
+                            </button>
+                            <br/> <br/> <br/> <br/> <br/> <br/>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
     </body>
     </html>
