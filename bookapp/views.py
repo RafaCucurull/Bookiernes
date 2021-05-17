@@ -248,8 +248,19 @@ def publicarllibre(request, pk):
     if request.method == "POST":
         llibre.publicat = True
         llibre.save()
+        notificarEditorPublicat(llibre)
 
     return render(request, "publicarllibre.html", llibreshtml)
+
+def notificarEditorPublicat(llibre):
+    editor = llibre.editor
+    notificacio = Notificacio()
+    notificacio.missatge = "El llibre que has estat editant ja ha estat publicat a la Web"
+    notificacio.usuari = editor
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
+    notificacio.save()
 
 
 def galeriaImatges(request, pk):
@@ -292,6 +303,9 @@ def seleccionar_dissenyador(solicitud, llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
     notificacio.usuari = dissenyadoraux
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
     notificacio.save()
 
 
@@ -333,6 +347,8 @@ def seleccionar_maquetador(solicitud, llibre):
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
     notificacio.usuari = maquetadoraux
+    data = datetime.now()
+    notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
 
@@ -364,11 +380,21 @@ def enviarbat(request, pk):
             obj.save()
             llibre.imatges.add(obj)
             llibre.save()
+            notificarEditorImatges(llibre)
             return redirect(request.path_info)
     else:
         form = pujarImatge()
     return render(request, 'enviar_imatges.html', {'form': form})
 
+def notificarEditorImatges(llibre):
+    editor = llibre.editor
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens disponible la bateria d'imatges que vas sol·licitar per l'obra"
+    notificacio.usuari = editor
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
+    notificacio.save()
 
 def veuresolicitudsMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
