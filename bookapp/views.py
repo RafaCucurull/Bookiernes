@@ -385,7 +385,7 @@ def enviarbat(request, pk):
             return redirect(request.path_info)
     else:
         form = pujarImatge()
-    return render(request, 'enviar_imatges.html', {'form': form})
+    return render(request, 'enviar_imatges.html', {'form': form, 'llibre': llibre})
 
 def notificarEditorImatges(llibre):
     editor = llibre.editor
@@ -424,11 +424,10 @@ def enviarMaquetacio(request, pk):
         if form.is_valid():
             obj = form.save()
             obj.save()
-            print(obj.pdf_maquetat)
             llibre.maquetacio = obj
             llibre.save()
             notificarEditorMaquetacio(llibre)
             return redirect(request.path_info)
     else:
         form = PujarMaquetacio()
-    return render(request, 'enviar_maquetat.html', {'form': form})
+    return render(request, 'enviar_maquetat.html', {'form': form, 'llibre': llibre})
