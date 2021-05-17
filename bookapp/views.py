@@ -1,8 +1,9 @@
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 
 from bookapp import models
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Maquetacio
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Maquetacio, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -139,9 +140,6 @@ def dirbateriaimatges(request, pk):
     return render(request, 'directori_imatges.html', context)
 
 
-
-
-
 def dirmaquetacions(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     context = {
@@ -252,6 +250,7 @@ def publicarllibre(request, pk):
 
     return render(request, "publicarllibre.html", llibreshtml)
 
+
 def notificarEditorPublicat(llibre):
     editor = llibre.editor
     notificacio = Notificacio()
@@ -289,7 +288,6 @@ def solicitudImatges(request, pk):
         'form': form
     }
     return render(request, "solicitud_imatges.html", context)
-
 
 
 def seleccionar_dissenyador(solicitud, llibre):
@@ -367,7 +365,7 @@ def veuresolicitudsImatge(request, pk):
     solicituds_disseny = models.solicitudImatges.objects.filter(llibre=llibre)
     context = {
         'llista_solicituds': solicituds_disseny,
-        'llibre':llibre
+        'llibre': llibre
     }
     return render(request, 'solicituds_imatges_disseny.html', context)
 
@@ -387,6 +385,7 @@ def enviarbat(request, pk):
         form = pujarImatge()
     return render(request, 'enviar_imatges.html', {'form': form})
 
+
 def notificarEditorImatges(llibre):
     editor = llibre.editor
     notificacio = Notificacio()
@@ -397,6 +396,7 @@ def notificarEditorImatges(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+
 def notificarEditorMaquetacio(llibre):
     editor = llibre.editor
     notificacio = Notificacio()
@@ -406,6 +406,7 @@ def notificarEditorMaquetacio(llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
 
 def veuresolicitudsMaquetacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -432,3 +433,20 @@ def enviarMaquetacio(request, pk):
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form})
+
+
+def eliminarimatge(request, pk, pkimatge):
+    llibre = Llibre.objects.get(pk=pk)
+    imatge = Imatge.objects.get(pk=pkimatge)
+    llibre.imatges.remove(imatge)
+    llibre.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def download_image(request, pk, pkimatge):
+    image = Imatge.objects.get(pk=pkimatge)
+    filename = image.image.file.name.split('/')[-1]
+    response = HttpResponse(image.image.file, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+    return response
