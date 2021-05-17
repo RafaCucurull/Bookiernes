@@ -31,18 +31,31 @@
                     <div class="w3-third w3-container w3-margin-bottom">
                         <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
                             <br/>
-                            <img class="w3-center icons" src="../static/escriptori/solicitudblack.png"
+                            <img class="w3-center icons" src="{% static '/escriptori/solicitudblack.png' %}"
                                  style="margin-left: 35%">
-                            <img class="w3-center icons" src="../static/escriptori/llibreblack.png">
+                            <img class="w3-center icons" src="{% static '/escriptori/llibreblack.png' %}">
                             <p><h4>NOM</h4></p>
                             <p><b>Anotacions:</b> {{ object.anotacions }}</p><br/>
                             <p><b>Llibre:</b> {{ object.llibre }}</p>
-                            <p><b>Editor:</b> {{ object.editor.nom }}</p>
+                            <p><b>Editor:</b> {{ object.editor }}</p>
                         </div>
                     </div>
                 </a>
             </div>
         {% endfor %}
+    </div>
+    <!-- BOTÓ TORNAR -->
+
+    <div class="w3-container w3-right" style="margin-right: 5%;margin-top: 2%">
+        <div class="right col-md-auto">
+            <a href="javascript:history.back()">
+                <button type="button" class="w3-round-xlarge btn btn-primary message">
+                    <h3 class="h3-message"><b>Tornar endarrere</b>
+                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                    </h3>
+                </button>
+            </a>
+        </div>
     </div>
     </body>
 {% endblock %}
