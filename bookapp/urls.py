@@ -19,6 +19,7 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirmaquetacions', views.dirmaquetacions, name='dirmaquetacions'),
     path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions', views.galeriaMaquetacions, name='galeriamaquetacions'),
     path('area_edicio/<int:pk>/dirmaquetacions/solicitudmaquetacio', views.solicitudmaquetacio, name='solicitudmaquetacio'),
+    path('area_edicio/<int:pk>/solicitudpublicacio', views.solicitudpublicacio, name='solicitudpublicacio'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
     path('area_it/<int:pk>/publicarllibre', views.publicarllibre, name='publicarllibre'),
     path('area_dismaq/<int:pk>', views.areaDisssenyiMaquetacio, name='areadismaq'),

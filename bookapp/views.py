@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, SolicitarPublicacioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Maquetacio
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -26,7 +26,7 @@ def Escriptori(request):
     if usuari.is_Maquetacio:
         llibres = Llibre.objects.filter(maquetador=usuari)
     if usuari.is_IT:
-        llibres = Llibre.objects.filter(IT=usuari)
+        llibres = Llibre.objects.filter(it=usuari)
     tematiques = list()
     for llibre in llibres:
         tematiques.append(TematiquesLlibre.objects.filter(llibre=llibre))
@@ -432,3 +432,36 @@ def enviarMaquetacio(request, pk):
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form})
+
+def solicitudpublicacio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarPublicacioForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            seleccionar_it(obj, llibre)
+            obj.save()
+            return redirect(request.path_info)
+    else:
+        form = SolicitarMaquetacioForm()
+    return render(request, "enviar_llibre_publicar.html", {'form': form})
+
+
+def seleccionar_it(solicitud, llibre):
+    it_lliures = CustomUser.objects.filter(is_IT=True, lliure=True)
+    it_aux = it_lliures[0]
+    llibre.it = it_aux
+    llibre.save()
+    solicitud.it = it_aux
+    it = CustomUser.objects.get(email=it_aux)
+    it.lliure = False
+    it.save()
+    notificacio = Notificacio()
+    notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"
+    notificacio.usuari = it_aux
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
+    notificacio.save()
