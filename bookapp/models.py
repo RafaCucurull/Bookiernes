@@ -94,3 +94,17 @@ class Maquetacio(models.Model):
     anotacions = models.CharField(max_length=70, null=True, blank=True)
     portada = models.ImageField(null=True, blank=True)
     contraportada = models.ImageField(null=True, blank=True)
+
+class solicitudPublicacio(models.Model):
+    anotacions = models.CharField(max_length=70)
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorpublicacio', null=True,
+                               blank=True)
+    IT = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='itsolicitud', null=True,
+                                   blank=True)
+
+class Publicacio(models.Model):
+    pdf_a_publicar = models.FileField(null=True, blank=True)
+    anotacions = models.CharField(max_length=70, null=True, blank=True)
+    portada = models.ImageField(null=True, blank=True)
+    contraportada = models.ImageField(null=True, blank=True)

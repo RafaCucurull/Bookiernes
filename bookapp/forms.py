@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, TextInput
 
-from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio, Imatge
+from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio, Imatge, solicitudPublicacio
 
 
 class AfegirLlibreForm(ModelForm):
@@ -48,3 +48,8 @@ class PujarMaquetacio(ModelForm):
         model = Maquetacio
         fields = ('pdf_maquetat', 'anotacions')
         widgets = {'anotacions': Textarea(attrs={'cols': 50, 'rows': 6})}
+
+class SolicitarPublicacioForm(ModelForm):
+    class Meta:
+        model = solicitudPublicacio
+        fields = ('anotacions',)
