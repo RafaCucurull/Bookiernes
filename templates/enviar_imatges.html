@@ -19,23 +19,35 @@
             que heu preparat per l'obra per tal que la validi el seu editor/a
         </p>
     </header>
+
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+
+
         <div class="w3-container w3-center">
             <div class="left">
                 <h1 class="title"><b>Afegiu les imatges</b></h1>
                 <p id="subtitle1">Adjunteu la bateria d'imatges en format PNG, JPG, JPEG, BMP, o similars</p>
+                <div class="custom-input-file">
+                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                    <small>Arrossega aquí els teus fitxers</small>
+                    {{ form }} </br>
+
+                </div>
             </div>
+
+
             <div class="right">
                 <h1 class="title"><b>Anotacions</b></h1>
                 <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per a l'editor/a</p>
                 <div>
-                    <textarea id="textarea" class="border-color" name="anotacions" rows="10" cols="60"
+                    <textarea id="textarea" class="" name="anotacions" rows="10" cols="60"
                               placeholder="Escriviu els vostres comentaris..."></textarea>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="w3-container w3-center">
             <button class="w3-round-xlarge btn btn-primary1 submit-button margin" type="submit">
                 <h3 class="h3-message"><b>Presentar les imatges</b>
@@ -44,6 +56,7 @@
             </button>
         </div>
     </form>
+
     <div class="w3-container w3-center">
         <div class="back-button right">
             <a href={% url 'escriptori' %}>
