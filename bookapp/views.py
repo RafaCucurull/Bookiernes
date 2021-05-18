@@ -67,7 +67,7 @@ def seleccionar_editor(llibre):
     editoraux = editors_lliures[0]
     llibre.editor = editoraux
     editor = CustomUser.objects.get(email=editoraux)
-    #editor.lliure = False
+    editor.lliure = False
     editor.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
@@ -306,7 +306,7 @@ def seleccionar_dissenyador(solicitud, llibre):
     llibre.save()
     solicitud.dissenyador = dissenyadoraux
     dissenyador = CustomUser.objects.get(email=dissenyadoraux)
-    #dissenyador.lliure = False
+    dissenyador.lliure = False
     dissenyador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
@@ -351,7 +351,7 @@ def seleccionar_maquetador(solicitud, llibre):
     llibre.save()
     solicitud.maquetador = maquetadoraux
     maquetador = CustomUser.objects.get(email=maquetadoraux)
-    #maquetador.lliure = False
+    maquetador.lliure = False
     maquetador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
@@ -484,7 +484,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    #it.lliure = False
+    it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"
