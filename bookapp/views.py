@@ -67,9 +67,8 @@ def seleccionar_editor(llibre):
     editoraux = editors_lliures[0]
     llibre.editor = editoraux
     editor = CustomUser.objects.get(email=editoraux)
-    editor.lliure = False
+    #editor.lliure = False
     editor.save()
-    print(editor.lliure)
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
     notificacio.usuari = editoraux
@@ -246,6 +245,8 @@ def publicarllibre(request, pk):
         llibre.publicat = True
         llibre.save()
         notificarEditorPublicat(llibre)
+        notificarITPublicat(llibre)
+        return redirect('/escriptori')
 
     return render(request, "publicarllibre.html", llibreshtml)
 
@@ -260,6 +261,15 @@ def notificarEditorPublicat(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+def notificarITPublicat(llibre):
+    it = llibre.it
+    notificacio = Notificacio()
+    notificacio.missatge = "El llibre que tenies assignat ja ha estat publicat a la Web"
+    notificacio.usuari = it
+    data = datetime.now()
+    notificacio.data = data
+    notificacio.llibre = llibre
+    notificacio.save()
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -296,7 +306,7 @@ def seleccionar_dissenyador(solicitud, llibre):
     llibre.save()
     solicitud.dissenyador = dissenyadoraux
     dissenyador = CustomUser.objects.get(email=dissenyadoraux)
-    dissenyador.lliure = False
+    #dissenyador.lliure = False
     dissenyador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
@@ -341,7 +351,7 @@ def seleccionar_maquetador(solicitud, llibre):
     llibre.save()
     solicitud.maquetador = maquetadoraux
     maquetador = CustomUser.objects.get(email=maquetadoraux)
-    maquetador.lliure = False
+    #maquetador.lliure = False
     maquetador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
@@ -474,7 +484,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    it.lliure = False
+    #it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"

@@ -67,7 +67,7 @@
                 <div class="col-md-auto">
                     <a href="{{ llibre.id }}/dirbateriaimatges">
                         <button class="btn">
-                            <h3><b>BATERIA D'IMATGES</b></h3>
+                            <h3><b>IMATGES</b></h3>
                         </button>
                     </a>
                 </div>
@@ -154,8 +154,8 @@
 
                 <div class="w3-container" style="margin-top: 2%">
                     <div class="right col-md-auto">
-                        <a href="javascript:history.back()">
-                            <button type="button" class="btn btn-primary message">
+                        <a href="{% url 'escriptori' %}">
+                            <button type="button" class="btn btn-primary message w3-round-xlarge ">
                                 <h3 class="h3-message"><b>Tornar endarrere</b>
                                     <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
                                 </h3>
