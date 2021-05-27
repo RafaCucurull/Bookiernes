@@ -460,8 +460,8 @@ def download_image(request, pk, pkimatge):
 
     return response
 
-def eliminarnotificacio(request, pk, pknotificacio):
-
+def eliminarnotificacio(request, pknotificacio):
+    Notificacio.objects.filter(pk=pknotificacio).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 

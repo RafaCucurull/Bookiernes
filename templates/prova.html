@@ -18,11 +18,9 @@
         <h1 class="w3-margin">
             Àrea d'edició: <b>{{ llibre.nom_llibre }}</b>
         </h1>
-        <p class="w3-center p_header w3-padding-24">Editor, des d'aquest espai podeu visualitzar el document i anotar
-            les vostres observacions
-            per tal que les vegi l'escriptor. També podeu sol·licitar les bateries d'imatges i enviar el document per a
-            ser maquetat
-            i publicat, tot a través dels diferents formularis</p>
+        <p class="w3-center p_header w3-padding-24">Escriptor, aquí apareix la darrera versió de la vostra obra i podeu accedir a les
+            observacions que us ha fet el vostre editor i que encara teniu pendents de resoldre. Des d'aquí també podeu enviar una
+            nova versió modificada a l'editor. Quan ho feu, també se us actualitzarà en aquest espai</p>
     </header>
 
     <!-- First Grid -->
@@ -113,24 +111,6 @@
                 </div>
             </div>
 
-            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
-                 style="text-align: left">
-                <div class="col-md-auto">
-                    <a href="{% url 'canviardocument' pk=llibre.pk %}">
-                        <button class="btn btn-primary btn-circle btn-xl">
-                            <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
-                        </button>
-                    </a>
-                </div>
-                <div class="col-md-auto">
-                    <a href="{% url 'canviardocument' pk=llibre.pk %}">
-                        <button class="btn">
-                            <h3><b>CANVIAR <br> DOCUMENT</b></h3>
-                        </button>
-                    </a>
-                </div>
-            </div>
-
         </div>
 
 
@@ -145,6 +125,13 @@
             <!-- COMENTARIS -->
 
             <div class="row document_feature">
+                <div class="col-md-auto">
+                    <a class="btn" href="{% url 'canviardocument' pk=llibre.pk %}">
+                        <h3 class="h3-document"><b>Canviar document</b>
+                            <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
+                        </h3>
+                    </a>
+                </div>
 
 
                 <!-- BOTÓ TORNAR -->
