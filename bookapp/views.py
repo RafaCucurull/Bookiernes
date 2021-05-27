@@ -460,6 +460,10 @@ def download_image(request, pk, pkimatge):
 
     return response
 
+def eliminarnotificacio(request, pk, pknotificacio):
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 
 def solicitudpublicacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
