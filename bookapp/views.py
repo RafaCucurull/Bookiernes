@@ -6,6 +6,7 @@ from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tem
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
+from django.urls import reverse
 
 
 def homePage(request):
@@ -51,7 +52,6 @@ def afegirLlibre(request):
     if request.method == 'POST':
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
-            print("Hola")
             obj = form.save()
             seleccionar_editor(obj)
             obj.escriptor = request.user
@@ -104,7 +104,24 @@ def areait(request, pk):
 
 
 def enviarnovaversio(request, pk):
-    return render(request, 'enviar_nova_versio.html')
+    llibre = Llibre.objects.get(pk=pk)
+
+    context = {
+        "llibrehtml": llibre
+    }
+    if request.method == "POST" and request.FILES['pdf']:
+        pdf = request.FILES['pdf']
+        print(pdf)
+        fs = FileSystemStorage()
+        filename = fs.save(pdf.name, pdf)
+
+        llibre.pdf = fs.url(filename)
+        print(llibre.pdf)
+        llibre.save()
+        return redirect(reverse('areaescriptor' , kwargs={'pk':pk}))
+
+
+    return render(request, 'enviar_nova_versio.html', context)
 
 
 def commentseditor(request, pk):

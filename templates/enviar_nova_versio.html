@@ -23,66 +23,36 @@
     </header>
 
     <div class="w3-container w3-center">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">
-                <div class="column" style="margin-left: 50px">
-                    <div>
-                        <h1 class="title"><b>Afegiu el llibre modificat</b></h1>
-                        <p id="subtitle1">Adjunteu el llibre modificat en format PDF </p>
-                    </div>
-                    <div class="custom-input-file">
-                        <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
-                        <small>Arrossegueu aquí els vostres fitxers</small>
-                        <input type="file" class="form-control" name="pdf"
-                               placeholder="pdf"
-                               required class="input-file">
-                    </div>
+                <div class="custom-input-file">
+                    <img id="image" src="{% static 'upload.png' %}" class="logo" alt="logo"><br>
+                    <medium>Arrossega aquí els teus fitxers</medium>
+                    <input type="file" class="form-control" name="pdf"
+                           placeholder="pdf"
+                           required class="input-file">
                 </div>
-                <div class="column" style="margin-left: -100px">
-                    <div>
-                        <h1 class="title"><b>Anotacions</b></h1>
-                        <p id="subtitle1">Si ho desitgeu, podeu incloure alguna anotació per a l'editor/a</p>
-                        <div id="form">
-                            <textarea name="num_pagines" cols="45" rows="6" required="" id="id_num_pagines"
-                                      spellcheck="false" data-gramm="false"></textarea>
-                        </div>
-                    </div>
-                    <!-- Afegir nou llibre -->
 
-                    <div class="w3-row-padding w3-container">
-                        <div class="row message_feature">
-                            <div class="col-md-auto">
-                                <a href="{% url 'areaescriptor' pk=llibre.pk %}">
-                                    <button type="button" class="w3-round-xlarge btn btn-primary other-message">
-                                        <h3 class="h3-message"><b>Enviar nova versió</b>
-                                            <img src="{% static '../static/modificacions/send.png' %}"
-                                                 style="width: 30px;height: 30px;margin-right: 20px;" alt="..">
-                                        </h3>
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="downblock2">
-                        <medium id="downtext1">En enviar el document, accepteu els termes i condicions de<br>
-                            l'editorial
-                        </medium>
-                    </div>
-                    <div class="w3-container w3-margin">
-                        <div class="w3-container w3-white">
-                            <div class="row message_feature">
-                                <div class="col-md-auto">
-                                    <a href="#">
-                                        <button type="button" class="w3-round-xlarge btn btn-primary other-message">
-                                            <h3 class="h3-message"><b>Tornar endarrere</b>
-                                                <img src="{% static '../static/areaescriptor/backarrow.png' %}"
-                                                     style="width: 30px;height: 30px;margin-right: 20px; " alt="..">
-                                            </h3>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="w3-row-padding w3-container">
+                    <div class="row message_feature">
+                        <a>
+                            <button type="submit" class="w3-round-xlarge btn btn-primary">
+                                <h3 class="h3-message"><b> Actualitzar </b>
+                                    <img src="{% static '../static/modificacions/updateicon.png' %}"
+                                         style="width: 30px;height: 30px;margin-right: 20px;"
+                                         alt="Actualitzar document">
+                                </h3>
+                            </button>
+                        </a>
+                        <a href="{% url 'areaescriptor' pk=llibrehtml.pk %}">
+                            <button type="button" class="w3-round-xlarge btn btn-primary">
+                                <h3 class="h3-message"><b>Tornar endarrere</b>
+                                    <img src="{% static '../static/areaescriptor/backarrow.png' %}"
+                                         style="width: 30px;height: 30px;margin-right: 20px;"
+                                         alt="Endarrere">
+                                </h3>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
