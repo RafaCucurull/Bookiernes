@@ -29,7 +29,7 @@ class CustomLectorCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('nme', 'email', 'password1', 'password2')
+        fields = ('name', 'email', 'password1', 'password2')
 
 
 class CustomUserChangeForm(UserChangeForm):
