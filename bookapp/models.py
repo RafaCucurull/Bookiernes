@@ -12,7 +12,6 @@ class Llibre(models.Model):
                                     null=True)
     maquetador = models.ForeignKey('users.CustomUser', related_name="maquetador", on_delete=models.CASCADE, blank=True,
                                    null=True)
-    portada = models.CharField(max_length=100)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()

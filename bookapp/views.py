@@ -51,11 +51,12 @@ def afegirLlibre(request):
     if request.method == 'POST':
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Hola")
             obj = form.save()
             seleccionar_editor(obj)
             obj.escriptor = request.user
             obj.save()
-            return redirect('afegirllibre')
+            return redirect('/escriptori')
     else:
         form = AfegirLlibreForm()
 
