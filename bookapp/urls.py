@@ -22,6 +22,8 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions/descargar/<int:pkimatge>', views.download_image, name='descargarimatge'),
     path('area_edicio/<int:pk>/dirmaquetacions/solicitudmaquetacio', views.solicitudmaquetacio, name='solicitudmaquetacio'),
     path('area_edicio/<int:pk>/solicitudpublicacio', views.solicitudpublicacio, name='solicitudpublicacio'),
+    path('area_edicio/<int:pk>/dirtraduccions', views.dirtraduccions, name='dirtraduccions'),
+    path('area_edicio/<int:pk>/dirtraduccions/solicitudtraduccio', views.solicitudTraduccio, name='solicitudtraduccio'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
     path('area_it/<int:pk>/publicarllibre', views.publicarllibre, name='publicarllibre'),
     path('area_dismaq/<int:pk>', views.areaDisssenyiMaquetacio, name='areadismaq'),
@@ -29,5 +31,5 @@ urlpatterns = [
     path('area_dismaq/<int:pk>/solicitudsimg', views.veuresolicitudsImatge, name='solicitudsimg'),
     path('area_dismaq/<int:pk>/solicitudsmaq', views.veuresolicitudsMaquetacio, name='solicitudsmaq'),
     path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq', views.enviarMaquetacio, name='enviarmaq'),
-    
+
 ]

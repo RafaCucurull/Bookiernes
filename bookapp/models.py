@@ -4,8 +4,10 @@ from django.urls import reverse
 
 class Llibre(models.Model):
     nom_llibre = models.CharField(max_length=70)
-    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True, null=True)
-    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True, null=True)
+    escriptor = models.ForeignKey('users.CustomUser', related_name="escriptor", on_delete=models.CASCADE, blank=True,
+                                  null=True)
+    editor = models.ForeignKey('users.CustomUser', related_name="editor", on_delete=models.CASCADE, blank=True,
+                               null=True)
     it = models.ForeignKey('users.CustomUser', related_name="it", on_delete=models.CASCADE, blank=True, null=True)
     dissenyador = models.ForeignKey('users.CustomUser', related_name="dissenyador", on_delete=models.CASCADE,
                                     blank=True,
@@ -18,11 +20,11 @@ class Llibre(models.Model):
     pdf = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
-    comentari_it = models.TextField(max_length=3000, blank=True )
+    comentari_it = models.TextField(max_length=3000, blank=True)
     publicat = models.BooleanField(default=False)
     imatges = models.ManyToManyField('Imatge', related_name='imatgesassociades', blank=True)
-    maquetacio = models.ForeignKey('Maquetacio', related_name='maquetacio', null=True, blank = True,  on_delete=models.CASCADE)
-
+    maquetacio = models.ForeignKey('Maquetacio', related_name='maquetacio', null=True, blank=True,
+                                   on_delete=models.CASCADE)
     def __str__(self):
         return self.nom_llibre
 
@@ -72,7 +74,8 @@ class solicitudImatges(models.Model):
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
     editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorbateria', null=True,
                                blank=True)
-    dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyadorimatge', null=True,
+    dissenyador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='dissenyadorimatge',
+                                    null=True,
                                     blank=True)
 
 
@@ -86,8 +89,10 @@ class solicitudMaquetacio(models.Model):
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
     editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editormaquetacio', null=True,
                                blank=True)
-    maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetadorsolicitud', null=True,
+    maquetador = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='maquetadorsolicitud',
+                                   null=True,
                                    blank=True)
+
 
 class Maquetacio(models.Model):
     pdf_maquetat = models.FileField(null=True, blank=True)
@@ -95,16 +100,32 @@ class Maquetacio(models.Model):
     portada = models.ImageField(null=True, blank=True)
     contraportada = models.ImageField(null=True, blank=True)
 
+
 class solicitudPublicacio(models.Model):
     anotacions = models.CharField(max_length=70)
     llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
     editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editorpublicacio', null=True,
                                blank=True)
     IT = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='itsolicitud', null=True,
-                                   blank=True)
+                           blank=True)
+
 
 class Publicacio(models.Model):
     pdf_a_publicar = models.FileField(null=True, blank=True)
     anotacions = models.CharField(max_length=70, null=True, blank=True)
     portada = models.ImageField(null=True, blank=True)
     contraportada = models.ImageField(null=True, blank=True)
+
+
+class solicitudTraduccio(models.Model):
+    idioma = models.CharField(max_length=2, null=True, blank=True)
+    llibre = models.ForeignKey('Llibre', on_delete=models.CASCADE, null=True, blank=True)
+    editor = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='editortraduccio',
+                               null=True,
+                               blank=True)
+
+
+class Traduccio(models.Model):
+    mkd_traduit = models.FileField(null=True, blank=True)
+    idioma = models.CharField(max_length=30, null=True, blank=True)
+    data = models.DateField(auto_now=True, blank=True, null=True)

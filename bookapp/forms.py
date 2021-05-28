@@ -1,6 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, TextInput
 
-from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio, Imatge, solicitudPublicacio
+from bookapp.models import Llibre, solicitudImatges, solicitudMaquetacio, Maquetacio, Imatge, solicitudPublicacio, \
+    solicitudTraduccio
 
 
 class AfegirLlibreForm(ModelForm):
@@ -32,10 +34,12 @@ class SolicitarImatgesForm(ModelForm):
             }),
         }
 
+
 class pujarImatge(ModelForm):
     class Meta:
         model = Imatge
         fields = ('image',)
+
 
 class SolicitarMaquetacioForm(ModelForm):
     class Meta:
@@ -49,7 +53,37 @@ class PujarMaquetacio(ModelForm):
         fields = ('pdf_maquetat', 'anotacions')
         widgets = {'anotacions': Textarea(attrs={'cols': 50, 'rows': 6})}
 
+
 class SolicitarPublicacioForm(ModelForm):
     class Meta:
         model = solicitudPublicacio
         fields = ('anotacions',)
+
+
+class SolicitarTraduccioForm(ModelForm):
+    class Meta:
+        model = solicitudTraduccio
+        fields = ('idioma',)
+        widgets = {
+            'idioma': TextInput(attrs={
+                'class': "form-control",
+                'style': 'width: 80%;background-color: linen;font-size: 30px; margin: auto;>',
+                'placeholder': 'Codi del idioma...'
+            }),
+        }
+
+    # this function will be used for the validation
+    def clean(self):
+        super(SolicitarTraduccioForm, self).clean()
+
+        idioma = self.cleaned_data.get('idioma')
+
+        # Si el codi no és de 2 caràcters
+        if len(idioma) <= 1:
+            raise ValidationError("El codi ha de ser de 2 caràcters")
+        if any(chr.isdigit() for chr in idioma):
+            raise ValidationError("El codi ha de ser de 2 caràcters alfabètics")
+        if idioma != "en" and idioma != "es" and idioma != "pt" and idioma != "zh":
+            raise ValidationError("El codi no correspon a ningun de la taula")
+
+        return self.cleaned_data

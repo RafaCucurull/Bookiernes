@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, SolicitarPublicacioForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
+    SolicitarPublicacioForm, SolicitarTraduccioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -261,6 +262,7 @@ def notificarEditorPublicat(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+
 def notificarITPublicat(llibre):
     it = llibre.it
     notificacio = Notificacio()
@@ -270,6 +272,7 @@ def notificarITPublicat(llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -493,3 +496,29 @@ def seleccionar_it(solicitud, llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
+
+def solicitudTraduccio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarTraduccioForm(request.POST)
+        if form.is_valid():
+            print("PERDO")
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            obj.save()
+            # traduirLlibre(llibre)
+            # notificarEditorTraduccio(llibre)
+            return redirect(request.path_info)
+    else:
+        form = SolicitarTraduccioForm()
+    return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
+
+
+def dirtraduccions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre,
+    }
+    return render(request, 'directori_traduccions.html', context)
