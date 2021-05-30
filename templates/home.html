@@ -11,15 +11,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 
     <body>
+
+    <marquee behavior="scroll" direction="left">Here is some scrolling text... right to left!</marquee>
+
+
     <!-- Header -->
     <header class="my_header">
+        <h1 class="ml3" , style="color: white; font-weight: bolder; font-size: 70px; padding: 1%">Bookiernes, on les lectures surten de la pantalla</h1>
 
-        <h1 class="w3-margin">
-            <span class="business">Bookiernes,</span>
-            on les lectures surten de la pantalla!
-        </h1>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
     </header>
     <!-- First Grid -->
+
     <div class="w3-row-padding w3-padding-32 w3-container">
         <div class="w3-content">
             <div class="w3-twothird">
@@ -53,9 +57,9 @@
                 <div class="col">
 
                     <a href="{% url 'login' %}">
-                    <button type="button" class="w3-round-xlarge btn btn-primary features"><b>ENTORN TREBALL</b>
-                        <img class="w3-center entorn-treball-img" src="../static/areaedicio/pencil-icon.png">
-                    </button>
+                        <button type="button" class="w3-round-xlarge btn btn-primary features"><b>ENTORN TREBALL</b>
+                            <img class="w3-center entorn-treball-img" src="../static/areaedicio/pencil-icon.png">
+                        </button>
                     </a>
                 </div>
             </div>
@@ -63,4 +67,25 @@
     </div>
     </body>
     </html>
+
+    <script>
+        // Wrap every letter in a span
+        var textWrapper = document.querySelector('.ml3');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml3 .letter',
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 2000,
+                delay: (el, i) => 150 * (i + 1)
+            }).add({
+            targets: '.ml3',
+            opacity: 0,
+            duration: 100000,
+            easing: "easeOutExpo",
+            delay: 100000
+        });
+    </script>
 {% endblock %}
