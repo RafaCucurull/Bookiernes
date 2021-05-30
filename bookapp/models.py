@@ -16,6 +16,8 @@ class Llibre(models.Model):
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()
+    # retall = models.FileField()
+    # retallfalcat = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)
     num_pagines = models.IntegerField()
     comentari_it = models.TextField(max_length=3000, blank=True )
