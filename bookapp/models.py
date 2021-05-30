@@ -14,10 +14,12 @@ class Llibre(models.Model):
                                     null=True)
     maquetador = models.ForeignKey('users.CustomUser', related_name="maquetador", on_delete=models.CASCADE, blank=True,
                                    null=True)
-    portada = models.CharField(max_length=100)
+    portada = models.CharField('Imatge', blank=True, null=True)
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()
+    txt = models.FileField()
+    traduccio = models.FileField() #S'HAURÀ DE FER COL·LECIÓ
     # retall = models.FileField()
     # retallfalcat = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True)

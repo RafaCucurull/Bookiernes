@@ -8,6 +8,11 @@ from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
 from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
+import PyPDF2
+from translate import Translator
+from fpdf import FPDF
+import os
+from django.http import FileResponse, Http404
 
 
 def homePage(request):
@@ -263,6 +268,7 @@ def notificarEditorPublicat(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+
 def notificarITPublicat(llibre):
     it = llibre.it
     notificacio = Notificacio()
@@ -272,6 +278,7 @@ def notificarITPublicat(llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -507,12 +514,44 @@ def solicitudTraduccio(request, pk):
             obj.llibre = llibre
             obj.editor = request.user
             obj.save()
-            # traduirLlibre(llibre)
+            traduirLlibre(llibre)
             # notificarEditorTraduccio(llibre)
             return redirect(request.path_info)
     else:
         form = SolicitarTraduccioForm()
     return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
+
+
+def traduirLlibre(llibre):
+
+    pdf = llibre.pdf.path
+    txt = llibre.txt.path
+    traduccio = llibre.traduccio.path
+
+    with open(pdf, 'rb') as pdf_file, open(txt, 'w') as txt_file:
+        read_pdf = PyPDF2.PdfFileReader(pdf_file)
+        number_of_pages = read_pdf.getNumPages()
+        for page_number in range(number_of_pages):
+            page = read_pdf.getPage(page_number)
+            page_content = page.extractText()
+            txt_file.write(page_content)
+
+    translator = Translator(to_lang="es")
+
+    with open(txt, 'r') as textOriginal:
+        data = textOriginal.read()
+    to_translate = data[:500]
+    translation = translator.translate(to_translate)
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('arial', size=12)
+    pdf.multi_cell(190, 10, txt=translation)
+    pdf.output(traduccio)
+
+
+    # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
+    #    translation.write(llibreTraduccioStream)
 
 
 def dirtraduccions(request, pk):
