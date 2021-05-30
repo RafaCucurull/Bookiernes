@@ -493,3 +493,34 @@ def seleccionar_it(solicitud, llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
+def retallarobra(llibre):
+    obra = PdfFileReader(llibre.pdf)
+    retall = PdfFileWriter()
+    for i in range(15):
+        retall.addPage(obra.getPage(i))
+        with open(llibre.retall, "wb") as retall_stream:
+            retall.write(retall_stream)
+    # FALCA
+    falca = PdfFileReader("/static/altres/falca.pdf")
+    retallfalcat = PdfFileMerger()
+    retallfalcat.append(retall)
+    retallfalcat.append(falca)
+    with open(llibre.falcat, "wb") as retallfalcat_stream:
+        retallfalcat.write(retallfalcat_stream)
+    llibre.save()
+
+
+def retallarobra(llibre):
+    obra = PdfFileReader(llibre.pdf)
+    falca = PdfFileReader("/static/altres/falca.pdf")
+
+    retallfalcat = PdfFileWriter()
+
+    retallfalcat.addPage(obra.getPage(range(15)))
+    retallfalcat.addPage(falca)
+
+    with open(llibre.retallfalcat, "wb") as retallfalcatStream:
+        retallfalcat.write(retallfalcatStream)
+
+    llibre.save()
