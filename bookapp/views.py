@@ -410,7 +410,7 @@ def enviarbat(request, pk):
             llibre.imatges.add(obj)
             llibre.save()
             notificarEditorImatges(llibre)
-            return redirect(request.path_info)
+            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
         form = pujarImatge()
     return render(request, 'enviar_imatges.html', {'form': form, 'llibre': llibre})
@@ -458,7 +458,7 @@ def enviarMaquetacio(request, pk):
             llibre.maquetacio = obj
             llibre.save()
             notificarEditorMaquetacio(llibre)
-            return redirect(request.path_info)
+            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form, 'llibre': llibre})
