@@ -313,6 +313,7 @@ def solicitudImatges(request, pk):
     else:
         form = SolicitarImatgesForm()
     context = {
+        'llibre': llibre,
         'form': form
     }
     return render(request, "solicitud_imatges.html", context)
