@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    {% include 'header_login.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    </head>
+    <body class="body-color">
+    <div class="container">
+        <div class="formulari border white-bg">
+            <h3><b>Registreu-vos</b></h3>
+            <form method="post">
+                {% csrf_token %}
+                <label for="email">Email</label>
+                {{form.email}}<br>
+                <small style="color: grey">{{ form.email.help_text }}</small><br><br>
+
+                <label for="password">Contrasenya</label>
+                {{ form.password1 }}<br>
+                {% for constraint in form.password1.help_text %}
+                    <ul>
+                        <li>
+                            <small style="color: grey">{{ constraint }}</small>
+                        </li>
+                    </ul>
+                {% endfor %}
+                <br>
+                <label for="confirm_password">Confirmar contrasenya</label>
+                {{ form.password2 }}<br>
+                <small style="color: grey">{{ form.password2.help_text }}</small><br><br>
+
+                <button class="w3-round-xlarge button1" type="submit">Registrar-se</button>
+            </form>
+        </div>
+    </div>
+    <div class="foot border white-bg">
+        <h3 class="h3-inline"><b>Si teniu algun dubte, contacteu a través del formulari i us guiarem</b>
+            <button class="w3-round-xlarge button1 button-margin h3-inline">Formulari contacte</button>
+        </h3>
+    </div>
+    </body>
+{% endblock %}
+

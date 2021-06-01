@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'header_login.html' %}
+<!-- templates/registration/login.html -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body class="body-color">
+<div class="row">
+    <div class="column left">
+        <h3><b>Aquí és on la màgia de la lectura comença!</b></h3>
+        <p class="text-left">Si et subscrius, en el nostre catàleg trobaràs una gran varietat de llibres per llegir!
+        </p>
+    </div>
+    <div class="column border">
+        <div class="formulari border white-bg">
+            <h3>Inicieu sessió</h3>
+            <form method="post">
+                {% csrf_token %}
+
+                <input type="input" class="form-control form-fields" name="username"
+
+                       id="inputEmail" placeholder="Email"
+                       required>
+                <br>
+                <br>
+                <input type="password" class="form-control form-fields" name="password"
+                       id="inputPass" placeholder="Contrasenya"
+                       required>
+                <br>
+                <br>
+                <button class="w3-round-xlarge button1" type="submit">Entrar</button>
+            </form>
+            <div class="separator"><p class="form-text">O si ho preferiu</p></div>
+            <button class="w3-round-xlarge button1">Inicieu amb Google</button>
+            <div class="separator"><p class="form-text">O bé</p></div>
+            <div id="google"></div>
+            <a href="{% url 'register' %}">
+                <button class="w3-round-xlarge button1">Creeu un compte nou amb un email</button>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="foot border white-bg">
+    <h3 class="h3-inline"><b>Si teniu algun dubte, contacteu a través del formulari i us guiarem</b>
+        <button class="w3-round-xlarge button1 button-margin h3-inline">Formulari contacte</button>
+    </h3>
+</div>
+</body>
+{% endblock %}
