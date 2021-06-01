@@ -489,10 +489,14 @@ def solicitudpublicacio(request, pk):
     if request.method == 'POST':
         form = SolicitarPublicacioForm(request.POST)
         if form.is_valid():
+            anotacions = request.POST.get('anotacions')
+            print(anotacions)
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            llibre.comentari_it = anotacions
             seleccionar_it(obj, llibre)
+            llibre.save()
             obj.save()
             return redirect(request.path_info)
     else:
