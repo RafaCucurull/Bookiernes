@@ -309,7 +309,7 @@ def solicitudImatges(request, pk):
             obj.editor = request.user
             seleccionar_dissenyador(obj, llibre)
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarImatgesForm()
     context = {
@@ -491,7 +491,6 @@ def solicitudpublicacio(request, pk):
         form = SolicitarPublicacioForm(request.POST)
         if form.is_valid():
             anotacions = request.POST.get('anotacions')
-            print(anotacions)
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
