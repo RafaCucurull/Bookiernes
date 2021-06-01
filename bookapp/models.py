@@ -18,8 +18,8 @@ class Llibre(models.Model):
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()
-    txt = models.FileField()
-    traduccio = models.FileField() #S'HAURÀ DE FER COL·LECIÓ
+    txt = models.FileField(blank=True, null=True)
+    traduccio = models.FileField(blank=True, null=True) #S'HAURÀ DE FER COL·LECIÓ
     # retall = models.FileField()
     # retallfalcat = models.FileField()
     coleccio = models.CharField(max_length=100, blank=True, null=True)

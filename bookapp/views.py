@@ -509,12 +509,12 @@ def solicitudTraduccio(request, pk):
     if request.method == 'POST':
         form = SolicitarTraduccioForm(request.POST)
         if form.is_valid():
-            print("PERDO")
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            idioma = obj.idioma
             obj.save()
-            traduirLlibre(llibre)
+            traduirLlibre(llibre, idioma)
             # notificarEditorTraduccio(llibre)
             return redirect(request.path_info)
     else:
@@ -522,7 +522,7 @@ def solicitudTraduccio(request, pk):
     return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
 
 
-def traduirLlibre(llibre):
+def traduirLlibre(llibre, idioma):
 
     pdf = llibre.pdf.path
     txt = llibre.txt.path
@@ -536,7 +536,7 @@ def traduirLlibre(llibre):
             page_content = page.extractText()
             txt_file.write(page_content)
 
-    translator = Translator(to_lang="es")
+    translator = Translator(to_lang=idioma)
 
     with open(txt, 'r') as textOriginal:
         data = textOriginal.read()
