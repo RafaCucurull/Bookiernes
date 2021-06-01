@@ -354,6 +354,7 @@ def solicitudmaquetacio(request, pk):
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            obj.anotacions
             seleccionar_maquetador(obj, llibre)
             obj.save()
             return redirect(request.path_info)
@@ -488,10 +489,14 @@ def solicitudpublicacio(request, pk):
     if request.method == 'POST':
         form = SolicitarPublicacioForm(request.POST)
         if form.is_valid():
+            anotacions = request.POST.get('anotacions')
+            print(anotacions)
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            llibre.comentari_it = anotacions
             seleccionar_it(obj, llibre)
+            llibre.save()
             obj.save()
             return redirect(request.path_info)
     else:
@@ -506,7 +511,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    it.lliure = False
+    #it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"
