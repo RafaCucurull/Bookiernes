@@ -179,7 +179,7 @@ def canviardocument(request, pk):
     llibre = Llibre.objects.get(pk=pk)
 
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     if request.method == "POST" and request.FILES['pdf']:
         pdf = request.FILES['pdf']
@@ -190,6 +190,7 @@ def canviardocument(request, pk):
         llibre.pdf = fs.url(filename)
         print(llibre.pdf)
         llibre.save()
+        return redirect(reverse('areaedicio', kwargs={'pk': pk}))
 
     return render(request, 'canviar_document.html', context)
 
@@ -339,11 +340,10 @@ def seleccionar_dissenyador(solicitud, llibre):
 
 def galeriaMaquetacions(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    maquetacions = llibre.maquetacio.maquetacio.all()
-    print(maquetacions)
+    maquetacio = llibre.maquetacio
     context = {
         "llibre": llibre,
-        "maquetacions": maquetacions
+        "maquetacio": maquetacio
     }
     return render(request, "galeria_maquetacions.html", context)
 
@@ -358,7 +358,7 @@ def solicitudmaquetacio(request, pk):
             obj.editor = request.user
             seleccionar_maquetador(obj, llibre)
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarMaquetacioForm()
     return render(request, "enviar_llibre_maquetar.html", {'form': form})
@@ -498,7 +498,7 @@ def solicitudpublicacio(request, pk):
             seleccionar_it(obj, llibre)
             llibre.save()
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarMaquetacioForm()
     return render(request, "enviar_llibre_publicar.html", {'form': form})
