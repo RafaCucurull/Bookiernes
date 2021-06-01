@@ -35,19 +35,20 @@
                     <img class="w3-center icons" src={% static "maquetacio/send.png" %}>
                 </h3>
             </button>
+            <div style="text-align:center">
+                <a href="javascript: history.back()">
+                    <button type="button" class="w3-round-xlarge btn btn-primary message" style="width: 20%">
+                        <h3 class="h3-message"><b>Tornar endarrere</b>
+                            <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                        </h3>
+                    </button>
+                    <br/> <br/> <br/>
+                </a>
+            </div>
         </div>
     </form>
-    <div class="w3-container w3-center">
-        <div class="back-button right">
-            <a href="javascript: history.back()">
-                <button class="w3-round-xlarge btn btn-primary2">
-                    <h3 class="h3-message"><b>Tornar endarrere</b>
-                        <img class="w3-center icons" src={% static "maquetacio/backarrow.png" %}>
-                    </h3>
-                </button>
-            </a>
-        </div>
-    </div>
+    
+
     </body>
 {% endblock %}
 
