@@ -107,3 +107,8 @@ class Publicacio(models.Model):
     anotacions = models.CharField(max_length=70, null=True, blank=True)
     portada = models.ImageField(null=True, blank=True)
     contraportada = models.ImageField(null=True, blank=True)
+
+class Missatge(models.Model):
+    autor = models.ForeignKey('users.CustomUser', related_name="autormissatge", on_delete=models.CASCADE, blank=True, null=True)
+    cos_missatge = models.CharField(max_length=70, null=True, blank=True)
+    destinatari = models.ForeignKey('users.CustomUser', related_name="destmissatge", on_delete=models.CASCADE, blank=True, null=True)

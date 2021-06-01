@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'user_header.html' %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/enviar_maquetar.css' %}">
+    </head>
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="h1-header w3-margin">
+            Envieu un missatge
+        </h1>
+
+        <p class="w3-center p_header w3-padding-24"> A través d'aquest formulari podeu enviar un missatge a qualssevol dels membres de l'editorial.
+        </p>
+    </header>
+    <div class="w3-container w3-center">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="w3-container w3-center">
+                <div class="row">
+                    <div class="col-4">
+                        <h3>Cost del missatge:</h3>
+                        {{ form.cos_missatge }}
+                    </div>
+                    <div class="col-8">
+                        <h3>Destinatari:</h3>
+                        {{ form.destinatari }}
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row-padding w3-container">
+                <button type="submit" class="w3-round-xlarge btn btn-primary message">
+                    <h3 class="h3-message"><b>Enviar missatge</b>
+                        <img src="{% static '../static/modificacions/send.png' %}"
+                             style="width: 30px;height: 30px;margin-right: 20px;"
+                             alt="Enviar missatge">
+                    </h3>
+                </button>
+                <a href="javascript:history.back()">
+                    <button type="button" class="w3-round-xlarge btn btn-primary message">
+                        <h3 class="h3-message"><b>Tornar endarrere</b>
+                            <img src="{% static '../static/areaescriptor/backarrow.png' %}"
+                                 style="width: 30px;height: 30px;margin-right: 20px;"
+                                 alt="Endarrere">
+                        </h3>
+                    </button>
+                </a>
+            </div>
+        </form>
+    </div>
+    </body>
+{% endblock %}
