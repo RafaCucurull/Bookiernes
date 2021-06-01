@@ -511,7 +511,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    #it.lliure = False
+    it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"
