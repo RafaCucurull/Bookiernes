@@ -42,23 +42,16 @@
         {% endif %}
 
         <!-- BOTÓ -->
-        <div class="w3-container w3-margin w3-padding">
-            <div class="w3-container w3-white">
-                <div class="row message_feature">
-                    <div class="right col-md-auto">
-                        <a href="javascript:history.back()">
-                            <button type="button" class="w3-round-xlarge btn btn-primary message">
+        <a href="{% url 'areaescriptor' pk=llibre.pk %}">
+            <div style="text-align:center">
+                            <button type="button" class="w3-round-xlarge btn btn-primary">
                                 <h3 class="h3-message"><b>Tornar endarrere</b>
-                                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                                    <img src="{% static '../static/areaescriptor/backarrow.png' %}"
+                                         style="width: 30px;height: 30px;margin-right: 20px;"
+                                         alt="Endarrere">
                                 </h3>
                             </button>
-                            <br/> <br/> <br/>
-                        </a>
-                    </div>
-                </div>
             </div>
-        </div>
+        </a>
 
-    </div>
-    </body>
 {% endblock %}

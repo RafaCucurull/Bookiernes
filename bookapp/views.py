@@ -125,9 +125,10 @@ def enviarnovaversio(request, pk):
 
 
 def commentseditor(request, pk):
-    llibre = Llibre.objects.filter(pk=pk)
-    usuari = CustomUser.objects.filter(email=request.user)
-    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+
+    llibre = Llibre.objects.get(pk=pk)
+    usuari = CustomUser.objects.get(email=request.user)
+    comentaris = Comentari.objects.filter(usuari=usuari, llibre=llibre)
     context = {
         "llibre": llibre,
         "usuari": usuari,
@@ -202,8 +203,8 @@ def notificacions(request):
 
 
 def comments(request, pk):
-    llibre = Llibre.objects.filter(pk=pk)
-    comentaris = Comentari.objects.filter(llibre__in=llibre)
+    llibre = Llibre.objects.get(pk=pk)
+    comentaris = Comentari.objects.filter(llibre=llibre)
     context = {
         "llibre": llibre,
         "comentaris": comentaris
