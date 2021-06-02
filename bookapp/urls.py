@@ -25,10 +25,10 @@ urlpatterns = [
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
     path('area_it/<int:pk>/publicarllibre', views.publicarllibre, name='publicarllibre'),
     path('area_dismaq/<int:pk>', views.areaDisssenyiMaquetacio, name='areadismaq'),
-    path('area_dismaq/<int:pk>/solicitudsimg/enviarbat', views.enviarbat, name='enviarbat'),
+    path('area_dismaq/<int:pk>/solicitudsimg/enviarbat/<int:pksol>', views.enviarbat, name='enviarbat'),
     path('area_dismaq/<int:pk>/solicitudsimg', views.veuresolicitudsImatge, name='solicitudsimg'),
     path('area_dismaq/<int:pk>/solicitudsmaq', views.veuresolicitudsMaquetacio, name='solicitudsmaq'),
-    path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq', views.enviarMaquetacio, name='enviarmaq'),
+    path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq/<int:pksol>', views.enviarMaquetacio, name='enviarmaq'),
     path('notificacions/eliminarnotificacio/<int:pknotificacio>', views.eliminarnotificacio,
          name='eliminarnotificacio'),
 
