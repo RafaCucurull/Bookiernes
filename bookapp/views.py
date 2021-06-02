@@ -68,7 +68,7 @@ def seleccionar_editor(llibre):
     editoraux = editors_lliures[0]
     llibre.editor = editoraux
     editor = CustomUser.objects.get(email=editoraux)
-    editor.lliure = False
+    #editor.lliure = False
     editor.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
@@ -327,7 +327,7 @@ def seleccionar_dissenyador(solicitud, llibre):
     llibre.save()
     solicitud.dissenyador = dissenyadoraux
     dissenyador = CustomUser.objects.get(email=dissenyadoraux)
-    dissenyador.lliure = False
+    #dissenyador.lliure = False
     dissenyador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
@@ -371,7 +371,7 @@ def seleccionar_maquetador(solicitud, llibre):
     llibre.save()
     solicitud.maquetador = maquetadoraux
     maquetador = CustomUser.objects.get(email=maquetadoraux)
-    maquetador.lliure = False
+    #maquetador.lliure = False
     maquetador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
@@ -400,8 +400,9 @@ def veuresolicitudsImatge(request, pk):
     return render(request, 'solicituds_imatges_disseny.html', context)
 
 
-def enviarbat(request, pk):
+def enviarbat(request, pk, pksol):
     llibre = Llibre.objects.get(pk=pk)
+    solicitud = models.solicitudImatges.objects.filter(pk=pksol)
     if request.method == 'POST':
         form = pujarImatge(request.POST, request.FILES)
         if form.is_valid():
@@ -409,6 +410,7 @@ def enviarbat(request, pk):
             obj.save()
             llibre.imatges.add(obj)
             llibre.save()
+            solicitud.delete()
             notificarEditorImatges(llibre)
             return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
@@ -448,8 +450,9 @@ def veuresolicitudsMaquetacio(request, pk):
     return render(request, 'solicituds_maquetacio_disseny.html', context)
 
 
-def enviarMaquetacio(request, pk):
+def enviarMaquetacio(request, pk, pksol):
     llibre = Llibre.objects.get(pk=pk)
+    solicitud = models.solicitudMaquetacio.objects.filter(pk=pksol)
     if request.method == 'POST':
         form = PujarMaquetacio(request.POST, request.FILES)
         if form.is_valid():
@@ -457,6 +460,7 @@ def enviarMaquetacio(request, pk):
             obj.save()
             llibre.maquetacio = obj
             llibre.save()
+            solicitud.delete()
             notificarEditorMaquetacio(llibre)
             return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
@@ -511,7 +515,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    it.lliure = False
+    #it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"

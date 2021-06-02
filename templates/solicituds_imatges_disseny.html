@@ -26,7 +26,7 @@
     <div class="w3-row-padding">
         {% for object in llista_solicituds %}
             <div>
-                <a href="{% url 'enviarbat' pk=llibre.pk %}">
+                <a href="{% url 'enviarbat' pk=llibre.pk pksol=object.pk %}">
                     <div class="w3-third w3-container w3-margin-bottom">
                         <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
                             <br/>
