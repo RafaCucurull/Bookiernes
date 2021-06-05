@@ -21,9 +21,10 @@ def register(request):
 def registerLector(request):
     if request.method == 'POST':
         form = CustomLectorCreationForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             user = form.save()
+            user.is_Lector = True
+            user.save()
             login(request, user)
             return redirect('home')
     else:

@@ -1,9 +1,11 @@
+from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from bookapp import views
 
 urlpatterns = [
     path('', views.homePage, name="home"),
+    path('login_lector/', LoginView.as_view(template_name='registration/login_lector.html'), name='login_lector'),
     path('escriptori', views.Escriptori, name="escriptori"),
     path('cataleg', views.cataleg, name="cataleg"),
     path('afegirllibre', views.afegirLlibre, name="afegirllibre"),
