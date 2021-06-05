@@ -63,39 +63,28 @@
             </a>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+
 
     <!-- MISSATGE NOU -->
-
-    <div class="w3-margin row message_feature w3-padding-16">
-        <div class="col-md-auto w3-padding-64" style="text-align: left">
-            <a href="#">
+            <div style="text-align:center">
+                    <a href="#">
                 <button type="button" class="w3-round-xlarge btn btn-primary message">
                     <h3 class="h3-message"><b>Missatge nou</b>
                         <img class="w3-center icons" src="../static/areaedicio/message-icon.png">
                     </h3>
                 </button>
             </a>
-        </div>
-    </div>
+                <a href="{% url 'escriptori' %}">
 
-    <!-- BOTÓ TORNAR -->
-
-    <div class="w3-container w3-right" style="margin-right: 5%; margin-top: -2%">
-        <div class="right col-md-auto">
-            <a href="{% url 'escriptori' %}">
                 <button type="button" class="w3-round-xlarge btn btn-primary message">
                     <h3 class="h3-message"><b>Tornar endarrere</b>
                         <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
                     </h3>
                 </button>
-                <br/> <br/> <br/> <br/> <br/> <br/>
             </a>
-        </div>
-    </div>
-
-
-    </div>
-    <br>
-    <br>
+            </div>
     </body>
 {% endblock %}

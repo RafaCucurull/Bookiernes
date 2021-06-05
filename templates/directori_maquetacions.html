@@ -74,17 +74,17 @@
 
     <div class="w3-container">
 
-        <div class="right col-md-auto">
-            <a href="javascript:history.back()">
-                <button type="button" class="w3-round-xlarge btn btn-primary">
-                    <h3 class="h3-message"><b>Tornar endarrere</b>
-                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
-                    </h3>
-                </button>
-                <br/> <br/> <br/>
-            </a>
-        </div>
 
-    </div>
+        <a href="{% url 'areaedicio' pk=llibre.pk %}">
+            <div style="text-align:center">
+            <button type="button" class="w3-round-xlarge btn btn-primary" style="width: 20%">
+                <h3 class="h3-message"><b>Tornar endarrere</b>
+                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                </h3>
+            </button>
+            </div>
+            <br/> <br/> <br/>
+        </a>
+</div>
     </body>
 {% endblock %}

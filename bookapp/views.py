@@ -11,8 +11,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
 import PyPDF2
 from translate import Translator
 from fpdf import FPDF
-import os
-from django.http import FileResponse, Http404
+from django.urls import reverse
 
 
 def homePage(request):
@@ -62,7 +61,7 @@ def afegirLlibre(request):
             seleccionar_editor(obj)
             obj.escriptor = request.user
             obj.save()
-            return redirect('afegirllibre')
+            return redirect('/escriptori')
     else:
         form = AfegirLlibreForm()
 
@@ -110,13 +109,31 @@ def areait(request, pk):
 
 
 def enviarnovaversio(request, pk):
-    return render(request, 'enviar_nova_versio.html')
+    llibre = Llibre.objects.get(pk=pk)
+
+    context = {
+        "llibrehtml": llibre
+    }
+    if request.method == "POST" and request.FILES['pdf']:
+        pdf = request.FILES['pdf']
+        print(pdf)
+        fs = FileSystemStorage()
+        filename = fs.save(pdf.name, pdf)
+
+        llibre.pdf = fs.url(filename)
+        print(llibre.pdf)
+        llibre.save()
+        return redirect(reverse('areaescriptor' , kwargs={'pk':pk}))
+
+
+    return render(request, 'enviar_nova_versio.html', context)
 
 
 def commentseditor(request, pk):
-    llibre = Llibre.objects.filter(pk=pk)
-    usuari = CustomUser.objects.filter(email=request.user)
-    comentaris = Comentari.objects.filter(usuari__in=usuari, llibre__in=llibre)
+
+    llibre = Llibre.objects.get(pk=pk)
+    usuari = CustomUser.objects.get(email=request.user)
+    comentaris = Comentari.objects.filter(usuari=usuari, llibre=llibre)
     context = {
         "llibre": llibre,
         "usuari": usuari,
@@ -167,7 +184,7 @@ def canviardocument(request, pk):
     llibre = Llibre.objects.get(pk=pk)
 
     context = {
-        "llibrehtml": llibre
+        "llibre": llibre
     }
     if request.method == "POST" and request.FILES['pdf']:
         pdf = request.FILES['pdf']
@@ -178,6 +195,7 @@ def canviardocument(request, pk):
         llibre.pdf = fs.url(filename)
         print(llibre.pdf)
         llibre.save()
+        return redirect(reverse('areaedicio', kwargs={'pk': pk}))
 
     return render(request, 'canviar_document.html', context)
 
@@ -191,8 +209,8 @@ def notificacions(request):
 
 
 def comments(request, pk):
-    llibre = Llibre.objects.filter(pk=pk)
-    comentaris = Comentari.objects.filter(llibre__in=llibre)
+    llibre = Llibre.objects.get(pk=pk)
+    comentaris = Comentari.objects.filter(llibre=llibre)
     context = {
         "llibre": llibre,
         "comentaris": comentaris
@@ -299,10 +317,11 @@ def solicitudImatges(request, pk):
             obj.editor = request.user
             seleccionar_dissenyador(obj, llibre)
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarImatgesForm()
     context = {
+        'llibre': llibre,
         'form': form
     }
     return render(request, "solicitud_imatges.html", context)
@@ -328,11 +347,10 @@ def seleccionar_dissenyador(solicitud, llibre):
 
 def galeriaMaquetacions(request, pk):
     llibre = Llibre.objects.get(pk=pk)
-    maquetacions = llibre.maquetacio.maquetacio.all()
-    print(maquetacions)
+    maquetacio = llibre.maquetacio
     context = {
         "llibre": llibre,
-        "maquetacions": maquetacions
+        "maquetacio": maquetacio
     }
     return render(request, "galeria_maquetacions.html", context)
 
@@ -347,7 +365,7 @@ def solicitudmaquetacio(request, pk):
             obj.editor = request.user
             seleccionar_maquetador(obj, llibre)
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarMaquetacioForm()
     return render(request, "enviar_llibre_maquetar.html", {'form': form})
@@ -399,7 +417,7 @@ def enviarbat(request, pk):
             llibre.imatges.add(obj)
             llibre.save()
             notificarEditorImatges(llibre)
-            return redirect(request.path_info)
+            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
         form = pujarImatge()
     return render(request, 'enviar_imatges.html', {'form': form, 'llibre': llibre})
@@ -447,7 +465,7 @@ def enviarMaquetacio(request, pk):
             llibre.maquetacio = obj
             llibre.save()
             notificarEditorMaquetacio(llibre)
-            return redirect(request.path_info)
+            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form, 'llibre': llibre})
@@ -469,18 +487,24 @@ def download_image(request, pk, pkimatge):
 
     return response
 
+def eliminarnotificacio(request, pknotificacio):
+    Notificacio.objects.filter(pk=pknotificacio).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def solicitudpublicacio(request, pk):
     llibre = Llibre.objects.get(pk=pk)
     if request.method == 'POST':
         form = SolicitarPublicacioForm(request.POST)
         if form.is_valid():
+            anotacions = request.POST.get('anotacions')
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            llibre.comentari_it = anotacions
             seleccionar_it(obj, llibre)
+            llibre.save()
             obj.save()
-            return redirect(request.path_info)
+            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarMaquetacioForm()
     return render(request, "enviar_llibre_publicar.html", {'form': form})

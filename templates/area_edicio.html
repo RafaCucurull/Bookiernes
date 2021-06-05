@@ -133,15 +133,19 @@
                 </div>
             </div>
 
-            <!-- MISSATGE NOU -->
-
-            <div class="w3-margin w3-threequarter row message_feature w3-padding-16">
-                <div class="col-md-auto w3-padding-64" style="text-align: left">
-                    <a href="#">
-                        <button type="button" class="w3-round-xlarge btn btn-primary message">
-                            <h3 class="h3-message"><b>Missatge nou</b>
-                                <img class="w3-center icons" src="../static/areaedicio/message-icon.png">
-                            </h3>
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
+                <div class="col-md-auto">
+                    <a href="{% url 'canviardocument' pk=llibre.pk %}">
+                        <button class="btn btn-primary btn-circle btn-xl">
+                            <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{% url 'canviardocument' pk=llibre.pk %}">
+                        <button class="btn">
+                            <h3><b>CANVIAR <br> DOCUMENT</b></h3>
                         </button>
                     </a>
                 </div>
@@ -161,33 +165,19 @@
             <!-- COMENTARIS -->
 
             <div class="row document_feature">
-                <div class="col-md-auto">
-                    <a class="btn" href="{% url 'canviardocument' pk=llibre.pk %}">
-                        <h3 class="h3-document"><b>Canviar document</b>
-                            <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
-                        </h3>
-                    </a>
-                </div>
-
-
-                <!-- BOTÓ TORNAR -->
-
-                <div class="w3-container" style="margin-top: 2%">
-                    <div class="right col-md-auto">
+            </div>
+        </div>
+    </div>
                         <a href="{% url 'escriptori' %}">
+                            <div style="text-align:center">
                             <button type="button" class="btn btn-primary message w3-round-xlarge ">
                                 <h3 class="h3-message"><b>Tornar endarrere</b>
                                     <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
                                 </h3>
                             </button>
+                                </div>
                             <br/> <br/> <br/> <br/> <br/> <br/>
                         </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     </body>
     </html>
 {% endblock %}

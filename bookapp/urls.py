@@ -18,7 +18,7 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirbateriaimatges/galeriaimatges', views.galeriaImatges, name='galeriaimatges'),
     path('area_edicio/<int:pk>/dirmaquetacions', views.dirmaquetacions, name='dirmaquetacions'),
     path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions', views.galeriaMaquetacions, name='galeriamaquetacions'),
-    path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions/eliminarimatge/<int:pkimatge>', views.eliminarimatge, name='eliminarimatge'),
+    path('area_edicio/<int:pk>/dirbateriaimatges/galeriaimatges/eliminarimatge/<int:pkimatge>', views.eliminarimatge, name='eliminarimatge'),
     path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions/descargar/<int:pkimatge>', views.download_image, name='descargarimatge'),
     path('area_edicio/<int:pk>/dirmaquetacions/solicitudmaquetacio', views.solicitudmaquetacio, name='solicitudmaquetacio'),
     path('area_edicio/<int:pk>/solicitudpublicacio', views.solicitudpublicacio, name='solicitudpublicacio'),
@@ -31,5 +31,6 @@ urlpatterns = [
     path('area_dismaq/<int:pk>/solicitudsimg', views.veuresolicitudsImatge, name='solicitudsimg'),
     path('area_dismaq/<int:pk>/solicitudsmaq', views.veuresolicitudsMaquetacio, name='solicitudsmaq'),
     path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq', views.enviarMaquetacio, name='enviarmaq'),
-
+    path('notificacions/eliminarnotificacio/<int:pknotificacio>', views.eliminarnotificacio,
+         name='eliminarnotificacio'),
 ]
