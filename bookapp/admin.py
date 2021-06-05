@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from bookapp.models import Llibre, TematiquesLlibre, Tematica, Consulta, Comentari, Notificacio, Imatge, \
-    solicitudImatges, solicitudMaquetacio, Maquetacio
+    solicitudImatges, solicitudMaquetacio, Maquetacio, Missatge
 
 
 class LlibreAdmin(admin.ModelAdmin):
@@ -38,6 +38,9 @@ class solmaqAdmin(admin.ModelAdmin):
 class maqAdmin(admin.ModelAdmin):
     pass
 
+class missatgeAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Llibre, LlibreAdmin)
 admin.site.register(Tematica, TematicaAdmin)
 admin.site.register(TematiquesLlibre, TematiquesLlibreAdmin)
@@ -48,3 +51,4 @@ admin.site.register(Imatge, ImatgeAdmin)
 admin.site.register(solicitudImatges, solimgAdmin)
 admin.site.register(solicitudMaquetacio, solmaqAdmin)
 admin.site.register(Maquetacio, maqAdmin)
+admin.site.register(Missatge, missatgeAdmin)

@@ -8,6 +8,8 @@ urlpatterns = [
     path('cataleg', views.cataleg, name="cataleg"),
     path('afegirllibre', views.afegirLlibre, name="afegirllibre"),
     path('area_edicio/<int:pk>', views.areaedicio, name='areaedicio'),
+    path('area_edicio/enviarmissatge', views.enviarmissatge, name='enviarmissatge'),
+    path('veuremissatge', views.veuremissatge, name='veuremissatge'),
     path('area_escriptor/<int:pk>', views.areaescriptor, name='areaescriptor'),
     path('area_escriptor/<int:pk>/enviarnovaversio', views.enviarnovaversio, name='enviarnovaversio'),
     path('area_edicio/<int:pk>/canviardocument', views.canviardocument, name='canviardocument'),
@@ -31,6 +33,8 @@ urlpatterns = [
     path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq/<int:pksol>', views.enviarMaquetacio, name='enviarmaq'),
     path('notificacions/eliminarnotificacio/<int:pknotificacio>', views.eliminarnotificacio,
          name='eliminarnotificacio'),
+    path('veuremissatge/eliminarmissatge/<int:pkmissatge>', views.eliminarmissatge,
+         name='eliminarmissatge'),
 
 
     

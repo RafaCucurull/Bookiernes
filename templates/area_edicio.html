@@ -116,6 +116,24 @@
             <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
                  style="text-align: left">
                 <div class="col-md-auto">
+                    <a href="{% url 'enviarmissatge' %}">
+                        <button class="btn btn-primary btn-circle btn-xl">
+                            <img class="w3-center icons" src="../static/areaedicio/earth-icon.png">
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{% url 'enviarmissatge' %}">
+                        <button class="btn">
+                            <h3><b>MISSATGES</b></h3>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="boto w3-margin w3-threequarter w3-button w3-border w3-round-xlarge row middle_features" ,
+                 style="text-align: left">
+                <div class="col-md-auto">
                     <a href="{% url 'canviardocument' pk=llibre.pk %}">
                         <button class="btn btn-primary btn-circle btn-xl">
                             <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">

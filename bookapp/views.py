@@ -1,8 +1,9 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, SolicitarPublicacioForm
-from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
+    SolicitarPublicacioForm, EnviarMissatgeForm
+from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge, Missatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -85,6 +86,22 @@ def areaedicio(request, pk):
         "llibre": llibre
     }
     return render(request, 'area_edicio.html', context)
+
+def enviarmissatge(request):
+    if request.method == 'POST':
+        form = EnviarMissatgeForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.autor = request.user
+            obj.save()
+            return redirect(request.path_info)
+    else:
+        form = EnviarMissatgeForm()
+    context = {
+        'form': form
+    }
+    return render(request, "missatge.html", context)
+
 
 
 def areaescriptor(request, pk):
@@ -201,6 +218,13 @@ def notificacions(request):
         "object_list": notificacions
     }
     return render(request, "notificacions.html", context)
+
+def veuremissatge(request):
+    missatges = Missatge.objects.filter(destinatari=request.user)
+    context = {
+        "object_list": missatges
+    }
+    return render(request, "veuremissatge.html", context)
 
 
 def comments(request, pk):
@@ -486,6 +510,10 @@ def download_image(request, pk, pkimatge):
 
 def eliminarnotificacio(request, pknotificacio):
     Notificacio.objects.filter(pk=pknotificacio).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def eliminarmissatge(request, pkmissatge):
+    Missatge.objects.filter(pk=pkmissatge).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
