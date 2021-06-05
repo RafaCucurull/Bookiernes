@@ -8,7 +8,7 @@ from users.forms import CustomUserCreationForm, CustomLectorCreationForm
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        print (form.is_valid())
+        print(form.is_valid())
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -21,11 +21,11 @@ def register(request):
 def registerLector(request):
     if request.method == 'POST':
         form = CustomLectorCreationForm(request.POST)
-        print (form.is_valid())
+        print(form.is_valid())
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
         form = CustomLectorCreationForm()
-    return render(request, 'registration/registerLector.html', {'form': form})
+    return render(request, 'registration/register_lector.html', {'form': form})

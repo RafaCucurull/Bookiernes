@@ -15,8 +15,12 @@
             <h3><b>Registreu-vos</b></h3>
             <form method="post">
                 {% csrf_token %}
+                <label for="name">Nom</label>
+                {{ form.name }}<br>
+                <small style="color: grey">{{ form.name.help_text }}</small><br><br>
+
                 <label for="email">Email</label>
-                {{form.email}}<br>
+                {{ form.email }}<br>
                 <small style="color: grey">{{ form.email.help_text }}</small><br><br>
 
                 <label for="password">Contrasenya</label>
