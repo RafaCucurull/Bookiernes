@@ -2,11 +2,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
-    SolicitarPublicacioForm, EnviarMissatgeForm
+    SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge, Missatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
+from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
+import PyPDF2
+from translate import Translator
+from fpdf import FPDF
 from django.urls import reverse
 
 
@@ -305,6 +309,7 @@ def notificarEditorPublicat(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+
 def notificarITPublicat(llibre):
     it = llibre.it
     notificacio = Notificacio()
@@ -314,6 +319,7 @@ def notificarITPublicat(llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -512,6 +518,7 @@ def eliminarnotificacio(request, pknotificacio):
     Notificacio.objects.filter(pk=pknotificacio).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
 def eliminarmissatge(request, pkmissatge):
     Missatge.objects.filter(pk=pkmissatge).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -552,3 +559,92 @@ def seleccionar_it(solicitud, llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
+
+def solicitudTraduccio(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SolicitarTraduccioForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.llibre = llibre
+            obj.editor = request.user
+            obj.save()
+            traduirLlibre(llibre)
+            # notificarEditorTraduccio(llibre)
+            return redirect(request.path_info)
+    else:
+        form = SolicitarTraduccioForm()
+    return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
+
+
+def traduirLlibre(llibre):
+
+    pdf = llibre.pdf.path
+    txt = llibre.txt.path
+    traduccio = llibre.traduccio.path
+
+    with open(pdf, 'rb') as pdf_file, open(txt, 'w') as txt_file:
+        read_pdf = PyPDF2.PdfFileReader(pdf_file)
+        number_of_pages = read_pdf.getNumPages()
+        for page_number in range(number_of_pages):
+            page = read_pdf.getPage(page_number)
+            page_content = page.extractText()
+            txt_file.write(page_content)
+
+    translator = Translator(to_lang="es")
+
+    with open(txt, 'r') as textOriginal:
+        data = textOriginal.read()
+    to_translate = data[:500]
+    translation = translator.translate(to_translate)
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('arial', size=12)
+    pdf.multi_cell(190, 10, txt=translation)
+    pdf.output(traduccio)
+
+
+    # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
+    #    translation.write(llibreTraduccioStream)
+
+
+def dirtraduccions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        "llibre": llibre,
+    }
+    return render(request, 'directori_traduccions.html', context)
+
+
+def retallarobra(llibre):
+    obra = PdfFileReader(llibre.pdf)
+    retall = PdfFileWriter()
+    for i in range(15):
+        retall.addPage(obra.getPage(i))
+        with open(llibre.retall, "wb") as retall_stream:
+            retall.write(retall_stream)
+    # FALCA
+    falca = PdfFileReader("/static/altres/falca.pdf")
+    retallfalcat = PdfFileMerger()
+    retallfalcat.append(retall)
+    retallfalcat.append(falca)
+    with open(llibre.falcat, "wb") as retallfalcat_stream:
+        retallfalcat.write(retallfalcat_stream)
+    llibre.save()
+
+
+def retallarobra(llibre):
+    obra = PdfFileReader(llibre.pdf)
+    falca = PdfFileReader("/static/altres/falca.pdf")
+
+    retallfalcat = PdfFileWriter()
+
+    retallfalcat.addPage(obra.getPage(range(15)))
+    retallfalcat.addPage(falca)
+
+    with open(llibre.retallfalcat, "wb") as retallfalcatStream:
+        retallfalcat.write(retallfalcatStream)
+
+    llibre.save()

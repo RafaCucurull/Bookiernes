@@ -1,9 +1,11 @@
+from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from bookapp import views
 
 urlpatterns = [
     path('', views.homePage, name="home"),
+    path('login_lector/', LoginView.as_view(template_name='registration/login_lector.html'), name='login_lector'),
     path('escriptori', views.Escriptori, name="escriptori"),
     path('cataleg', views.cataleg, name="cataleg"),
     path('afegirllibre', views.afegirLlibre, name="afegirllibre"),
@@ -24,6 +26,8 @@ urlpatterns = [
     path('area_edicio/<int:pk>/dirmaquetacions/galeriamaquetacions/descargar/<int:pkimatge>', views.download_image, name='descargarimatge'),
     path('area_edicio/<int:pk>/dirmaquetacions/solicitudmaquetacio', views.solicitudmaquetacio, name='solicitudmaquetacio'),
     path('area_edicio/<int:pk>/solicitudpublicacio', views.solicitudpublicacio, name='solicitudpublicacio'),
+    path('area_edicio/<int:pk>/dirtraduccions', views.dirtraduccions, name='dirtraduccions'),
+    path('area_edicio/<int:pk>/dirtraduccions/solicitudtraduccio', views.solicitudTraduccio, name='solicitudtraduccio'),
     path('area_escriptor/<int:pk>/comments', views.comments, name='comments'),
     path('area_it/<int:pk>/publicarllibre', views.publicarllibre, name='publicarllibre'),
     path('area_dismaq/<int:pk>', views.areaDisssenyiMaquetacio, name='areadismaq'),
@@ -35,7 +39,4 @@ urlpatterns = [
          name='eliminarnotificacio'),
     path('veuremissatge/eliminarmissatge/<int:pkmissatge>', views.eliminarmissatge,
          name='eliminarmissatge'),
-
-
-    
 ]

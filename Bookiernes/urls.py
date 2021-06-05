@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('bookapp.urls')),
     path('accounts/register/', views.register, name="register"),
+    path('accounts/register_lector/', views.registerLector, name="register_lector"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
