@@ -138,12 +138,3 @@ class solicitudTraduccio(models.Model):
 class Traduccio(models.Model):
     idioma = models.CharField(max_length=2, null=True, blank=True)
     pdf_traduit = models.FileField(null=True, blank=True)
-
-
-class Retall(models.Model):
-    idioma = models.CharField(max_length=2, null=True, blank=True)
-    pdf_retallat = models.FileField(null=True, blank=True)
-
-class RetallFalcat(models.Model):
-    idioma = models.CharField(max_length=2, null=True, blank=True)
-    pdf_falcat = models.FileField(null=True, blank=True)

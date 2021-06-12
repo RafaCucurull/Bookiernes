@@ -79,29 +79,21 @@ def afegirDocuments(llibre):
         llibre.es.save('es', File(esdoc))
     with open('text.txt') as g:
         llibre.es_retall.save('esRetall', File(g))
-    with open('text.txt') as h:
-        llibre.es_falcat.save('esFalcat', File(h))
 
     with open('text.txt') as g:
         llibre.en.save('en', File(g))
     with open('text.txt') as h:
         llibre.en_retall.save('enRetall', File(h))
-    with open('text.txt') as h:
-        llibre.en_falcat.save('enFalcat', File(h))
 
     with open('text.txt') as g:
         llibre.pt.save('pt', File(g))
     with open('text.txt') as h:
         llibre.pt_retall.save('ptRetall', File(h))
-    with open('text.txt') as h:
-        llibre.pt_falcat.save('ptFalcat', File(h))
 
     with open('text.txt') as g:
         llibre.zh.save('zh', File(g))
     with open('text.txt') as h:
         llibre.zh_retall.save('zhRetall', File(h))
-    with open('text.txt') as h:
-        llibre.zh_falcat.save('zhFalcat', File(h))
 
 
 def seleccionar_editor(llibre):
@@ -558,8 +550,15 @@ def solicitudTraduccio(request, pk):
     return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
 
 
-def traduirLlibre(llibre, idioma):
+def galeriaTraduccions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        'llibre': llibre,
+    }
+    return render(request, "galeria_traduccions.html", context)
 
+
+def traduirLlibre(llibre, idioma):
     pdf = llibre.pdf.path
     txt = llibre.textPla.path
 
@@ -574,7 +573,6 @@ def traduirLlibre(llibre, idioma):
 
     elif (idioma == 'zh'):
         traduccio = llibre.zh.path
-
 
     with open(pdf, 'rb') as pdf_file, open(txt, 'w') as txt_file:
         read_pdf = PyPDF2.PdfFileReader(pdf_file)
@@ -597,7 +595,6 @@ def traduirLlibre(llibre, idioma):
     pdf.multi_cell(190, 10, txt=translation)
     pdf.output(traduccio)
 
-
     # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
     #    translation.write(llibreTraduccioStream)
 
@@ -610,25 +607,7 @@ def dirtraduccions(request, pk):
     return render(request, 'directori_traduccions.html', context)
 
 
-def retallarobra1(llibre):
-    obra = PdfFileReader(llibre.pdf)
-    retall = PdfFileWriter()
-    for i in range(15):
-        retall.addPage(obra.getPage(i))
-        with open(llibre.retall, "wb") as retall_stream:
-            retall.write(retall_stream)
-    # FALCA
-    falca = PdfFileReader("/static/altres/falca.pdf")
-    retallfalcat = PdfFileMerger()
-    retallfalcat.append(retall)
-    retallfalcat.append(falca)
-    with open(llibre.falcat, "wb") as retallfalcat_stream:
-        retallfalcat.write(retallfalcat_stream)
-    llibre.save()
-
-
 def retallarobra(llibre):
-
     # PDF
 
     retallPDF = FPDF()
@@ -638,9 +617,9 @@ def retallarobra(llibre):
     for x in f:
         retallPDF.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
     retallPDF.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
-                  ln=1, align='C')
+                   ln=1, align='C')
     retallPDF.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
-                  ln=2, align='C')
+                   ln=2, align='C')
     retallPDF.output(llibre.pdf_retall.path)
 
     # ES
@@ -654,9 +633,9 @@ def retallarobra(llibre):
     for x in es:
         retallES.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
     retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
-             ln=1, align='C')
+                  ln=1, align='C')
     retallES.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
-             ln=2, align='C')
+                  ln=2, align='C')
     retallES.output(llibre.es_retall.path)
 
     # EN
@@ -702,16 +681,3 @@ def retallarobra(llibre):
     retallZH.output(llibre.zh_retall.path)
 
     llibre.save()
-
-
-# CAL ARREGLAR AIXÒ!
-
-def LlibreCataleg(request):
-    global llibres
-    usuari = CustomUser.objects.get(email=request.user)
-
-    if usuari.is_Subscrit:
-        return render(request, "escriptori_escriptor.html")
-    if usuari.is_NoSubscrit:
-        return render(request, "escriptori_escriptor.html")
-
