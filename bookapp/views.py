@@ -11,8 +11,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
 import PyPDF2
 from translate import Translator
 from fpdf import FPDF
-import os
-from django.http import FileResponse, Http404
+from django.core.files.base import File
 
 
 def homePage(request):
@@ -59,6 +58,7 @@ def afegirLlibre(request):
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save()
+            afegirDocuments(obj)
             seleccionar_editor(obj)
             obj.escriptor = request.user
             obj.save()
@@ -67,6 +67,41 @@ def afegirLlibre(request):
         form = AfegirLlibreForm()
 
     return render(request, "afegirllibre.html", {'form': form})
+
+
+def afegirDocuments(llibre):
+    with open('text.txt') as f:
+        llibre.textPla.save('text', File(f))
+    with open('text.txt') as f:
+        llibre.pdf_retall.save('retall', File(f))
+
+    with open('text.txt') as esdoc:
+        llibre.es.save('es', File(esdoc))
+    with open('text.txt') as g:
+        llibre.es_retall.save('esRetall', File(g))
+    with open('text.txt') as h:
+        llibre.es_falcat.save('esFalcat', File(h))
+
+    with open('text.txt') as g:
+        llibre.en.save('en', File(g))
+    with open('text.txt') as h:
+        llibre.en_retall.save('enRetall', File(h))
+    with open('text.txt') as h:
+        llibre.en_falcat.save('enFalcat', File(h))
+
+    with open('text.txt') as g:
+        llibre.pt.save('pt', File(g))
+    with open('text.txt') as h:
+        llibre.pt_retall.save('ptRetall', File(h))
+    with open('text.txt') as h:
+        llibre.pt_falcat.save('ptFalcat', File(h))
+
+    with open('text.txt') as g:
+        llibre.zh.save('zh', File(g))
+    with open('text.txt') as h:
+        llibre.zh_retall.save('zhRetall', File(h))
+    with open('text.txt') as h:
+        llibre.zh_falcat.save('zhFalcat', File(h))
 
 
 def seleccionar_editor(llibre):
@@ -483,6 +518,7 @@ def solicitudpublicacio(request, pk):
             return redirect(request.path_info)
     else:
         form = SolicitarMaquetacioForm()
+    retallarobra(llibre)
     return render(request, "enviar_llibre_publicar.html", {'form': form})
 
 
@@ -525,8 +561,20 @@ def solicitudTraduccio(request, pk):
 def traduirLlibre(llibre, idioma):
 
     pdf = llibre.pdf.path
-    txt = llibre.txt.path
-    traduccio = llibre.traduccio.path
+    txt = llibre.textPla.path
+
+    if (idioma == 'es'):
+        traduccio = llibre.es.path
+
+    if (idioma == 'en'):
+        traduccio = llibre.en.path
+
+    elif (idioma == 'pt'):
+        traduccio = llibre.pt.path
+
+    elif (idioma == 'zh'):
+        traduccio = llibre.zh.path
+
 
     with open(pdf, 'rb') as pdf_file, open(txt, 'w') as txt_file:
         read_pdf = PyPDF2.PdfFileReader(pdf_file)
@@ -562,7 +610,7 @@ def dirtraduccions(request, pk):
     return render(request, 'directori_traduccions.html', context)
 
 
-def retallarobra(llibre):
+def retallarobra1(llibre):
     obra = PdfFileReader(llibre.pdf)
     retall = PdfFileWriter()
     for i in range(15):
@@ -580,15 +628,90 @@ def retallarobra(llibre):
 
 
 def retallarobra(llibre):
-    obra = PdfFileReader(llibre.pdf)
-    falca = PdfFileReader("/static/altres/falca.pdf")
 
-    retallfalcat = PdfFileWriter()
+    # PDF
 
-    retallfalcat.addPage(obra.getPage(range(15)))
-    retallfalcat.addPage(falca)
+    retallPDF = FPDF()
+    retallPDF.add_page()
+    retallPDF.set_font("Arial", size=15)
+    f = open(llibre.textPla.path, "r")
+    for x in f:
+        retallPDF.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallPDF.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallPDF.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallPDF.output(llibre.pdf_retall.path)
 
-    with open(llibre.retallfalcat, "wb") as retallfalcatStream:
-        retallfalcat.write(retallfalcatStream)
+    # ES
+
+    retallES = FPDF()
+    retallES.add_page()
+    retallES.set_font("Arial", size=15)
+
+    es = open(llibre.textPla.path, "r")
+
+    for x in es:
+        retallES.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+             ln=1, align='C')
+    retallES.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+             ln=2, align='C')
+    retallES.output(llibre.es_retall.path)
+
+    # EN
+
+    retallEN = FPDF()
+    retallEN.add_page()
+    retallEN.set_font("Arial", size=15)
+    en = open(llibre.en.path, "r")
+    for x in en:
+        retallEN.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallEN.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallEN.output(llibre.en_retall.path)
+
+    # PT
+
+    retallPT = FPDF()
+    retallPT.add_page()
+    retallPT.set_font("Arial", size=15)
+    pt = open(llibre.pt.path, "r")
+    for x in pt:
+        retallPT.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallPT.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallPT.output(llibre.pt_retall.path)
+
+    # ZH
+
+    retallZH = FPDF()
+    retallZH.add_page()
+    retallZH.set_font("Arial", size=15)
+    zh = open(llibre.zh.path, "r")
+    for x in zh:
+        retallZH.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallZH.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallZH.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallZH.output(llibre.zh_retall.path)
 
     llibre.save()
+
+
+# CAL ARREGLAR AIXÒ!
+
+def LlibreCataleg(request):
+    global llibres
+    usuari = CustomUser.objects.get(email=request.user)
+
+    if usuari.is_Subscrit:
+        return render(request, "escriptori_escriptor.html")
+    if usuari.is_NoSubscrit:
+        return render(request, "escriptori_escriptor.html")
+

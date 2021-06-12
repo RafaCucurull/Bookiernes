@@ -13,15 +13,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    #Funcions laborals de l'empresa
+    # Funcions laborals de l'empresa
     is_Treballador = models.BooleanField(default=False)
     is_Escriptor = models.BooleanField(default=False)
     is_Editor = models.BooleanField(default=False)
     is_Dissenyador = models.BooleanField(default=False)
     is_Maquetacio = models.BooleanField(default=False)
     is_IT = models.BooleanField(default=False)
-    is_Lector = models.BooleanField(default=False)
     lliure = models.BooleanField(default=True)
+    # Lectors
+    is_Subscrit = models.BooleanField(default=False)
+    is_NoSubscrit = models.BooleanField(default=False)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
