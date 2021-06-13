@@ -17,10 +17,16 @@ class Llibre(models.Model):
     sinopsis = models.TextField(max_length=3000)
     tematiques = models.ManyToManyField('Tematica', related_name='tematiques', blank=True, through='TematiquesLlibre')
     pdf = models.FileField()
-    txt = models.FileField()
-    traduccio = models.FileField() #S'HAURÀ DE FER COL·LECIÓ
-    # retall = models.FileField()
-    # retallfalcat = models.FileField()
+    pdf_retall = models.FileField(blank=True, null=True)
+    textPla = models.FileField(blank=True, null=True)
+    es = models.FileField(blank=True, null=True)
+    es_retall = models.FileField(blank=True, null=True)
+    en = models.FileField(blank=True, null=True)
+    en_retall = models.FileField(blank=True, null=True)
+    pt = models.FileField(blank=True, null=True)
+    pt_retall = models.FileField(blank=True, null=True)
+    zh = models.FileField(blank=True, null=True)
+    zh_retall = models.FileField(blank=True, null=True)
     coleccio = models.CharField(max_length=100, blank=True, null=True)
     num_pagines = models.IntegerField()
     comentari_it = models.TextField(max_length=3000, blank=True)
@@ -135,7 +141,5 @@ class solicitudTraduccio(models.Model):
 
 
 class Traduccio(models.Model):
-    mkd_traduit = models.FileField(null=True, blank=True)
-    idioma = models.CharField(max_length=30, null=True, blank=True)
-    data = models.DateField(auto_now=True, blank=True, null=True)
-
+    idioma = models.CharField(max_length=2, null=True, blank=True)
+    pdf_traduit = models.FileField(null=True, blank=True)

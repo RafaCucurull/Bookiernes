@@ -7,11 +7,11 @@ from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tem
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
-from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
 import PyPDF2
 from translate import Translator
 from fpdf import FPDF
 from django.urls import reverse
+from django.core.files.base import File
 
 
 def homePage(request):
@@ -58,6 +58,7 @@ def afegirLlibre(request):
         form = AfegirLlibreForm(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save()
+            afegirDocuments(obj)
             seleccionar_editor(obj)
             obj.escriptor = request.user
             obj.save()
@@ -66,6 +67,33 @@ def afegirLlibre(request):
         form = AfegirLlibreForm()
 
     return render(request, "afegirllibre.html", {'form': form})
+
+
+def afegirDocuments(llibre):
+    with open('text.txt') as f:
+        llibre.textPla.save('text', File(f))
+    with open('text.txt') as f:
+        llibre.pdf_retall.save('retall', File(f))
+
+    with open('text.txt') as esdoc:
+        llibre.es.save('es', File(esdoc))
+    with open('text.txt') as g:
+        llibre.es_retall.save('esRetall', File(g))
+
+    with open('text.txt') as g:
+        llibre.en.save('en', File(g))
+    with open('text.txt') as h:
+        llibre.en_retall.save('enRetall', File(h))
+
+    with open('text.txt') as g:
+        llibre.pt.save('pt', File(g))
+    with open('text.txt') as h:
+        llibre.pt_retall.save('ptRetall', File(h))
+
+    with open('text.txt') as g:
+        llibre.zh.save('zh', File(g))
+    with open('text.txt') as h:
+        llibre.zh_retall.save('zhRetall', File(h))
 
 
 def seleccionar_editor(llibre):
@@ -540,6 +568,7 @@ def solicitudpublicacio(request, pk):
             return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
     else:
         form = SolicitarMaquetacioForm()
+    retallarobra(llibre)
     return render(request, "enviar_llibre_publicar.html", {'form': form})
 
 
@@ -569,8 +598,9 @@ def solicitudTraduccio(request, pk):
             obj = form.save()
             obj.llibre = llibre
             obj.editor = request.user
+            idioma = obj.idioma
             obj.save()
-            traduirLlibre(llibre)
+            traduirLlibre(llibre, idioma)
             # notificarEditorTraduccio(llibre)
             return redirect(request.path_info)
     else:
@@ -578,11 +608,29 @@ def solicitudTraduccio(request, pk):
     return render(request, 'solicitud_traduccio.html', {'form': form, 'llibre': llibre})
 
 
-def traduirLlibre(llibre):
+def galeriaTraduccions(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    context = {
+        'llibre': llibre,
+    }
+    return render(request, "galeria_traduccions.html", context)
 
+
+def traduirLlibre(llibre, idioma):
     pdf = llibre.pdf.path
-    txt = llibre.txt.path
-    traduccio = llibre.traduccio.path
+    txt = llibre.textPla.path
+
+    if (idioma == 'es'):
+        traduccio = llibre.es.path
+
+    if (idioma == 'en'):
+        traduccio = llibre.en.path
+
+    elif (idioma == 'pt'):
+        traduccio = llibre.pt.path
+
+    elif (idioma == 'zh'):
+        traduccio = llibre.zh.path
 
     with open(pdf, 'rb') as pdf_file, open(txt, 'w') as txt_file:
         read_pdf = PyPDF2.PdfFileReader(pdf_file)
@@ -592,7 +640,7 @@ def traduirLlibre(llibre):
             page_content = page.extractText()
             txt_file.write(page_content)
 
-    translator = Translator(to_lang="es")
+    translator = Translator(to_lang=idioma)
 
     with open(txt, 'r') as textOriginal:
         data = textOriginal.read()
@@ -604,7 +652,6 @@ def traduirLlibre(llibre):
     pdf.set_font('arial', size=12)
     pdf.multi_cell(190, 10, txt=translation)
     pdf.output(traduccio)
-
 
     # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
     #    translation.write(llibreTraduccioStream)
@@ -619,32 +666,76 @@ def dirtraduccions(request, pk):
 
 
 def retallarobra(llibre):
-    obra = PdfFileReader(llibre.pdf)
-    retall = PdfFileWriter()
-    for i in range(15):
-        retall.addPage(obra.getPage(i))
-        with open(llibre.retall, "wb") as retall_stream:
-            retall.write(retall_stream)
-    # FALCA
-    falca = PdfFileReader("/static/altres/falca.pdf")
-    retallfalcat = PdfFileMerger()
-    retallfalcat.append(retall)
-    retallfalcat.append(falca)
-    with open(llibre.falcat, "wb") as retallfalcat_stream:
-        retallfalcat.write(retallfalcat_stream)
-    llibre.save()
+    # PDF
 
+    retallPDF = FPDF()
+    retallPDF.add_page()
+    retallPDF.set_font("Arial", size=15)
+    f = open(llibre.textPla.path, "r")
+    for x in f:
+        retallPDF.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallPDF.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                   ln=1, align='C')
+    retallPDF.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                   ln=2, align='C')
+    retallPDF.output(llibre.pdf_retall.path)
 
-def retallarobra(llibre):
-    obra = PdfFileReader(llibre.pdf)
-    falca = PdfFileReader("/static/altres/falca.pdf")
+    # ES
 
-    retallfalcat = PdfFileWriter()
+    retallES = FPDF()
+    retallES.add_page()
+    retallES.set_font("Arial", size=15)
 
-    retallfalcat.addPage(obra.getPage(range(15)))
-    retallfalcat.addPage(falca)
+    es = open(llibre.textPla.path, "r")
 
-    with open(llibre.retallfalcat, "wb") as retallfalcatStream:
-        retallfalcat.write(retallfalcatStream)
+    for x in es:
+        retallES.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallES.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallES.output(llibre.es_retall.path)
+
+    # EN
+
+    retallEN = FPDF()
+    retallEN.add_page()
+    retallEN.set_font("Arial", size=15)
+    en = open(llibre.en.path, "r")
+    for x in en:
+        retallEN.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallEN.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallEN.output(llibre.en_retall.path)
+
+    # PT
+
+    retallPT = FPDF()
+    retallPT.add_page()
+    retallPT.set_font("Arial", size=15)
+    pt = open(llibre.pt.path, "r")
+    for x in pt:
+        retallPT.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallPT.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallPT.output(llibre.pt_retall.path)
+
+    # ZH
+
+    retallZH = FPDF()
+    retallZH.add_page()
+    retallZH.set_font("Arial", size=15)
+    zh = open(llibre.zh.path, "r")
+    for x in zh:
+        retallZH.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
+    retallZH.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+                  ln=1, align='C')
+    retallZH.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+                  ln=2, align='C')
+    retallZH.output(llibre.zh_retall.path)
 
     llibre.save()
