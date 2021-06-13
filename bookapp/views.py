@@ -650,8 +650,8 @@ def traduirLlibre(llibre, idioma):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font('arial', size=12)
-    pdf.multi_cell(190, 10, txt=translation)
-    pdf.output(traduccio)
+    pdf.multi_cell(190, 12, txt=translation)
+    pdf.output(traduccio+".pdf")
 
     # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
     #    translation.write(llibreTraduccioStream)
@@ -673,13 +673,14 @@ def retallarobra(llibre):
     retallPDF.set_font("Arial", size=15)
     f = open(llibre.textPla.path, "r")
     for x in f:
-        retallPDF.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallPDF.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+        retallPDF.multi_cell(190, 10, txt=x, border=0, align='J', fill=False)
+    retallPDF.cell(190, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
                    ln=1, align='C')
-    retallPDF.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallPDF.cell(190, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
                    ln=2, align='C')
-    retallPDF.output(llibre.pdf_retall.path)
+    retallPDF.output(llibre.pdf_retall.path+".pdf")
 
+    """
     # ES
 
     retallES = FPDF()
@@ -737,5 +738,7 @@ def retallarobra(llibre):
     retallZH.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
                   ln=2, align='C')
     retallZH.output(llibre.zh_retall.path)
+
+    """
 
     llibre.save()
