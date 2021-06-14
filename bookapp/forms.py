@@ -63,6 +63,7 @@ class EnviarMissatgeForm(ModelForm):
     class Meta:
         model = Missatge
         fields = ('cos_missatge', 'destinatari', )
+        widgets = {'cos_missatge': Textarea(attrs={'cols': 70, 'rows': 6})}
 
 
 class SolicitarTraduccioForm(ModelForm):

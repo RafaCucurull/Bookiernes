@@ -22,12 +22,12 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="w3-container w3-center">
-                <div class="row">
-                    <div class="col-4">
-                        <h3>Cost del missatge:</h3>
+                <div class="row" style="margin:auto">
+                    <div class="col-8" >
+                        <h3>Cos del missatge:</h3>
                         {{ form.cos_missatge }}
                     </div>
-                    <div class="col-8">
+                    <div class="col-0">
                         <h3>Destinatari:</h3>
                         {{ form.destinatari }}
                     </div>

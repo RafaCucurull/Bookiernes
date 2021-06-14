@@ -26,13 +26,15 @@
                         <!-- Imatge -->
                         <div class=" w3-display-container">
                             <div class="w3-container w3-border  w3-topbar w3-white">
-                                <p>
-                                    <img class="w3-center noti-img"
-                                         src="../static/notificacions/notificacio.png"><br>
-                                    <b>Data de la notificació: </b> {{ object.data|date:"Y-m-d H:i" }}<br>
-                                    <b>Llibre al qual fa referència: </b> {{ object.llibre }}<br>
-                                    {{ object.missatge }}
-                                </p>
+                                <a href="{% url 'escriptori' %}">
+                                    <p>
+                                        <img class="w3-center noti-img"
+                                             src="../static/notificacions/notificacio.png"><br>
+                                        <b>Data de la notificació: </b> {{ object.data|date:"Y-m-d H:i" }}<br>
+                                        <b>Llibre al qual fa referència: </b> {{ object.llibre }}<br>
+                                        {{ object.missatge }}
+                                    </p>
+                                </a>
                             </div>
 
                             <div style="color: white; font-weight: bold; font-size: medium">
@@ -85,16 +87,16 @@
 
         {% endfor %}
     </div>
-    <a href="{% url 'escriptori' %}">
-                            <div style="text-align:center">
-                            <button type="button" class="btn btn-primary message w3-round-xlarge" style="width:20%">
-                                <h3 class="h3-message"><b>Tornar endarrere</b>
-                                    <img class="w3-center icons" style="width: 15%" src="{% static '/areaescriptor/backarrow.png' %}">
-                                </h3>
-                            </button>
-                                </div>
-                            <br/> <br/> <br/> <br/> <br/> <br/>
-                        </a>
+    <div class="w3-row-padding w3-padding-32 w3-container">
+        <div class="w3-content w3-center">
+            <a href="{% url 'escriptori' %}">
+                <button type="button" class="w3-round-xlarge btn btn-primary features"><b>Tornar a l'escriptori</b>
+                    <img class="w3-center noti-img" src="../static/notificacions/backarrow.png"
+                         style="margin-left: 5px">
+                </button>
+            </a>
+        </div>
+    </div>
     </body>
     </html>
     <!-- SCRIPT MODAL -->
