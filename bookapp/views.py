@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from bookapp import models
 from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge,SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge, Missatge
+from users.forms import ConfiguracioForm
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
@@ -744,8 +745,7 @@ def retallarobra(llibre):
 
 def perfil(request, pkperfil):
     usuari = CustomUser.objects.get(email=request.user)
-    if not usuari.is_Treballador:
-        return render(request, "home.html")
+    llistallibres = list()
     if usuari.is_Editor:
         llistallibres = Llibre.objects.filter(editor=usuari)
     if usuari.is_Escriptor:
@@ -760,3 +760,14 @@ def perfil(request, pkperfil):
         'llibres': llistallibres
     }
     return render(request, 'profile.html', context)
+
+def configuracio(request, pkperfil):
+    if request.method == 'POST':
+        form = ConfiguracioForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.save()
+            return redirect('perfil')
+    else:
+        form = ConfiguracioForm()
+    return render(request, 'configuracio_perfil.html', {'form': form})

@@ -11,6 +11,8 @@ def register(request):
         print(form.is_valid())
         if form.is_valid():
             user = form.save()
+            user.is_Treballador = True
+            user.save()
             login(request, user)
             return redirect('home')
     else:
@@ -23,7 +25,7 @@ def registerLector(request):
         form = CustomLectorCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.is_Lector = True
+            user.is_Subscrit = True
             user.save()
             login(request, user)
             return redirect('home')

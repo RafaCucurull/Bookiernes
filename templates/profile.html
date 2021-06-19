@@ -28,11 +28,13 @@
                                         <p class="text-secondary mb-1">Maquetador/a</p>
                                     {% elif  user.is_IT %}
                                         <p class="text-secondary mb-1">IT</p>
-                                    {% elif  user.is_Lector %}
+                                    {% elif  user.is_Subscrit %}
                                         <p class="text-secondary mb-1">Lector/a</p>
                                     {% endif %}
                                     <p class="text-muted font-size-sm">Lleida</p>
+                                    <a href="{% url 'configuracio' pkperfil=user.pk%}">
                                     <button class="btn btn-primary">Configuració</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +132,7 @@
                                     <h6 class="mb-0">Edat</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    25
+                                    {{ user.edat }}
                                 </div>
                             </div>
                             <hr>
@@ -139,7 +141,7 @@
                                     <h6 class="mb-0">Sexe</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Indefinit
+                                    {{ user.sexe }}
                                 </div>
                             </div>
                             <hr>
@@ -153,6 +155,7 @@
                             </div>
                         </div>
                     </div>
+                    {% if user.is_Subscrit == False %}
                     <div class="row gutters-sm">
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
@@ -178,6 +181,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

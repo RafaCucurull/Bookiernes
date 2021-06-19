@@ -36,3 +36,9 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email',)
+
+class ConfiguracioForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = ('nom', 'edat', 'sexe')
+
