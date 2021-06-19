@@ -23,38 +23,12 @@
 
     </header>
 
-    <!-- Anglès -->
-    <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.en.url }}.pdf"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Títol: {{ llibre.nom_llibre }}</p>
-                        <p style="text-align: center">Idioma: en</p>
-                        <a href="{{ llibre.en.url }}">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 25px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Castellà -->
     <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+        <div class=" w3-center w3-half w3-container w3-margin-bottom">
             <div class="w3-container">
                 <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.es.path }}"
+                    <iframe src="{{ llibre.es.url }}.pdf"
                             width="100%"
                             height="800px">
                     </iframe>
@@ -73,14 +47,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Portuguès -->
-    <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+        <!-- Portuguès -->
+        <div class=" w3-center w3-half w3-container w3-margin-bottom">
             <div class="w3-container">
                 <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.pt.path }}"
+                    <iframe src="{{ llibre.pt.url }}.pdf"
                             width="100%"
                             height="800px">
                     </iframe>
@@ -101,47 +73,18 @@
         </div>
     </div>
 
-    <!-- Xinès -->
-    <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
-            <div class="w3-container">
-                <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.zh.path }}"
-                            width="100%"
-                            height="800px">
-                    </iframe>
-                    <div class="w3-container w3-center w3-margin">
-                        <p style="text-align: center">Títol: {{ llibre.nom_llibre }}</p>
-                        <p style="text-align: center">Idioma: zh</p>
-                        <a href="{{ llibre.zh.url }}">
-                            <button class="w3-button w3-xlarge w3-orange w3-round-large w3-margin ">
-                                <div style="color: white; font-weight: bold; font-size: medium"> Descarregar
-                                    <img class="w3-center icons" style="width: 25px; height: auto"
-                                         src="{% static '/altres/baixada.png' %}">
-                                </div>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- BOTÓ TORNAR -->
+    <div class="row" style="text-align: center">
 
-    <div class="w3-container">
-
-        <div class="right col-md-auto">
-            <a href="{% url 'dirtraduccions' pk=llibre.pk %}">
-                <button type="button" class="w3-round-xlarge btn btn-primary message">
-                    <h3 class="h3-message"><b>Tornar endarrere</b>
-                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
-                    </h3>
-                </button>
-                <br/> <br/> <br/>
-            </a>
-        </div>
+        <a href="{% url 'dirtraduccions' pk=llibre.pk %}">
+            <button type="button" class="w3-round-xlarge btn btn-primary message">
+                <h3 class="h3-message"><b>Tornar endarrere</b>
+                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                </h3>
+            </button>
+        </a>
     </div>
+    <br/>
 
     </body>
 {% endblock %}

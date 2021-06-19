@@ -24,12 +24,12 @@ class SolicitarImatgesForm(ModelForm):
             'nom': TextInput(attrs={
                 'class': "form-control",
                 'style': 'width: 100%;background-color: linen;font-size: 30px',
-                'placeholder': 'Nom de la imatge...'
+                'placeholder': 'Context de la imatge...'
             }),
             'context': TextInput(attrs={
                 'class': "form-control",
                 'style': 'width: 100%;background-color: linen;font-size: 30px',
-                'placeholder': 'Context de la imatge...'
+                'placeholder': 'Descripció de la imatge...'
             }),
         }
 

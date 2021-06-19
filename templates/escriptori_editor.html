@@ -21,7 +21,7 @@
         <p class="p_header w3-padding-24"> Aquí apareixen totes les edicions que heu o esteu portant a terme.
             Quan se us assigni un nou llibre rebreu una notificació
             i us apareixerà aquí l'obra per poder iniciar el seu procés d'edició
-        </p> <br/>
+        </p>
 
     </header>
 
@@ -40,7 +40,11 @@
                         <p>{{ object.sinopsis }}</p><br/>
                         <p style="display:inline">Temàtiques: </p>
                         {% for t in tematiques %}
-                            <p style="display:inline">{{ t }},</p>
+                            {% if forloop.last %}
+                                <p style="display:inline">{{ t }}</p>
+                            {% else %}
+                                <p style="display:inline">{{ t }},</p>
+                            {% endif %}
                         {% endfor %}
                         <p>Col·lecció: {{ object.coleccio }}</p>
                         <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
@@ -50,4 +54,5 @@
         </div>
     {% endfor %}
     </div>
+    </body>
 {% endblock %}

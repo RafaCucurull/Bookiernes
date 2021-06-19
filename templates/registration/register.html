@@ -16,7 +16,7 @@
             <form method="post">
                 {% csrf_token %}
                 <label for="email">Email</label>
-                {{form.email}}<br>
+                {{ form.email }}<br>
                 <small style="color: grey">{{ form.email.help_text }}</small><br><br>
                 <label for="is_Editor">Editor/a</label>
                 {{ form.is_Editor }}<br>

@@ -9,7 +9,7 @@
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
     vertical-align: top;
 }
@@ -19,15 +19,16 @@ h1 {
 }
 
 p {
-    font-size: 20px;
+    font-size: 18px;
     text-align: justify;
     color: darkgrey;
 }
 
 .p_header {
-    font-size: 26px;
+    font-size: 20px;
     width: 1000px;
     margin: auto;
+    text-align: center;
 }
 
 .btn-primary {

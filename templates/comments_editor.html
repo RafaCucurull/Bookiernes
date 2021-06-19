@@ -18,7 +18,8 @@
             Comentaris i propostes
         </h1>
 
-        <p class="p_header w3-padding-24"> Els comentaris o modificacions que proposeu en aquest espai les podrà veure
+        <p class="w3-center p_header w3-padding-24"> Els comentaris o modificacions que proposeu en aquest espai les
+            podrà veure
             l'escriptor/a
             de l'obra. Cada cop que en publiqui un de nou li arribarà una notificació a ell/a per tal que valori si
             decideix incloure'l o no en el seu llibre.
@@ -28,50 +29,50 @@
 
     <div class="w3-row-padding">
 
-            <form action="/area_edicio/{{ llibre.id }}/commentseditor" method="post">{% csrf_token %}
-                <div class="w3-center w3-margin-bottom w3-center" style="margin: auto; width: 40%">
-                    <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-white"
-                         style="box-shadow: 10px 10px 5px #aaaaaa"><br/>
-                        <div id="form">
-                            <p class="titolformulari"> Títol del comentari</p>
-                            <input class="inputarea w3-margin-bottom" type="text" id="titol" name="titol" size="50"
-                                   required>
-                        </div>
-                        <p class="titolformulari"> Escriviu aquí el vostre comentari</p>
-                        <div id="form">
+        <form action="/area_edicio/{{ llibre.id }}/commentseditor" method="post">{% csrf_token %}
+            <div class="w3-center w3-margin-bottom w3-center" style="margin: auto; width: 40%">
+                <div class="w3-center w3-container w3-border w3-round-xlarge w3-topbar w3-white"
+                     style="box-shadow: 10px 10px 5px #aaaaaa"><br/>
+                    <div id="form">
+                        <p class="titolformulari"> Títol del comentari</p>
+                        <input class="inputarea w3-margin-bottom" type="text" id="titol" name="titol" size="50"
+                               required>
+                    </div>
+                    <p class="titolformulari"> Escriviu aquí el vostre comentari</p>
+                    <div id="form">
                             <textarea cols="45" rows="6" required="" id="descripcio" name="descripcio"
                                       spellcheck="false" data-gramm="false"></textarea>
-                        </div>
+                    </div>
 
-                        <div class="w3-justify w3-padding w3-container">
-                            <div class="row message_feature">
-                                    <button type="submit" class="w3-round-xlarge btn btn-primary message w3-margin-bottom">
-                                        <h3 class="h3-message"><b>Publiqueu el comentari</b>
-                                            <img class="w3-center icons" src="{% static '/escriptori/plusicon.png' %}">
-                                        </h3>
-                                    </button>
+                    <div class="w3-justify w3-padding w3-container">
+                        <div class="row message_feature">
+                            <button type="submit" class="w3-round-xlarge btn btn-primary message w3-margin-bottom">
+                                <h3 class="h3-message"><b>Publiqueu el comentari</b>
+                                    <img class="w3-center icons" src="{% static '/escriptori/plusicon.png' %}">
+                                </h3>
+                            </button>
 
-                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </form>
 
     </div>
 
     <!-- BOTÓ TORNAR -->
 
-    <a href="{% url 'areaedicio' pk=llibre.pk %}">
-            <div style="text-align:center">
-                            <button type="button" class="w3-round-xlarge btn btn-primary">
-                                <h3 class="h3-message"><b>Tornar endarrere</b>
-                                    <img src="{% static '../static/areaescriptor/backarrow.png' %}"
-                                         style="width: 30px;height: 30px;margin-right: 20px;"
-                                         alt="Endarrere">
-                                </h3>
-                            </button>
-            </div>
+    <div style="text-align:center; margin-top: 1%">
+        <a href="{% url 'areaedicio' pk=llibre.pk %}">
+            <button type="button" class="w3-round-xlarge btn btn-primary">
+                <h3 class="h3-message"><b>Tornar endarrere</b>
+                    <img src="{% static '../static/areaescriptor/backarrow.png' %}"
+                         style="width: 30px;height: 30px;margin-right: 20px;"
+                         alt="Endarrere">
+                </h3>
+            </button>
         </a>
+    </div>
 
     <div class="w3-row-padding" style="margin-top: 7%">
         {% if comentaris %}
@@ -81,7 +82,7 @@
                 <div class="w3-third w3-container w3-margin-bottom">
                     <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-container w3-white">
                         <br/>
-                        <p><h5>{{ comentari.titol }}</h5></p>
+                        <p><h5><b>{{ comentari.titol }}</b></h5></p>
                         <p>{{ comentari.descripcio }}</p><br/><br/>
                     </div>
 

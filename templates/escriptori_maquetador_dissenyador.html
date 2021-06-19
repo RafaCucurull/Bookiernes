@@ -41,7 +41,11 @@
                         <p><h4>{{ object.nom_llibre }}</h4></p>
                         <p style="display: inline">Temàtiques:</p>
                         {% for t in tematiques %}
+                            {% if forloop.last %}
+                            <p style="display:inline">{{ t }}</p>
+                            {% else %}
                             <p style="display:inline">{{ t }},</p>
+                            {% endif %}
                         {% endfor %}
                         <p>Col·lecció: {{ object.coleccio }}</p>
                         <p>Nombre de pàgines: {{ object.num_pagines }}</p><br/>
