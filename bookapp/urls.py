@@ -31,6 +31,8 @@ urlpatterns = [
     path('area_dismaq/<int:pk>/solicitudsmaq/enviarmaq', views.enviarMaquetacio, name='enviarmaq'),
     path('notificacions/eliminarnotificacio/<int:pknotificacio>', views.eliminarnotificacio,
          name='eliminarnotificacio'),
+    path('perfil/<int:pkperfil>', views.perfil,
+         name='perfil'),
 
 
     

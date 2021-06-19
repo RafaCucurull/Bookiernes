@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+    {% include 'user_header.html' %}
+    {% else %}
     {% include 'main_header.html' %}
+    {% endif %}
     <html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

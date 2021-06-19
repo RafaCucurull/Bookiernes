@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, SolicitarPublicacioForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
+    SolicitarPublicacioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -118,8 +119,7 @@ def enviarnovaversio(request, pk):
         llibre.pdf = fs.url(filename)
         print(llibre.pdf)
         llibre.save()
-        return redirect(reverse('areaescriptor' , kwargs={'pk':pk}))
-
+        return redirect(reverse('areaescriptor', kwargs={'pk': pk}))
 
     return render(request, 'enviar_nova_versio.html', context)
 
@@ -279,6 +279,7 @@ def notificarEditorPublicat(llibre):
     notificacio.llibre = llibre
     notificacio.save()
 
+
 def notificarITPublicat(llibre):
     it = llibre.it
     notificacio = Notificacio()
@@ -288,6 +289,7 @@ def notificarITPublicat(llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
 
 def galeriaImatges(request, pk):
     llibre = Llibre.objects.get(pk=pk)
@@ -478,6 +480,7 @@ def download_image(request, pk, pkimatge):
 
     return response
 
+
 def eliminarnotificacio(request, pknotificacio):
     Notificacio.objects.filter(pk=pknotificacio).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -515,3 +518,7 @@ def seleccionar_it(solicitud, llibre):
     notificacio.data = data
     notificacio.llibre = llibre
     notificacio.save()
+
+
+def perfil(request, pkperfil):
+    return render(request, 'profile.html')
