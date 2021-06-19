@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg py-4 navbar-light" style="background-color: white">
     <!-- Just an image -->
-    <a class="navbar-brand" href="{% url 'escriptori' %}">
+    <a class="navbar-brand" href="{% url 'home' %}">
         <img src="{% static 'headers/Bookiernes_logo.jpeg' %}" width="200" height="90" alt="Logo Bookiernes">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -45,9 +45,15 @@
                     Hola <b>{{ request.user.email }}</b>!
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" style="font-size: 15px" href="#">
+                    <a class="dropdown-item" style="font-size: 15px" href="{% url 'perfil' pkperfil=user.pk %}">
                         <img src="{% static '/headers/perfil_icon.png' %}" width="20" height="20" alt="Perfil">
                         Perfil</a>
+                    {% if user.is_Lector == False %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" style="font-size: 15px" href="{% url 'escriptori' %}">
+                        <img src="{% static '/headers/logout_icon.png' %}" width="20" height="20" alt="Tancar Sessió">
+                        Espai de treball</a>
+                    {% endif %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" style="font-size: 15px" href="{% url 'logout' %}">
                         <img src="{% static '/headers/logout_icon.png' %}" width="20" height="20" alt="Tancar Sessió">
@@ -60,7 +66,11 @@
                 </a>
             </li>
             <li class="nav-item">
+<<<<<<< HEAD
                 <a href=" {% url 'veuremissatge' %}">
+=======
+                <a href=" {% url 'notificacions' %}">
+>>>>>>> origin/fixes
                 <img src="{% static '/headers/icon-message.png' %}" style="width: 50px;height: 50px;margin-right: 180px"
                      alt="Missatges">
                 </a>

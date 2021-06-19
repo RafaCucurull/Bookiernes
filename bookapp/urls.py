@@ -42,4 +42,6 @@ urlpatterns = [
          name='eliminarnotificacio'),
     path('veuremissatge/eliminarmissatge/<int:pkmissatge>', views.eliminarmissatge,
          name='eliminarmissatge'),
+    path('perfil/<int:pkperfil>', views.perfil,
+         name='perfil'),
 ]

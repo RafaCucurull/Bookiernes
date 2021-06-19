@@ -1,8 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
-    SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge,SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge, Missatge
 from users.models import CustomUser
 from django.core.files.storage import FileSystemStorage
@@ -167,8 +166,7 @@ def enviarnovaversio(request, pk):
         llibre.pdf = fs.url(filename)
         print(llibre.pdf)
         llibre.save()
-        return redirect(reverse('areaescriptor' , kwargs={'pk':pk}))
-
+        return redirect(reverse('areaescriptor', kwargs={'pk': pk}))
 
     return render(request, 'enviar_nova_versio.html', context)
 
@@ -542,6 +540,7 @@ def download_image(request, pk, pkimatge):
 
     return response
 
+
 def eliminarnotificacio(request, pknotificacio):
     Notificacio.objects.filter(pk=pknotificacio).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -742,3 +741,22 @@ def retallarobra(llibre):
     """
 
     llibre.save()
+
+def perfil(request, pkperfil):
+    usuari = CustomUser.objects.get(email=request.user)
+    if not usuari.is_Treballador:
+        return render(request, "home.html")
+    if usuari.is_Editor:
+        llistallibres = Llibre.objects.filter(editor=usuari)
+    if usuari.is_Escriptor:
+        llistallibres = Llibre.objects.filter(escriptor=usuari)
+    if usuari.is_Dissenyador:
+        llistallibres = Llibre.objects.filter(dissenyador=usuari)
+    if usuari.is_Maquetacio:
+        llistallibres = Llibre.objects.filter(maquetador=usuari)
+    if usuari.is_IT:
+        llistallibres = Llibre.objects.filter(it=usuari)
+    context = {
+        'llibres': llistallibres
+    }
+    return render(request, 'profile.html', context)
