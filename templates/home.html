@@ -55,12 +55,19 @@
                     <p class="entorn-treball-text">Benvinguts a l'espai on la vostra obra s'enlaira!</p>
                 </div>
                 <div class="col">
-
+                    {% if user.is_authenticated == False %}
                     <a href="{% url 'login' %}">
                     <button type="button" class="w3-round-xlarge btn btn-primary features"><b>ENTORN TREBALL</b>
                         <img class="w3-center entorn-treball-img" src="../static/areaedicio/pencil-icon.png">
                     </button>
                     </a>
+                    {% else %}
+                    <a href="{% url 'escriptori' %}">
+                    <button type="button" class="w3-round-xlarge btn btn-primary features"><b>ENTORN TREBALL</b>
+                        <img class="w3-center entorn-treball-img" src="../static/areaedicio/pencil-icon.png">
+                    </button>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

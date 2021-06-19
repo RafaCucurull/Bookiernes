@@ -521,4 +521,20 @@ def seleccionar_it(solicitud, llibre):
 
 
 def perfil(request, pkperfil):
-    return render(request, 'profile.html')
+    usuari = CustomUser.objects.get(email=request.user)
+    if not usuari.is_Treballador:
+        return render(request, "home.html")
+    if usuari.is_Editor:
+        llistallibres = Llibre.objects.filter(editor=usuari)
+    if usuari.is_Escriptor:
+        llistallibres = Llibre.objects.filter(escriptor=usuari)
+    if usuari.is_Dissenyador:
+        llistallibres = Llibre.objects.filter(dissenyador=usuari)
+    if usuari.is_Maquetacio:
+        llistallibres = Llibre.objects.filter(maquetador=usuari)
+    if usuari.is_IT:
+        llistallibres = Llibre.objects.filter(it=usuari)
+    context = {
+        'llibres': llistallibres
+    }
+    return render(request, 'profile.html', context)
