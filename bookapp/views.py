@@ -680,22 +680,23 @@ def retallarobra(llibre):
                    ln=2, align='C')
     retallPDF.output(llibre.pdf_retall.path+".pdf")
 
-    """
+    
     # ES
 
     retallES = FPDF()
     retallES.add_page()
     retallES.set_font("Arial", size=15)
 
-    es = open(llibre.textPla.path, "r")
+    es = open(llibre.es.path, "r")
 
     for x in es:
         retallES.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA\nHAS LLEGADO AL FINAL DEL FRAGMENTO DE MUESTRA ",
                   ln=1, align='C')
-    retallES.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallES.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes\nPara continuar disfrutando del contenido del libro, suscríbase a Bookiernes ",
                   ln=2, align='C')
-    retallES.output(llibre.es_retall.path)
+    retallES.output(llibre.es_retall.path+".pdf")
+    print(llibre.es_retall.path)
 
     # EN
 
@@ -705,11 +706,15 @@ def retallarobra(llibre):
     en = open(llibre.en.path, "r")
     for x in en:
         retallEN.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA ",
                   ln=1, align='C')
-    retallEN.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallEN.cell(200, 10, txt="YOU HAVE REACHED THE END OF THE SAMPLE FRAGMENT ",
+                  ln=1, align='C')
+    retallEN.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes ",
                   ln=2, align='C')
-    retallEN.output(llibre.en_retall.path)
+    retallEN.cell(200, 10, txt="To continue enjoying the contents of the book, subscribe to Bookiernes ",
+                  ln=2, align='C')
+    retallEN.output(llibre.en_retall.path+".pdf")
 
     # PT
 
@@ -719,11 +724,15 @@ def retallarobra(llibre):
     pt = open(llibre.pt.path, "r")
     for x in pt:
         retallPT.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA ",
                   ln=1, align='C')
-    retallPT.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallPT.cell(200, 10, txt="VOCÊ ALCANÇOU O FIM DO FRAGMENTO DE AMOSTRA ",
+                  ln=1, align='C')
+    retallPT.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes",
                   ln=2, align='C')
-    retallPT.output(llibre.pt_retall.path)
+    retallPT.cell(200, 10, txt="Para continuar aproveitando o conteúdo do livro, assine Bookiernes",
+                  ln=2, align='C')
+    retallPT.output(llibre.pt_retall.path+".pdf")
 
     # ZH
 
@@ -735,10 +744,20 @@ def retallarobra(llibre):
         retallZH.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
     retallZH.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
                   ln=1, align='C')
-    retallZH.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallZH.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes",
                   ln=2, align='C')
-    retallZH.output(llibre.zh_retall.path)
+    retallZH.output(llibre.zh_retall.path+".pdf")
 
-    """
+    
 
     llibre.save()
+
+
+def idiomes(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    comentaris = Comentari.objects.filter(llibre=llibre)
+    context = {
+        "llibre": llibre,
+        "comentaris": comentaris
+    }
+    return render(request, 'idioma.html', context)

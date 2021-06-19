@@ -99,7 +99,7 @@
                     <div>
                         <div class="w3-third w3-container w3-margin-bottom">
                             {% if request.user.is_authenticated %}
-                                <a href="{{ llibre.pdf.url }}">
+                                <a href="{% url 'idioma' pk=llibre.pk %}">
                                     <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
                                         <br/>
                                         <img src="/static/escriptori/bookescriptori3.png" alt="Book icon"
@@ -115,7 +115,7 @@
                                     </div>
                                 </a>
                             {% else %}
-                                <a href="{{ llibre.pdf_retall.url }}.pdf">
+                                <a href="{% url 'idioma' pk=llibre.pk %}">
                                     <div class="w3-container w3-border w3-round-xlarge w3-topbar w3-white box">
                                         <br/>
                                         <img src="/static/escriptori/bookescriptori3.png" alt="Book icon"
