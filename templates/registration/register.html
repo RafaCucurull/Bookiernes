@@ -15,6 +15,9 @@
             <h3><b>Registreu-vos</b></h3>
             <form method="post">
                 {% csrf_token %}
+                <label for="nom">Nom</label>
+                {{ form.nom }}<br>
+                <small style="color: grey">{{ form.nom.help_text }}</small><br><br>
                 <label for="email">Email</label>
                 {{ form.email }}<br>
                 <small style="color: grey">{{ form.email.help_text }}</small><br><br>

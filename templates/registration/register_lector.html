@@ -11,13 +11,13 @@
     </head>
     <body class="body-color">
     <div class="container">
-        <div class="formulari border white-bg">
-            <h3 class="w3-padding-32"><b>Registreu-vos</b></h3>
-            <form method="post">
+        <div class="formulari border white-bg w3-padding-32">
+            <h3><b>Registreu-vos</b></h3>
+            <form method="post" class="w3-padding-48">
                 {% csrf_token %}
-                <label for="name">Nom</label>
-                {{ form.name }}<br>
-                <small style="color: grey">{{ form.name.help_text }}</small><br><br>
+                <label for="nom">Nom</label>
+                {{ form.nom }}<br>
+                <small style="color: grey">{{ form.nom.help_text }}</small><br><br>
 
                 <label for="email">Email</label>
                 {{ form.email }}<br>
@@ -37,7 +37,7 @@
                 {{ form.password2 }}<br>
                 <small style="color: grey">{{ form.password2.help_text }}</small><br><br>
 
-                <button class="w3-round-xlarge button1" type="submit">Registrar-se</button>
+                <button class="w3-round-xlarge button1" type="submit" style="margin-top: 5%">Registrar-se</button>
             </form>
         </div>
     </div>
