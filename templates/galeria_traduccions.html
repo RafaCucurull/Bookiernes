@@ -23,14 +23,12 @@
 
     </header>
 
-    
-
     <!-- Castellà -->
     <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+        <div class=" w3-center w3-half w3-container w3-margin-bottom">
             <div class="w3-container">
                 <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.es.url }}.pdf "
+                    <iframe src="{{ llibre.es.url }}.pdf"
                             width="100%"
                             height="800px">
                     </iframe>
@@ -49,14 +47,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Portuguès -->
-    <div>
-        <div class=" w3-center w3-third w3-container w3-margin-bottom">
+        <!-- Portuguès -->
+        <div class=" w3-center w3-half w3-container w3-margin-bottom">
             <div class="w3-container">
                 <div class="w3-card-4" style="width:100%">
-                    <iframe src="{{ llibre.pt.url }}.pdf "
+                    <iframe src="{{ llibre.pt.url }}.pdf"
                             width="100%"
                             height="800px">
                     </iframe>
@@ -77,23 +73,23 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> origin/revisioTemplatesPresentacio
     <!-- BOTÓ TORNAR -->
+    <div class="row" style="text-align: center">
 
-    <div class="w3-container">
-
-        <div class="right col-md-auto">
-            <a href="{% url 'dirtraduccions' pk=llibre.pk %}">
-                <button type="button" class="w3-round-xlarge btn btn-primary message">
-                    <h3 class="h3-message"><b>Tornar endarrere</b>
-                        <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
-                    </h3>
-                </button>
-                <br/> <br/> <br/>
-            </a>
-        </div>
+        <a href="{% url 'dirtraduccions' pk=llibre.pk %}">
+            <button type="button" class="w3-round-xlarge btn btn-primary message">
+                <h3 class="h3-message"><b>Tornar endarrere</b>
+                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                </h3>
+            </button>
+        </a>
     </div>
+    <br/>
 
     </body>
 {% endblock %}

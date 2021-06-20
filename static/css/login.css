@@ -10,6 +10,11 @@ h3 {
     display: inline;
 }
 
+.main-p {
+    padding: 10px 50px;
+    word-wrap: break-word;
+}
+
 /* Create two equal columns that floats next to each other */
 .column {
     float: left;

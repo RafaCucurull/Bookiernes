@@ -138,7 +138,7 @@
                 <div class="col-md-auto">
                     <a href="{% url 'canviardocument' pk=llibre.pk %}">
                         <button class="btn btn-primary btn-circle btn-xl">
-                            <img class="w3-center icons" src="../static/areaedicio/arrow-next.png">
+                            <img class="w3-center icons" src="{% static 'notificacions/messages.png' %}">
                         </button>
                     </a>
                 </div>
@@ -182,22 +182,17 @@
                     height="800px">
             </iframe>
 
-            <!-- COMENTARIS -->
-
-            <div class="row document_feature">
-            </div>
+            <a href="{% url 'escriptori' %}">
+                <div style="text-align:center; margin-top: 2%">
+                    <button type="button" class="btn btn-primary message w3-round-xlarge ">
+                        <h3 class="h3-message"><b>Tornar endarrere</b>
+                            <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
+                        </h3>
+                    </button>
+                </div>
+            </a>
         </div>
     </div>
-                        <a href="{% url 'escriptori' %}">
-                            <div style="text-align:center">
-                            <button type="button" class="btn btn-primary message w3-round-xlarge ">
-                                <h3 class="h3-message"><b>Tornar endarrere</b>
-                                    <img class="w3-center icons" src="{% static '/areaescriptor/backarrow.png' %}">
-                                </h3>
-                            </button>
-                                </div>
-                            <br/> <br/> <br/> <br/> <br/> <br/>
-                        </a>
     </body>
     </html>
 {% endblock %}

@@ -12,8 +12,8 @@
     <header class="my_header">
 
         <h1 class="w3-margin"> Envieu una nova obra </h1>
-        <p class="p_header w3-center">A través d'aquest espai podeu enviar les noves obres que desitgeu presentar
-            a l'editorial. Un dels nostres editors la llegirà i es posarà en contacte amb vosaltres</p> </br></br>
+        <p class="p_header w3-padding-24 w3-center">A través d'aquest espai podeu enviar les noves obres que desitgeu presentar
+            a l'editorial. Un dels nostres editors la llegirà i es posarà en contacte amb vosaltres</p>
     </header>
 
 
@@ -37,7 +37,6 @@
                            placeholder="pdf"
                            required class="input-file">
                 </div>
-                <br>
                 <div id="downblock">
                     <h1 class="numstyle"><b><br>2.</b></h1>
                     <h1 class="title"><b>Indiqueu una proposta de títol</b></h1>
@@ -46,7 +45,6 @@
                     <p style="text-align: center;">
                         {{ form.nom_llibre }}
                     </p>
-                    <br>
                 </div>
             </div>
             <div id="downblock2">
@@ -58,7 +56,6 @@
                         {{ tematica }}
                     {% endfor %}
                 </p>
-                <br>
             </div>
             <div id="downblock2">
                 <h1 class="numstyle"><b><br>5.</b></h1>
@@ -68,7 +65,6 @@
                 <p style="text-align: center;">
                     {{ form.num_pagines }}
                 </p>
-                <br>
             </div>
             <div>
                 <h1 id="num1" class="numstyle"><b><br>6.</b></h1>

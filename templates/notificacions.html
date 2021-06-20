@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    {% include 'main_header.html' %}
+    {% include 'user_header.html' %}
     <html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,28 +75,25 @@
                                             </button>
                                         </a>
                                         </span>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         {% endfor %}
     </div>
-    <div class="w3-row-padding w3-padding-32 w3-container">
-        <div class="w3-content w3-center">
-            <a href="{% url 'escriptori' %}">
-                <button type="button" class="w3-round-xlarge btn btn-primary features"><b>Tornar a l'escriptori</b>
-                    <img class="w3-center noti-img" src="../static/notificacions/backarrow.png"
-                         style="margin-left: 5px">
-                </button>
-            </a>
+    <a href="{% url 'escriptori' %}">
+        <div style="text-align:center">
+            <button type="button" class="btn btn-primary message w3-round-xlarge" style="width:20%">
+                <h3 class="h3-message"><b>Tornar a l'escriptori</b>
+                    <img class="w3-center icons" style="width: 15%" src="{% static '/areaescriptor/backarrow.png' %}">
+                </h3>
+            </button>
         </div>
-    </div>
+        <br/> <br/> <br/> <br/> <br/> <br/>
+    </a>
     </body>
     </html>
     <!-- SCRIPT MODAL -->
