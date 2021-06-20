@@ -762,12 +762,15 @@ def perfil(request, pkperfil):
     return render(request, 'profile.html', context)
 
 def configuracio(request, pkperfil):
+    usuari = CustomUser.objects.get(pk=pkperfil)
     if request.method == 'POST':
         form = ConfiguracioForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            user.save()
-            return redirect('perfil')
+            usuari.nom = form.cleaned_data.get('nom')
+            usuari.edat = form.cleaned_data.get('edat')
+            usuari.sexe = form.cleaned_data.get('sexe')
+            usuari.save()
+            return redirect(reverse('perfil', kwargs={'pkperfil': pkperfil}))
     else:
         form = ConfiguracioForm()
     return render(request, 'configuracio_perfil.html', {'form': form})

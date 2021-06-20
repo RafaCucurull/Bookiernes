@@ -44,6 +44,6 @@ urlpatterns = [
          name='eliminarmissatge'),
     path('perfil/<int:pkperfil>', views.perfil,
          name='perfil'),
-    path('perfil/<int:pkperfil>/configuracio>', views.configuracio,
+    path('perfil/<int:pkperfil>/configuracio', views.configuracio,
          name='configuracio'),
 ]
