@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from bookapp import models
-from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge,SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
+from bookapp.forms import AfegirLlibreForm, SolicitarImatgesForm, SolicitarMaquetacioForm, PujarMaquetacio, pujarImatge, \
+    SolicitarPublicacioForm, EnviarMissatgeForm, SolicitarTraduccioForm
 from bookapp.models import Llibre, TematiquesLlibre, Comentari, Notificacio, Tematica, Imatge, Missatge
 from users.forms import ConfiguracioForm
 from users.models import CustomUser
@@ -101,7 +102,7 @@ def seleccionar_editor(llibre):
     editoraux = editors_lliures[0]
     llibre.editor = editoraux
     editor = CustomUser.objects.get(email=editoraux)
-    #editor.lliure = False
+    # editor.lliure = False
     editor.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nou llibre assignat"
@@ -119,6 +120,7 @@ def areaedicio(request, pk):
     }
     return render(request, 'area_edicio.html', context)
 
+
 def enviarmissatge(request):
     if request.method == 'POST':
         form = EnviarMissatgeForm(request.POST)
@@ -133,7 +135,6 @@ def enviarmissatge(request):
         'form': form
     }
     return render(request, "missatge.html", context)
-
 
 
 def areaescriptor(request, pk):
@@ -173,7 +174,6 @@ def enviarnovaversio(request, pk):
 
 
 def commentseditor(request, pk):
-
     llibre = Llibre.objects.get(pk=pk)
     usuari = CustomUser.objects.get(email=request.user)
     comentaris = Comentari.objects.filter(usuari=usuari, llibre=llibre)
@@ -249,6 +249,7 @@ def notificacions(request):
         "object_list": notificacions
     }
     return render(request, "notificacions.html", context)
+
 
 def veuremissatge(request):
     missatges = Missatge.objects.filter(destinatari=request.user)
@@ -367,7 +368,7 @@ def solicitudImatges(request, pk):
             obj.editor = request.user
             seleccionar_dissenyador(obj, llibre)
             obj.save()
-            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
+            return redirect(reverse('areaedicio', kwargs={'pk': pk}))
     else:
         form = SolicitarImatgesForm()
     context = {
@@ -384,7 +385,7 @@ def seleccionar_dissenyador(solicitud, llibre):
     llibre.save()
     solicitud.dissenyador = dissenyadoraux
     dissenyador = CustomUser.objects.get(email=dissenyadoraux)
-    #dissenyador.lliure = False
+    # dissenyador.lliure = False
     dissenyador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud d'imatges assignada"
@@ -415,7 +416,7 @@ def solicitudmaquetacio(request, pk):
             obj.editor = request.user
             seleccionar_maquetador(obj, llibre)
             obj.save()
-            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
+            return redirect(reverse('areaedicio', kwargs={'pk': pk}))
     else:
         form = SolicitarMaquetacioForm()
     return render(request, "enviar_llibre_maquetar.html", {'form': form})
@@ -428,7 +429,7 @@ def seleccionar_maquetador(solicitud, llibre):
     llibre.save()
     solicitud.maquetador = maquetadoraux
     maquetador = CustomUser.objects.get(email=maquetadoraux)
-    #maquetador.lliure = False
+    # maquetador.lliure = False
     maquetador.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de maquetació assignada"
@@ -469,7 +470,7 @@ def enviarbat(request, pk, pksol):
             llibre.save()
             solicitud.delete()
             notificarEditorImatges(llibre)
-            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
+            return redirect(reverse('areadismaq', kwargs={'pk': pk}))
     else:
         form = pujarImatge()
     return render(request, 'enviar_imatges.html', {'form': form, 'llibre': llibre})
@@ -519,7 +520,7 @@ def enviarMaquetacio(request, pk, pksol):
             llibre.save()
             solicitud.delete()
             notificarEditorMaquetacio(llibre)
-            return redirect(reverse('areadismaq' , kwargs={'pk':pk}))
+            return redirect(reverse('areadismaq', kwargs={'pk': pk}))
     else:
         form = PujarMaquetacio()
     return render(request, 'enviar_maquetat.html', {'form': form, 'llibre': llibre})
@@ -565,7 +566,7 @@ def solicitudpublicacio(request, pk):
             seleccionar_it(obj, llibre)
             llibre.save()
             obj.save()
-            return redirect(reverse('areaedicio' , kwargs={'pk':pk}))
+            return redirect(reverse('areaedicio', kwargs={'pk': pk}))
     else:
         form = SolicitarMaquetacioForm()
     retallarobra(llibre)
@@ -579,7 +580,7 @@ def seleccionar_it(solicitud, llibre):
     llibre.save()
     solicitud.it = it_aux
     it = CustomUser.objects.get(email=it_aux)
-    #it.lliure = False
+    # it.lliure = False
     it.save()
     notificacio = Notificacio()
     notificacio.missatge = "Tens un nova sol·licitud de publicació assignada"
@@ -651,7 +652,7 @@ def traduirLlibre(llibre, idioma):
     pdf.add_page()
     pdf.set_font('arial', size=12)
     pdf.multi_cell(190, 12, txt=translation)
-    pdf.output(traduccio+".pdf")
+    pdf.output(traduccio + ".pdf")
 
     # with open(llibre.traduccio, "wb") as llibreTraduccioStream:
     #    translation.write(llibreTraduccioStream)
@@ -678,24 +679,26 @@ def retallarobra(llibre):
                    ln=1, align='C')
     retallPDF.cell(190, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
                    ln=2, align='C')
-    retallPDF.output(llibre.pdf_retall.path+".pdf")
+    retallPDF.output(llibre.pdf_retall.path + ".pdf")
 
-    """
     # ES
 
     retallES = FPDF()
     retallES.add_page()
     retallES.set_font("Arial", size=15)
 
-    es = open(llibre.textPla.path, "r")
+    es = open(llibre.es.path, "r")
 
     for x in es:
         retallES.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallES.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallES.cell(200, 10,
+                  txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA\nHAS LLEGADO AL FINAL DEL FRAGMENTO DE MUESTRA ",
                   ln=1, align='C')
-    retallES.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallES.cell(200, 10,
+                  txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes\nPara continuar disfrutando del contenido del libro, suscríbase a Bookiernes ",
                   ln=2, align='C')
-    retallES.output(llibre.es_retall.path)
+    retallES.output(llibre.es_retall.path + ".pdf")
+    print(llibre.es_retall.path)
 
     # EN
 
@@ -705,11 +708,15 @@ def retallarobra(llibre):
     en = open(llibre.en.path, "r")
     for x in en:
         retallEN.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallEN.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA ",
                   ln=1, align='C')
-    retallEN.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallEN.cell(200, 10, txt="YOU HAVE REACHED THE END OF THE SAMPLE FRAGMENT ",
+                  ln=1, align='C')
+    retallEN.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes ",
                   ln=2, align='C')
-    retallEN.output(llibre.en_retall.path)
+    retallEN.cell(200, 10, txt="To continue enjoying the contents of the book, subscribe to Bookiernes ",
+                  ln=2, align='C')
+    retallEN.output(llibre.en_retall.path + ".pdf")
 
     # PT
 
@@ -719,11 +726,15 @@ def retallarobra(llibre):
     pt = open(llibre.pt.path, "r")
     for x in pt:
         retallPT.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
-    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
+    retallPT.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA ",
                   ln=1, align='C')
-    retallPT.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallPT.cell(200, 10, txt="VOCÊ ALCANÇOU O FIM DO FRAGMENTO DE AMOSTRA ",
+                  ln=1, align='C')
+    retallPT.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes",
                   ln=2, align='C')
-    retallPT.output(llibre.pt_retall.path)
+    retallPT.cell(200, 10, txt="Para continuar aproveitando o conteúdo do livro, assine Bookiernes",
+                  ln=2, align='C')
+    retallPT.output(llibre.pt_retall.path + ".pdf")
 
     # ZH
 
@@ -735,13 +746,12 @@ def retallarobra(llibre):
         retallZH.multi_cell(200, 10, txt=x, border=0, align='J', fill=False)
     retallZH.cell(200, 10, txt="HEU ARRIBAT AL FINAL DEL FRAGMENT DE MOSTRA",
                   ln=1, align='C')
-    retallZH.cell(200, 10, txt="Per continuar gaudint del contigut del llibre, subscriviu-vos a Bookiernes",
+    retallZH.cell(200, 10, txt="Per continuar gaudint del contingut del llibre, subscriviu-vos a Bookiernes",
                   ln=2, align='C')
-    retallZH.output(llibre.zh_retall.path)
-
-    """
+    retallZH.output(llibre.zh_retall.path + ".pdf")
 
     llibre.save()
+
 
 def perfil(request, pkperfil):
     usuari = CustomUser.objects.get(email=request.user)
@@ -761,6 +771,7 @@ def perfil(request, pkperfil):
     }
     return render(request, 'profile.html', context)
 
+
 def configuracio(request, pkperfil):
     usuari = CustomUser.objects.get(pk=pkperfil)
     if request.method == 'POST':
@@ -774,3 +785,13 @@ def configuracio(request, pkperfil):
     else:
         form = ConfiguracioForm()
     return render(request, 'configuracio_perfil.html', {'form': form})
+
+
+def idiomes(request, pk):
+    llibre = Llibre.objects.get(pk=pk)
+    comentaris = Comentari.objects.filter(llibre=llibre)
+    context = {
+        "llibre": llibre,
+        "comentaris": comentaris
+    }
+    return render(request, 'idioma.html', context)

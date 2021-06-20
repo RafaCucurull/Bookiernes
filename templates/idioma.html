@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'user_header.html' %}
+    <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/escriptori.css' %}">
+
+    <body>
+    <!-- Header -->
+    <header class="my_header">
+
+        <h1 class="w3-margin">
+            Idioma
+        </h1>
+        <br>
+        
+
+    </header>
+    <div class="w3-container  w3-center w3-padding-32">
+        
+        {% if llibre.pdf %}
+            {% if request.user.is_authenticated %}
+                <a href="{{ llibre.pdf.url }}">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">Original
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{{ llibre.pdf_retall.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">Publicar
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+
+    
+
+        {% endif %}
+        {% if llibre.en %}
+            {% if request.user.is_authenticated %}
+                <a href="{{ llibre.en.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <img src="{% static '/areaedicio/united-kingdom-flag-round-icon.png' %}" width="20" height="20"
+                             alt="English">
+                             English
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{{ llibre.en_retall.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <img src="{% static '/areaedicio/united-kingdom-flag-round-icon.png' %}" width="20" height="20"
+                             alt="English">
+                             English
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+    
+            {% endif %}
+        {% endif %}
+        {% if llibre.es %}
+            {% if request.user.is_authenticated %}
+                <a href="{{ llibre.es.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                <img src="{% static '/areaedicio/spain-flag-round-icon.png' %}" width="20" height="20"
+                             alt="Español">
+                                Español
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{{ llibre.es_retall.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <img src="{% static '/areaedicio/spain-flag-round-icon.png' %}" width="20" height="20"
+                                alt="Español">
+                                Español
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+        {% endif %}
+        {% if llibre.pt %}
+            {% if request.user.is_authenticated %}
+                <a href="{{ llibre.pt.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <img src="{% static '/areaedicio/portugal-flag-round-icon.png' %}" width="20" height="20"
+                                alt="Portugues">
+                                Português 
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{{ llibre.pt_retall.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <div style="color: white; font-weight: bold; font-size: 25px">
+                                        <img src="{% static '/areaedicio/portugal-flag-round-icon.png' %}" width="20" height="20"
+                                    alt="Portugues">
+                                    Português 
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+    
+
+        {% endif %}
+        {% if llibre.zh %}
+            {% if request.user.is_authenticated %}
+                <a href="{{ llibre.zh.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <img src="{% static '/areaedicio/china-flag-round-icon.png' %}" width="20" height="20"
+                                alt="Chino">
+                                中文
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{{ llibre.zh_retall.url }}.pdf">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            
+                            <button type="submit" class="w3-button w3-round-xlarge w3-orange h3-message">
+                                <div style="color: white; font-weight: bold; font-size: 25px">
+                                    <div style="color: white; font-weight: bold; font-size: 25px">
+                                        <img src="{% static '/areaedicio/china-flag-round-icon.png' %}" width="20" height="20"
+                                    alt="Chino">
+                                    中文
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+
+
+        {% endif %}
+        
+            
+        
+    </div>
+    </body>
+    </html>
+{% endblock %}
