@@ -6,6 +6,7 @@ from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
+    nom = forms.CharField(help_text="Introdueix el seu nom i cognoms (p.ex. Carlos Ruíz Zafon)")
     email = forms.CharField(help_text="Introdueix un format correcte de correu electrònic (p.ex. example@gmail.com)")
     password1 = forms.CharField(
         help_text=["La teva contrassenya no pot ser similar a l'altra informació personal teva.",
@@ -16,10 +17,10 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('email', 'is_Editor', 'is_Escriptor', 'is_Maquetacio', 'is_IT', 'password1', 'password2')
+        fields = ('nom', 'email', 'is_Editor', 'is_Escriptor', 'is_Maquetacio', 'is_IT', 'password1', 'password2')
 
 class CustomLectorCreationForm(UserCreationForm):
-    name = forms.CharField(help_text="Introdueix el seu nom i cognoms (p.ex. Carlos Ruíz Zafon)")
+    nom = forms.CharField(help_text="Introdueix el seu nom i cognoms (p.ex. Carlos Ruíz Zafon)")
     email = forms.CharField(help_text="Introdueix un format correcte de correu electrònic (p.ex. cruizz@escriptors.cat)")
     password1 = forms.CharField(
         help_text=["La teva contrassenya no pot ser similar a l'altra informació personal teva.",
@@ -30,7 +31,7 @@ class CustomLectorCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('name', 'email', 'password1', 'password2')
+        fields = ('nom', 'email', 'password1', 'password2')
 
 
 class CustomUserChangeForm(UserChangeForm):

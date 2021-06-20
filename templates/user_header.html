@@ -42,7 +42,7 @@
                    id="navbarDropdown" role="button"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Hola <b>{{ request.user.email }}</b>!
+                    Hola <b>{{ request.user.nom }}</b>!
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" style="font-size: 15px" href="{% url 'perfil' pkperfil=user.pk %}">

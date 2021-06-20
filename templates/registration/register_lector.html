@@ -15,9 +15,9 @@
             <h3 class="w3-padding-32"><b>Registreu-vos</b></h3>
             <form method="post">
                 {% csrf_token %}
-                <label for="name">Nom</label>
-                {{ form.name }}<br>
-                <small style="color: grey">{{ form.name.help_text }}</small><br><br>
+                <label for="nom">Nom</label>
+                {{ form.nom }}<br>
+                <small style="color: grey">{{ form.nom.help_text }}</small><br><br>
 
                 <label for="email">Email</label>
                 {{ form.email }}<br>
